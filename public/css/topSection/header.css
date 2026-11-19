@@ -489,7 +489,7 @@
     overflow: hidden;
     background:
         linear-gradient(rgba(20, 16, 45, 0.42), rgba(20, 16, 45, 0.52)),
-        url("/images/headerImage/header1.jpeg") center top / cover no-repeat;
+        url("/images/headerimage/header1.jpeg") center top / cover no-repeat;
     background-attachment: fixed;
 }
 
