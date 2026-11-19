@@ -1,0 +1,443 @@
+<% layout("fixLayout/boilerplate") %>
+
+<link rel="stylesheet" href="/css/homeCss/my-properties.css">
+
+<main class="my-properties-page">
+
+    <!-- ================= PAGE HEADER ================= -->
+
+    <section class="mp-header">
+
+        <div class="mp-header-content">
+
+            <div class="mp-header-icon">
+                <i class="fa-solid fa-building"></i>
+            </div>
+
+            <div>
+                <span class="mp-eyebrow">
+                    PROPERTY MANAGEMENT
+                </span>
+
+                <h1>My Properties</h1>
+
+                <p>
+                    Manage all the properties listed from your account.
+                </p>
+            </div>
+
+        </div>
+
+        <a href="/listings/new" class="mp-add-btn">
+            <i class="fa-solid fa-plus"></i>
+            Add Property
+        </a>
+
+    </section>
+
+
+    <!-- ================= STATS ================= -->
+
+    <section class="mp-stats">
+
+        <div class="mp-stat-card">
+
+            <div class="mp-stat-icon mp-purple">
+                <i class="fa-solid fa-building"></i>
+            </div>
+
+            <div>
+                <span>Total Properties</span>
+
+                <strong>
+                    <%= myProperties ? myProperties.length : 0 %>
+                </strong>
+            </div>
+
+        </div>
+
+
+        <div class="mp-stat-card">
+
+            <div class="mp-stat-icon mp-green">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+
+            <div>
+
+                <span>Active Listings</span>
+
+                <%
+                    let activeCount = 0;
+
+                    if (myProperties) {
+                        activeCount = myProperties.filter(property =>
+                            property.status === "Approved" ||
+                            property.status === "Active" ||
+                            property.status === "Available"
+                        ).length;
+                    }
+                %>
+
+                <strong><%= activeCount %></strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="mp-stat-card">
+
+            <div class="mp-stat-icon mp-orange">
+                <i class="fa-solid fa-clock"></i>
+            </div>
+
+            <div>
+
+                <span>Pending</span>
+
+                <%
+                    let pendingCount = 0;
+
+                    if (myProperties) {
+                        pendingCount = myProperties.filter(property =>
+                            property.status === "Pending"
+                        ).length;
+                    }
+                %>
+
+                <strong><%= pendingCount %></strong>
+
+            </div>
+
+        </div>
+
+
+        
+
+    </section>
+
+
+    <!-- ================= LISTING HEADER ================= -->
+
+    <section class="mp-list-header">
+
+        <div>
+
+            <h2>Your Properties</h2>
+
+            <p>
+                All properties posted by your account
+            </p>
+
+        </div>
+
+        <span class="mp-count">
+            <%= myProperties ? myProperties.length : 0 %>
+            Listings
+        </span>
+
+    </section>
+
+
+    <!-- ================= PROPERTY GRID ================= -->
+
+    <% if (myProperties && myProperties.length > 0) { %>
+
+        <section class="mp-grid">
+
+            <% myProperties.forEach(property => { %>
+
+                <%
+                    const status = property.status || "Active";
+
+                    let statusClass = status
+                        .toLowerCase()
+                        .replace(/\s+/g, "-");
+                %>
+
+
+                <!-- ================= PROPERTY CARD ================= -->
+
+                <article class="mp-card">
+
+
+                    <!-- IMAGE -->
+
+                    <div class="mp-image">
+
+                        <% if (
+                            property.images &&
+                            property.images.length > 0
+                        ) { %>
+
+                            <img
+                                src="<%= property.images[0].url || property.images[0] %>"
+                                alt="<%= property.title || 'Property' %>"
+                            >
+
+                        <% } else { %>
+
+                            <div class="mp-no-image">
+
+                                <i class="fa-solid fa-house"></i>
+
+                                <span>No Image</span>
+
+                            </div>
+
+                        <% } %>
+
+
+                        <!-- STATUS BADGE ONLY -->
+
+                        <span class="mp-status <%= statusClass %>">
+
+                            <% if (
+                                status === "Approved" ||
+                                status === "Active" ||
+                                status === "Available"
+                            ) { %>
+
+                                <i class="fa-solid fa-circle-check"></i>
+
+                            <% } else if (status === "Pending") { %>
+
+                                <i class="fa-solid fa-clock"></i>
+
+                            <% } else if (status === "Rented") { %>
+
+                                <i class="fa-solid fa-key"></i>
+
+                            <% } %>
+
+                            <%= status %>
+
+                        </span>
+
+
+                        <!-- IMAGE COUNT -->
+
+                        <% if (
+                            property.images &&
+                            property.images.length > 1
+                        ) { %>
+
+                            <span class="mp-image-count">
+
+                                <i class="fa-regular fa-images"></i>
+
+                                <%= property.images.length %>
+
+                            </span>
+
+                        <% } %>
+
+                    </div>
+
+
+                    <!-- CONTENT -->
+
+                    <div class="mp-card-body">
+
+
+                        <!-- TITLE -->
+
+                        <div class="mp-title-row">
+
+                            <div class="mp-title">
+
+                                <h3>
+                                    <%= property.title ||
+                                        property.propertyType ||
+                                        "Rental Property" %>
+                                </h3>
+
+                                <p>
+                                    <i class="fa-solid fa-location-dot"></i>
+
+                                    <%= property.area ||
+                                        property.location ||
+                                        "Aligarh" %>
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- PROPERTY DETAILS -->
+
+                        <div class="mp-details">
+
+
+                            <% if (property.bhk) { %>
+
+                                <div class="mp-detail">
+
+                                    <i class="fa-solid fa-bed"></i>
+
+                                    <div>
+                                        <span>BHK</span>
+                                        <strong>
+                                            <%= property.bhk %>
+                                        </strong>
+                                    </div>
+
+                                </div>
+
+                            <% } %>
+
+
+                            <% if (property.propertyType) { %>
+
+                                <div class="mp-detail">
+
+                                    <i class="fa-solid fa-house"></i>
+
+                                    <div>
+                                        <span>Type</span>
+                                        <strong>
+                                            <%= property.propertyType %>
+                                        </strong>
+                                    </div>
+
+                                </div>
+
+                            <% } %>
+
+
+                            <% if (property.furnishing) { %>
+
+                                <div class="mp-detail">
+
+                                    <i class="fa-solid fa-couch"></i>
+
+                                    <div>
+                                        <span>Furnished</span>
+                                        <strong>
+                                            <%= property.furnishing %>
+                                        </strong>
+                                    </div>
+
+                                </div>
+
+                            <% } %>
+
+
+                            <% if (property.floor) { %>
+
+                                <div class="mp-detail">
+
+                                    <i class="fa-solid fa-layer-group"></i>
+
+                                    <div>
+                                        <span>Floor</span>
+                                        <strong>
+                                            <%= property.floor %>
+                                        </strong>
+                                    </div>
+
+                                </div>
+
+                            <% } %>
+
+                        </div>
+
+
+                        <!-- RENT -->
+
+                        <div class="mp-rent">
+
+                            <span>Monthly Rent</span>
+
+                            <strong>
+
+                                ₹<%= Number(
+                                    property.rentPrice || 0
+                                ).toLocaleString("en-IN") %>
+
+                                <small>/month</small>
+
+                            </strong>
+
+                        </div>
+
+
+                        <!-- ACTIONS -->
+
+                        <div class="mp-actions">
+
+                            <a
+                                href="/listings/<%= property._id %>"
+                                class="mp-view"
+                            >
+                                <i class="fa-regular fa-eye"></i>
+                                View
+                            </a>
+
+
+                            <a
+                                href="/listings/<%= property._id %>/edit"
+                                class="mp-edit"
+                            >
+                                <i class="fa-solid fa-pen"></i>
+                                Edit
+                            </a>
+
+
+                            <form
+                                action="/listings/<%= property._id %>?_method=DELETE"
+                                method="POST"
+                                onsubmit="return confirm('Are you sure you want to delete this property?');"
+                            >
+
+                                <button
+                                    type="submit"
+                                    class="mp-delete"
+                                >
+                                    <i class="fa-regular fa-trash-can"></i>
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            <% }) %>
+
+        </section>
+
+
+    <% } else { %>
+
+
+        <!-- ================= EMPTY STATE ================= -->
+
+        <section class="mp-empty">
+
+            <div class="mp-empty-icon">
+                <i class="fa-solid fa-building"></i>
+            </div>
+
+            <h2>No Properties Listed</h2>
+
+            <p>
+                You haven't added any properties yet.
+                Add your first rental property to get started.
+            </p>
+
+            <a href="/listings/new">
+                <i class="fa-solid fa-plus"></i>
+                Add Property
+            </a>
+
+        </section>
+
+    <% } %>
+
+
+</main>

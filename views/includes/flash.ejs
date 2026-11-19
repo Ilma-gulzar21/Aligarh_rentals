@@ -1,0 +1,242 @@
+<link rel="stylesheet" href="/css/homeCss/flash.css">
+
+<!-- ==========================================
+        ALIGARH RENTALS FLASH MESSAGE
+========================================== -->
+
+
+<% if(success && success.length){ %>
+
+<div class="ar-flash-overlay">
+
+    <div class="ar-flash-card ar-success-card">
+
+
+        <!-- CLOSE BUTTON -->
+
+        <button
+            type="button"
+            class="ar-flash-close"
+            aria-label="Close"
+        >
+
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+            >
+
+                <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M6 6L18 18M18 6L6 18"
+                />
+
+            </svg>
+
+        </button>
+
+
+
+
+        <!-- TOP -->
+
+        <div class="ar-flash-top ar-success-top">
+
+
+            <div class="ar-flash-icon">
+
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                >
+
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M5 13l4 4L19 7"
+                    />
+
+                </svg>
+
+            </div>
+
+
+        </div>
+
+
+
+
+
+        <!-- BODY -->
+
+        <div class="ar-flash-body">
+
+
+            <h2>
+
+                Success
+
+            </h2>
+
+
+            <p>
+
+                <%= success[0] %>
+
+            </p>
+
+
+            <button
+                type="button"
+                class="ar-flash-btn ar-success-btn"
+            >
+
+                Continue
+
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+</div>
+
+<% } %>
+
+
+
+
+
+
+
+
+
+<% if(error && error.length){ %>
+
+<div class="ar-flash-overlay">
+
+    <div class="ar-flash-card ar-error-card">
+
+
+        <!-- CLOSE BUTTON -->
+
+        <button
+            type="button"
+            class="ar-flash-close"
+            aria-label="Close"
+        >
+
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+            >
+
+                <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M6 6L18 18M18 6L6 18"
+                />
+
+            </svg>
+
+        </button>
+
+
+
+
+
+        <!-- TOP -->
+
+        <div class="ar-flash-top ar-error-top">
+
+
+            <div class="ar-flash-icon">
+
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                >
+
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M12 9v4"
+                    />
+
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M12 17h.01"
+                    />
+
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"
+                    />
+
+                </svg>
+
+            </div>
+
+
+        </div>
+
+
+
+
+
+        <!-- BODY -->
+
+        <div class="ar-flash-body">
+
+
+            <h2>
+
+                Warning
+
+            </h2>
+
+
+            <p>
+
+                <%= error[0] %>
+
+            </p>
+
+
+            <button
+                type="button"
+                class="ar-flash-btn ar-error-btn"
+            >
+
+                Try Again
+
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+</div>
+
+<% } %>
+
+
+<script src="/js/homeJS/flash.js"></script>

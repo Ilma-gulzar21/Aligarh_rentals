@@ -1,0 +1,128 @@
+<%
+    const types = [
+        { name: "Apartment", icon: "fa-building", link: "/listings/type/Apartment",
+          desc: "Modern apartments with premium amenities and security.",
+          tags: ["Parking", "Security", "Lift"] },
+
+        { name: "House", icon: "fa-house", link: "/listings/type/House",
+          desc: "Independent houses suitable for families and long-term living.",
+          tags: ["Family", "Spacious", "Private"] },
+
+        { name: "Flat", icon: "fa-city", link: "/listings/type/Flat",
+          desc: "Affordable flats in prime areas, ready to move in.",
+          tags: ["Budget", "Prime Area", "Furnished"] },
+
+        { name: "PG", icon: "fa-bed", link: "/listings/type/PG",
+          desc: "Comfortable PG stays with meals, WiFi and safety.",
+          tags: ["Meals", "WiFi", "Security"] },
+
+        { name: "Room", icon: "fa-door-open", link: "/listings/type/Room",
+          desc: "Single and shared rooms for students and professionals.",
+          tags: ["Student", "Single", "Shared"] },
+
+        { name: "Roommate", icon: "fa-user-group", link: "/listings/roommates",
+          desc: "Find a compatible roommate and split the rent easily.",
+          tags: ["Verified", "Split Rent", "Safe"] }
+    ];
+%>
+
+<noscript><style>.pt-reveal{opacity:1 !important;}</style></noscript>
+
+<section class="pt-section">
+
+    <span class="pt-blob pt-blob-1"></span>
+    <span class="pt-blob pt-blob-2"></span>
+
+    <div class="pt-container">
+
+        <div class="pt-head pt-reveal">
+            <span class="pt-eyebrow"><i class="fa-solid fa-wand-magic-sparkles"></i> Browse Categories</span>
+            <h2>Choose Your <em>Property Type</em></h2>
+            <p>
+                Explore a wide range of rental properties in Aligarh based on
+                your lifestyle, budget and accommodation needs.
+            </p>
+        </div>
+
+        <div class="pt-grid">
+            <% types.forEach((t, i) => { %>
+
+                <a href="<%= t.link %>"
+                   class="pt-card <%= i % 2 === 0 ? 'pt-blue' : 'pt-purple' %> pt-reveal">
+
+                    <span class="pt-glow"></span>
+                    <span class="pt-num">0<%= i + 1 %></span>
+
+                    <div class="pt-icon">
+                        <i class="fa-solid <%= t.icon %>"></i>
+                    </div>
+
+                    <h3><%= t.name %></h3>
+                    <p class="pt-desc"><%= t.desc %></p>
+
+                    <div class="pt-tags">
+                        <% t.tags.forEach(tag => { %>
+                            <span><%= tag %></span>
+                        <% }) %>
+                    </div>
+
+                    <div class="pt-cta">
+                        <span>Explore</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </a>
+
+            <% }) %>
+        </div>
+
+        <div class="pt-strip pt-reveal">
+            <p><i class="fa-solid fa-circle-question"></i> Not sure what suits you best?</p>
+            <a href="/listings">Browse all properties <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+
+    </div>
+</section>
+
+<script>
+(function () {
+    const reveals = document.querySelectorAll(".pt-reveal");
+    const cards   = document.querySelectorAll(".pt-card");
+    const isTouch = window.matchMedia("(hover: none)").matches;
+
+    /* SCROLL REVEAL */
+    if ("IntersectionObserver" in window) {
+        const io = new IntersectionObserver((entries) => {
+            let k = 0;
+            entries.forEach(e => {
+                if (!e.isIntersecting) return;
+                e.target.style.animationDelay = (k * 110) + "ms";
+                e.target.classList.add("pt-in");
+                io.unobserve(e.target);
+                k++;
+            });
+        }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+        reveals.forEach(el => io.observe(el));
+    } else {
+        reveals.forEach(el => el.classList.add("pt-in"));
+    }
+
+    /* TOUCH: screen ke beech wala card active */
+    if (isTouch && "IntersectionObserver" in window) {
+        const ao = new IntersectionObserver((entries) => {
+            entries.forEach(e => e.target.classList.toggle("pt-active", e.isIntersecting));
+        }, { rootMargin: "-38% 0px -38% 0px", threshold: 0 });
+        cards.forEach(c => ao.observe(c));
+    }
+
+    /* GLOW: mouse + touch */
+    const moveGlow = (card, e) => {
+        const r = card.getBoundingClientRect();
+        card.style.setProperty("--mx", (e.clientX - r.left) + "px");
+        card.style.setProperty("--my", (e.clientY - r.top) + "px");
+    };
+    cards.forEach(card => {
+        card.addEventListener("pointermove", e => moveGlow(card, e));
+        card.addEventListener("pointerdown", e => moveGlow(card, e));
+    });
+})();
+</script>

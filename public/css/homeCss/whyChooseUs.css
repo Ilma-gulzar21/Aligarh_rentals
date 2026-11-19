@@ -1,0 +1,273 @@
+/* ===== WHY CHOOSE (arv) ===== */
+
+.arv-section{
+    position:relative;
+    overflow:hidden;
+    padding:90px 7%;
+    background:#f8fafc;
+}
+
+/* floating background shapes */
+.arv-blob{
+    position:absolute;
+    border-radius:50%;
+    background:#6d28d9;
+    opacity:.07;
+    animation:arvFloat 8s ease-in-out infinite;
+}
+.arv-blob1{ width:320px; height:320px; top:-120px; right:-80px; }
+.arv-blob2{ width:240px; height:240px; bottom:-90px; left:-70px; animation-delay:2s; }
+
+/* heading row */
+.arv-head{
+    position:relative;
+    z-index:1;
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:40px;
+    margin-bottom:50px;
+    animation:arvFadeUp .8s ease both;
+}
+.arv-head-left{ max-width:560px; }
+.arv-head-right{ max-width:420px; }
+
+.arv-tag{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:8px 18px;
+    border-radius:30px;
+    background:#ede9fe;
+    color:#6d28d9;
+    font-size:.9rem;
+    font-weight:600;
+}
+.arv-title{
+    margin:18px 0 0;
+    font-size:2.6rem;
+    font-weight:800;
+    line-height:1.2;
+    color:#111827;
+}
+.arv-title span{ color:#6d28d9; }
+
+.arv-sub{
+    margin:0 0 20px;
+    color:#6b7280;
+    font-size:1.02rem;
+    line-height:1.8;
+}
+.arv-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:12px 26px;
+    border-radius:30px;
+    background:#6d28d9;
+    color:#fff;
+    font-weight:700;
+    text-decoration:none;
+    transition:.3s;
+}
+.arv-btn:hover{
+    gap:16px;
+    background:#5b21b6;
+    color:#fff;
+}
+
+/* ---------- EXPANDING PANELS ---------- */
+.arv-panels{
+    position:relative;
+    z-index:1;
+    display:flex;
+    gap:14px;
+    height:400px;
+}
+
+.arv-panel{
+    position:relative;
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    padding:22px;
+    overflow:hidden;
+    border-radius:24px;
+    color:#fff;
+    cursor:pointer;
+    transition:flex .6s ease, transform .4s;
+    animation:arvFadeUp .8s ease both;
+}
+
+/* different purple shade for each panel */
+.arv-panels .arv-panel:nth-child(1){ background:linear-gradient(160deg,#7c3aed,#4c1d95); animation-delay:.1s; }
+.arv-panels .arv-panel:nth-child(2){ background:linear-gradient(160deg,#6d28d9,#3b0764); animation-delay:.2s; }
+.arv-panels .arv-panel:nth-child(3){ background:linear-gradient(160deg,#8b5cf6,#5b21b6); animation-delay:.3s; }
+.arv-panels .arv-panel:nth-child(4){ background:linear-gradient(160deg,#7c3aed,#312e81); animation-delay:.4s; }
+.arv-panels .arv-panel:nth-child(5){ background:linear-gradient(160deg,#6d28d9,#4c1d95); animation-delay:.5s; }
+.arv-panels .arv-panel:nth-child(6){ background:linear-gradient(160deg,#8b5cf6,#4c1d95); animation-delay:.6s; }
+
+/* shine circle inside panel */
+.arv-panel::before{
+    content:"";
+    position:absolute;
+    top:-60px;
+    right:-60px;
+    width:180px;
+    height:180px;
+    border-radius:50%;
+    background:rgba(255,255,255,.1);
+    transition:.6s;
+}
+.arv-panel:hover::before{
+    transform:scale(1.5);
+}
+
+/* open panel = the first one by default, or the hovered one */
+.arv-open,
+.arv-panel:hover{
+    flex:2.6;
+}
+/* when mouse is on the panels, first panel closes (unless it is hovered) */
+.arv-panels:hover .arv-open:not(:hover){
+    flex:1;
+}
+
+/* big number */
+.arv-num{
+    position:absolute;
+    top:16px;
+    left:22px;
+    font-size:1.1rem;
+    font-weight:800;
+    letter-spacing:2px;
+    color:rgba(255,255,255,.55);
+}
+
+/* icon */
+.arv-icon{
+    width:58px;
+    height:58px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-bottom:16px;
+    border-radius:16px;
+    background:rgba(255,255,255,.18);
+    font-size:1.5rem;
+    transition:.4s;
+}
+.arv-panel:hover .arv-icon{
+    background:#fff;
+    color:#6d28d9;
+    transform:rotate(-8deg) scale(1.1);
+}
+
+.arv-ptitle{
+    margin:0;
+    font-size:1.1rem;
+    font-weight:700;
+    line-height:1.3;
+    color:#fff;
+}
+
+/* description: hidden in closed panels */
+.arv-ptext{
+    margin:0;
+    max-height:0;
+    overflow:hidden;
+    opacity:0;
+    font-size:.95rem;
+    line-height:1.7;
+    color:#ede9fe;
+    transition:.5s;
+}
+.arv-open .arv-ptext,
+.arv-panel:hover .arv-ptext{
+    max-height:120px;
+    opacity:1;
+    margin-top:10px;
+    transition-delay:.2s;
+}
+.arv-panels:hover .arv-open:not(:hover) .arv-ptext{
+    max-height:0;
+    opacity:0;
+    margin-top:0;
+    transition-delay:0s;
+}
+
+/* ---------- BOTTOM CHIPS ---------- */
+.arv-chips{
+    position:relative;
+    z-index:1;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:14px;
+    margin-top:40px;
+}
+.arv-chip{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:11px 22px;
+    border-radius:30px;
+    background:#fff;
+    border:1px solid #e9d5ff;
+    color:#6d28d9;
+    font-weight:600;
+    font-size:.92rem;
+    transition:.3s;
+    animation:arvFadeUp .8s ease .7s both;
+}
+.arv-chip:hover{
+    background:#6d28d9;
+    color:#fff;
+    transform:translateY(-4px);
+}
+
+/* ---------- ANIMATIONS ---------- */
+@keyframes arvFadeUp{
+    from{ opacity:0; transform:translateY(40px); }
+    to{ opacity:1; transform:translateY(0); }
+}
+@keyframes arvFloat{
+    0%,100%{ transform:translateY(0); }
+    50%{ transform:translateY(-16px); }
+}
+
+/* ---------- DARK MODE ---------- */
+body.dark-mode .arv-section{ background:#0f172a; }
+body.dark-mode .arv-title{ color:#fff; }
+body.dark-mode .arv-sub{ color:#cbd5e1; }
+body.dark-mode .arv-tag{ background:#312e81; color:#ddd6fe; }
+body.dark-mode .arv-btn{ background:#7c3aed; }
+body.dark-mode .arv-chip{ background:#1e293b; border-color:#334155; color:#ddd6fe; }
+body.dark-mode .arv-chip:hover{ background:#7c3aed; color:#fff; }
+
+/* ---------- RESPONSIVE ---------- */
+@media(max-width:992px){
+    .arv-head{ flex-direction:column; align-items:flex-start; gap:20px; }
+    .arv-title{ font-size:2.2rem; }
+}
+
+/* Mobile: panels stack, text always visible (!important is used on purpose) */
+@media(max-width:768px){
+    .arv-section{ padding:70px 20px; }
+    .arv-title{ font-size:1.8rem; }
+
+    .arv-panels{
+        flex-direction:column;
+        height:auto;
+    }
+    .arv-panel{
+        flex:none !important;
+        min-height:190px;
+    }
+    .arv-ptext{
+        max-height:none !important;
+        opacity:1 !important;
+        margin-top:10px !important;
+    }
+}

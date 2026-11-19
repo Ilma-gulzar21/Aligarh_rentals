@@ -1,0 +1,187 @@
+<% layout("fixLayout/boilerplate") %>
+
+<link rel="stylesheet" href="/css/showPage/areawise.css">
+
+<main class="ar-page">
+
+  <!-- ========== HERO ========== -->
+  <header class="ar-hero">
+
+    <!-- animated background shapes -->
+    <span class="ar-shape ar-shape-1"></span>
+    <span class="ar-shape ar-shape-2"></span>
+    <span class="ar-shape ar-shape-3"></span>
+
+    <div class="ar-wrap ar-hero-inner">
+
+      <nav class="ar-crumb">
+        <a href="/listings"><i class="fa-solid fa-house"></i> Home</a>
+        <i class="fa-solid fa-angle-right"></i>
+        <span><%= selectedArea %></span>
+      </nav>
+
+      <div class="ar-badge">
+        <span class="ar-dot"></span> ALIGARH RENTAL PROPERTIES
+      </div>
+
+      <h1 class="ar-hero-title">
+        Find Your Perfect Home in
+        <span><%= selectedArea %></span>
+      </h1>
+
+      <p class="ar-hero-sub">
+        Verified flats, rooms, houses and PG options. Compare rent,
+        furnishing and owner details in one place.
+      </p>
+
+    </div>
+  </header>
+
+
+  <!-- ========== STATS (overlap on banner) ========== -->
+  <div class="ar-wrap ar-stats-wrap">
+    <div class="ar-stats">
+
+      <div class="ar-stat">
+        <span class="ar-stat-icon"><i class="fa-solid fa-house"></i></span>
+        <div>
+          <strong><span class="ar-count" data-count="<%= totalProperties %>">0</span>+</strong>
+          <small>Available Homes</small>
+        </div>
+      </div>
+
+      <div class="ar-stat">
+        <span class="ar-stat-icon"><i class="fa-solid fa-location-dot"></i></span>
+        <div>
+          <strong><%= selectedArea %></strong>
+          <small>Popular Area</small>
+        </div>
+      </div>
+
+      <div class="ar-stat">
+        <span class="ar-stat-icon"><i class="fa-solid fa-shield-halved"></i></span>
+        <div>
+          <strong>Verified</strong>
+          <small>Trusted Listings</small>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ========== LISTINGS ========== -->
+  <section class="ar-wrap ar-listings">
+
+    <div class="ar-bar">
+      <h2>Properties for rent in <%= selectedArea %></h2>
+      <span><%= listings.length %> results</span>
+    </div>
+
+    <div class="ar-grid">
+
+      <% if(listings.length > 0){ %>
+        <% listings.forEach(listing => { %>
+
+        <article class="ar-card">
+
+          <!-- IMAGE -->
+          <a href="/listings/<%= listing._id %>" class="ar-img">
+            <img
+              src="<%= listing.images && listing.images.length ? listing.images[0].url : '/images/no-image.jpg' %>"
+              alt="<%= listing.title %>"
+              loading="lazy"
+            >
+            <span class="ar-type"><%= listing.propertyType %></span>
+
+            <% if(listing.ownerVerified){ %>
+              <span class="ar-verified">
+                <i class="fa-solid fa-circle-check"></i> Verified
+              </span>
+            <% } %>
+          </a>
+
+          <!-- BODY -->
+          <div class="ar-body">
+
+            <div class="ar-price">
+              ₹<%= listing.rentPrice.toLocaleString("en-IN") %>
+              <small>/ month</small>
+            </div>
+
+            <h3 class="ar-title"><%= listing.title %></h3>
+
+            <p class="ar-loc">
+              <i class="fa-solid fa-location-dot"></i>
+              <%= listing.area %>, <%= listing.city %>
+            </p>
+
+            <ul class="ar-chips">
+              <li><i class="fa-solid fa-bed"></i> <%= listing.bhk %></li>
+              <li><i class="fa-solid fa-couch"></i> <%= listing.furnishing %></li>
+              <li><i class="fa-solid fa-layer-group"></i> Floor <%= listing.floor %></li>
+            </ul>
+
+            <div class="ar-deposit">
+              Security Deposit
+              <strong>₹<%= listing.securityDeposit.toLocaleString("en-IN") %></strong>
+            </div>
+
+            <!-- OWNER -->
+   
+
+<div class="ar-owner">
+    <span class="ar-avatar">
+        <%= (listing.owner?.fullName || listing.owner?.username || "O").charAt(0).toUpperCase() %>
+    </span>
+
+
+<div class="ar-owner-info">
+    <small>Listed by</small>
+    <strong><%= listing.owner?.fullName || listing.owner?.username || "Owner" %></strong>
+</div>
+
+<a href="/listings/<%= listing._id %>" class="ar-btn" aria-label="View details">
+    View <i class="fa-solid fa-arrow-right"></i>
+</a>
+
+
+</div>
+
+          </div>
+        </article>
+
+        <% }) %>
+
+      <% } else { %>
+
+        <div class="ar-empty">
+          <i class="fa-solid fa-house-circle-xmark"></i>
+          <h2>No Property Found</h2>
+          <p>Currently no rental property available in <%= selectedArea %>.</p>
+          <a href="/listings">Browse All Properties</a>
+        </div>
+
+      <% } %>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- number count-up animation -->
+<script>
+  document.querySelectorAll(".ar-count").forEach(function (el) {
+    var target = parseInt(el.dataset.count, 10) || 0;
+    var current = 0;
+    var step = Math.max(1, Math.ceil(target / 40));
+    var timer = setInterval(function () {
+      current += step;
+      if (current >= target) {
+        current = target;
+        clearInterval(timer);
+      }
+      el.textContent = current;
+    }, 30);
+  });
+</script>

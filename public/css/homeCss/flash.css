@@ -1,0 +1,454 @@
+/* ==========================================
+        ALIGARH RENTALS
+      PREMIUM FLASH MESSAGE
+========================================== */
+
+
+/* =========================
+        OVERLAY
+========================= */
+
+.ar-flash-overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:rgba(17,24,39,.35);
+
+    backdrop-filter:blur(8px);
+
+    -webkit-backdrop-filter:blur(8px);
+
+    z-index:99999;
+
+    animation:arFade .35s ease;
+
+}
+
+
+
+/* =========================
+          CARD
+========================= */
+
+.ar-flash-card{
+
+    width:92%;
+
+    max-width:560px;
+
+    background:#fff;
+
+    border-radius:24px;
+
+    overflow:hidden;
+
+    position:relative;
+
+    box-shadow:
+    0 30px 70px rgba(0,0,0,.20);
+
+    animation:arPopup .35s ease;
+
+}
+
+
+
+/* =========================
+         TOP AREA
+========================= */
+
+.ar-flash-top{
+
+    height:175px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    position:relative;
+
+}
+
+
+.ar-success-top{
+
+    background:#34c38f;
+
+    color:#34c38f;
+
+}
+
+
+.ar-error-top{
+
+    background:#ff4d4f;
+
+    color:#ff4d4f;
+
+}
+
+
+
+/* Bottom Triangle */
+
+.ar-flash-top::after{
+
+    content:"";
+
+    position:absolute;
+
+    bottom:-18px;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    width:0;
+
+    height:0;
+
+    border-left:22px solid transparent;
+
+    border-right:22px solid transparent;
+
+    border-top:18px solid currentColor;
+
+}
+
+
+
+/* =========================
+           ICON
+========================= */
+
+.ar-flash-icon{
+
+    width:110px;
+
+    height:110px;
+
+    border-radius:50%;
+
+    border:5px solid rgba(255,255,255,.95);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    color:#fff;
+
+    background:transparent;
+
+}
+
+
+.ar-flash-icon svg{
+
+    width:58px;
+
+    height:58px;
+
+}
+
+
+
+/* =========================
+          CLOSE
+========================= */
+
+.ar-flash-close{
+
+    position:absolute;
+
+    top:18px;
+
+    right:18px;
+
+    width:42px;
+
+    height:42px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.18);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    cursor:pointer;
+
+    color:#fff;
+
+    transition:.30s ease;
+
+    z-index:5;
+
+}
+
+
+.ar-flash-close svg{
+
+    width:20px;
+
+    height:20px;
+
+    stroke:currentColor;
+
+    pointer-events:none;
+
+}
+
+
+.ar-flash-close:hover{
+
+    background:#fff;
+
+    color:#1f2937;
+
+    transform:rotate(90deg) scale(1.08);
+
+}
+
+
+
+/* =========================
+            BODY
+========================= */
+
+.ar-flash-body{
+
+    padding:45px 40px 35px;
+
+    text-align:center;
+
+}
+
+
+.ar-flash-body h2{
+
+    margin:0;
+
+    font-size:34px;
+
+    font-weight:700;
+
+    color:#1f2937;
+
+}
+
+
+.ar-flash-body p{
+
+    margin:18px 0 32px;
+
+    color:#6b7280;
+
+    font-size:17px;
+
+    line-height:1.7;
+
+}
+
+
+
+/* =========================
+          BUTTON
+========================= */
+
+.ar-flash-btn{
+
+    border:none;
+
+    padding:15px 46px;
+
+    border-radius:14px;
+
+    color:#fff;
+
+    cursor:pointer;
+
+    font-size:17px;
+
+    font-weight:600;
+
+    transition:.30s;
+
+}
+
+
+.ar-success-btn{
+
+    background:#34c38f;
+
+}
+
+
+.ar-success-btn:hover{
+
+    background:#29ad7b;
+
+    transform:translateY(-2px);
+
+}
+
+
+.ar-error-btn{
+
+    background:#ff4d4f;
+
+}
+
+
+.ar-error-btn:hover{
+
+    background:#eb3d3f;
+
+    transform:translateY(-2px);
+
+}
+
+
+
+/* =========================
+        ANIMATION
+========================= */
+
+@keyframes arPopup{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(-45px) scale(.90);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0) scale(1);
+
+    }
+
+}
+
+
+@keyframes arFade{
+
+    from{
+
+        opacity:0;
+
+    }
+
+    to{
+
+        opacity:1;
+
+    }
+
+}
+
+
+
+/* =========================
+        RESPONSIVE
+========================= */
+
+@media(max-width:768px){
+
+    .ar-flash-card{
+
+        max-width:92%;
+
+    }
+
+    .ar-flash-top{
+
+        height:150px;
+
+    }
+
+    .ar-flash-icon{
+
+        width:90px;
+
+        height:90px;
+
+    }
+
+    .ar-flash-icon svg{
+
+        width:46px;
+
+        height:46px;
+
+    }
+
+    .ar-flash-close{
+
+        width:38px;
+
+        height:38px;
+
+        top:15px;
+
+        right:15px;
+
+    }
+
+    .ar-flash-close svg{
+
+        width:18px;
+
+        height:18px;
+
+    }
+
+    .ar-flash-body{
+
+        padding:36px 24px 28px;
+
+    }
+
+    .ar-flash-body h2{
+
+        font-size:28px;
+
+    }
+
+    .ar-flash-body p{
+
+        font-size:15px;
+
+    }
+
+    .ar-flash-btn{
+
+        width:100%;
+
+        padding:14px;
+
+        font-size:16px;
+
+    }
+
+}

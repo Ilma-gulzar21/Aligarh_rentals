@@ -1,0 +1,1526 @@
+<% layout("fixLayout/boilerplate") %>
+
+<link rel="stylesheet" href="/css/showPage/editProperty.css">
+
+<section class="apn-list-create-page">
+
+    <!-- INTRO SECTION -->
+
+    <section class="apn-list-intro-section">
+
+        <div class="apn-list-intro-content">
+
+            <span class="apn-list-small-tag">ALIGARH RENTALS</span>
+
+            <h1>List Your Property And Connect With Verified Tenants</h1>
+
+            <p>
+                Rent your flat, room, PG or independent house with Aligarh Rentals.
+                Add accurate details, pricing and photos to get better tenant
+                enquiries from students, families and working professionals.
+            </p>
+
+            <div class="apn-list-benefit-row">
+
+                <div class="apn-list-benefit-item">
+                    <i class="fa-solid fa-circle-check"></i>
+                    Verified Property Listing
+                </div>
+
+                <div class="apn-list-benefit-item">
+                    <i class="fa-solid fa-users"></i>
+                    Direct Tenant Reach
+                </div>
+
+                <div class="apn-list-benefit-item">
+                    <i class="fa-solid fa-location-dot"></i>
+                    Aligarh Local Network
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="apn-list-intro-card">
+
+            <div class="apn-list-intro-icon">
+                <i class="fa-solid fa-house-circle-check"></i>
+            </div>
+
+            <h3>Edit Rental Listing</h3>
+
+            <p>
+                Update your property information and keep your rental listing
+                accurate for tenants.
+            </p>
+
+            <div class="apn-list-quality-box">
+
+                <span><i class="fa-solid fa-check"></i> Property Information</span>
+                <span><i class="fa-solid fa-check"></i> Location Details</span>
+                <span><i class="fa-solid fa-check"></i> Rental Pricing</span>
+                <span><i class="fa-solid fa-check"></i> Photos Management</span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- MAIN EDIT FORM -->
+
+<form
+    action="/listings/<%= listing._id %>?_method=PUT"
+    method="POST"
+    enctype="multipart/form-data"
+    class="apn-list-main-form"
+    id="apnListPropertyForm"
+    data-page="edit"
+>
+
+        <!-- 01 OWNER DETAILS -->
+
+        <section class="apn-list-step-section">
+
+            <div class="apn-list-step-header">
+                <div class="apn-list-step-number">01</div>
+
+                <div>
+                    <h2>Owner Information</h2>
+                    <p>Provide your contact details so tenants can reach you easily.</p>
+                </div>
+            </div>
+
+            <div class="apn-list-fields-grid">
+
+                <div class="apn-list-field-box">
+                    <label>Mobile Number</label>
+
+                    <input
+                        type="tel"
+                        name="ownerPhone"
+                        class="apn-list-input"
+                        placeholder="Enter 10 digit mobile number"
+                        maxlength="10"
+                        value="<%= listing.ownerPhone || '' %>"
+                        required
+                    >
+
+                    <div class="apn-list-feedback"></div>
+                </div>
+
+                <div class="apn-list-field-box">
+                    <label>Email Address</label>
+
+                    <input
+                        type="email"
+                        name="ownerEmail"
+                        class="apn-list-input"
+                        placeholder="Enter active email address"
+                        value="<%= listing.ownerEmail || '' %>"
+                        required
+                    >
+
+                    <div class="apn-list-feedback"></div>
+                </div>
+
+                <div class="apn-list-field-box">
+                    <label>Response Time</label>
+
+                    <select name="responseTime" class="apn-list-select" required>
+
+                        <option value="">Select response time</option>
+
+                        <% ["Within 5 mins", "Within 30 mins", "Within 1 hour", "Within 24 hours"].forEach(time => { %>
+
+                            <option
+                                value="<%= time %>"
+                                <%= listing.responseTime === time ? "selected" : "" %>
+                            >
+                                <%= time %>
+                            </option>
+
+                        <% }) %>
+
+                    </select>
+
+                    <div class="apn-list-feedback"></div>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- 02 PROPERTY DETAILS -->
+
+        <section class="apn-list-step-section">
+
+            <div class="apn-list-step-header">
+                <div class="apn-list-step-number">02</div>
+
+                <div>
+                    <h2>Property Details</h2>
+                    <p>Tell tenants about your property type, space and facilities.</p>
+                </div>
+            </div>
+
+            <div class="apn-list-fields-grid">
+
+                <div class="apn-list-field-full">
+                    <label>Property Title</label>
+
+                    <input
+                        type="text"
+                        name="title"
+                        class="apn-list-input"
+                        placeholder="Example: Spacious 2 BHK Flat Near AMU Gate"
+                        value="<%= listing.title || '' %>"
+                        required
+                    >
+
+                    <div class="apn-list-feedback"></div>
+                </div>
+
+                <div class="apn-list-field-full">
+                    <label>Property Description</label>
+
+                    <textarea
+                        name="description"
+                        class="apn-list-textarea"
+                        placeholder="Describe rooms, ventilation, parking, nearby places, facilities and special features..."
+                        required
+                    ><%= listing.description || '' %></textarea>
+
+                    <div class="apn-list-feedback"></div>
+                </div>
+
+                <div class="apn-list-field-box">
+                    <label>Property Type</label>
+
+                    <select name="propertyType" class="apn-list-select" required>
+
+                        <option value="">Select property type</option>
+
+                        <% ["Flat", "Apartment", "Room", "House", "PG", "Shop"].forEach(type => { %>
+
+                            <option
+                                value="<%= type %>"
+                                <%= listing.propertyType === type ? "selected" : "" %>
+                            >
+                                <%= type %>
+                            </option>
+
+                        <% }) %>
+
+                    </select>
+
+                    <div class="apn-list-feedback"></div>
+                </div>
+
+                <div class="apn-list-field-box">
+                    <label>BHK Configuration</label>
+
+                    <select name="bhk" class="apn-list-select" required>
+
+                        <option value="">Select BHK</option>
+
+                        <% ["1 RK", "1 BHK", "2 BHK", "3 BHK", "4 BHK", "5+ BHK"].forEach(type => { %>
+
+                            <option
+                                value="<%= type %>"
+                                <%= listing.bhk === type ? "selected" : "" %>
+                            >
+                                <%= type %>
+                            </option>
+
+                        <% }) %>
+
+                    </select>
+
+                    <div class="apn-list-feedback"></div>
+                </div>
+
+                <div class="apn-list-field-box">
+                    <label>Furnishing Type</label>
+
+                    <select name="furnishing" class="apn-list-select" required>
+
+                        <option value="">Select furnishing</option>
+
+                        <% ["Furnished", "Semi Furnished", "Unfurnished"].forEach(type => { %>
+
+                            <option
+                                value="<%= type %>"
+                                <%= listing.furnishing === type ? "selected" : "" %>
+                            >
+                                <%= type %>
+                            </option>
+
+                        <% }) %>
+
+                    </select>
+
+                    <div class="apn-list-feedback"></div>
+                </div>
+
+                <div class="apn-list-field-box">
+                    <label>Available For</label>
+
+                    <select name="availableFor" class="apn-list-select" required>
+
+                        <option value="">Who can rent this property?</option>
+
+                        <% ["Student", "Family", "Roommate", "Visitor"].forEach(type => { %>
+
+                            <option
+                                value="<%= type %>"
+                                <%= listing.availableFor === type ? "selected" : "" %>
+                            >
+                                <%= type %>
+                            </option>
+
+                        <% }) %>
+
+                    </select>
+
+                    <div class="apn-list-feedback"></div>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- 03 RENTAL PRICING -->
+
+        <section class="apn-list-step-section">
+
+            <div class="apn-list-step-header">
+                <div class="apn-list-step-number">03</div>
+
+                <div>
+                    <h2>Rental Pricing</h2>
+                    <p>Set clear rental expectations so tenants can understand the complete cost.</p>
+                </div>
+            </div>
+
+            <div class="apn-list-fields-grid">
+
+                <div class="apn-list-field-box">
+                    <label>Monthly Rent</label>
+
+                    <input
+                        type="number"
+                        name="rentPrice"
+                        class="apn-list-input"
+                        placeholder="Example: ₹14000 per month"
+                        min="1"
+                        value="<%= listing.rentPrice ?? '' %>"
+                        required
+                    >
+
+                    <div class="apn-list-feedback"></div>
+                </div>
+
+                <div class="apn-list-field-box">
+                    <label>Security Deposit</label>
+
+                    <input
+                        type="number"
+                        name="securityDeposit"
+                        class="apn-list-input"
+                        placeholder="Example: ₹28000"
+                        min="0"
+                        value="<%= listing.securityDeposit ?? '' %>"
+                        required
+                    >
+
+                    <div class="apn-list-feedback"></div>
+                </div>
+
+                <div class="apn-list-field-box">
+                    <label>Maintenance Charge</label>
+
+                    <input
+                        type="number"
+                        name="maintenanceCharge"
+                        class="apn-list-input"
+                        placeholder="Example: ₹800 per month"
+                        min="0"
+                        value="<%= listing.maintenanceCharge ?? '' %>"
+                    >
+
+                    <div class="apn-list-feedback"></div>
+                </div>
+
+                <div class="apn-list-field-box">
+                    <label>Electricity Included</label>
+
+                    <select name="electricityIncluded" class="apn-list-select" required>
+
+                        <option value="">Select electricity option</option>
+
+                        <option
+                            value="true"
+                            <%= listing.electricityIncluded === true ? "selected" : "" %>
+                        >
+                            Yes, included
+                        </option>
+
+                        <option
+                            value="false"
+                            <%= listing.electricityIncluded === false ? "selected" : "" %>
+                        >
+                            No, separate payment
+                        </option>
+
+                    </select>
+
+                    <div class="apn-list-feedback"></div>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- 04 LOCATION DETAILS -->
+
+        <section class="apn-list-step-section">
+
+            <div class="apn-list-step-header">
+                <div class="apn-list-step-number">04</div>
+
+                <div>
+                    <h2>Property Location</h2>
+                    <p>Accurate location helps tenants find your property easily.</p>
+                </div>
+            </div>
+
+            <div class="apn-list-fields-grid">
+
+                <div class="apn-list-field-box">
+                    <label>Area / Locality</label>
+
+                    <input
+                        type="text"
+                        name="area"
+                        class="apn-list-input"
+                        placeholder="Example: Civil Lines, AMU Area, G.T Road"
+                        value="<%= listing.area || '' %>"
+                        required
+                    >
+
+                    <div class="apn-list-feedback"></div>
+                </div>
+
+                <div class="apn-list-field-box">
+                    <label>City</label>
+
+                    <input
+                        type="text"
+                        name="city"
+                        class="apn-list-input"
+                        value="<%= listing.city || 'Aligarh' %>"
+                        readonly
+                        required
+                    >
+
+                    <div class="apn-list-feedback"></div>
+                </div>
+
+                <div class="apn-list-field-box">
+                    <label>Country</label>
+
+                    <input
+                        type="text"
+                        name="country"
+                        class="apn-list-input"
+                        value="<%= listing.country || 'India' %>"
+                        readonly
+                        required
+                    >
+
+                    <div class="apn-list-feedback"></div>
+                </div>
+
+                <div class="apn-list-field-box">
+                    <label>Pincode</label>
+
+                    <input
+                        type="text"
+                        name="pincode"
+                        autocomplete="postal-code"
+                        class="apn-list-input"
+                        placeholder="Example: 202001"
+                        maxlength="6"
+                        pattern="[0-9]{6}"
+                        value="<%= listing.pincode || '' %>"
+                        required
+                    >
+
+                    <div class="apn-list-feedback"></div>
+                </div>
+
+                <div class="apn-list-field-full">
+                    <label>Complete Property Address</label>
+
+                    <textarea
+                        autocomplete="off"
+                        name="fullAddress"
+                        class="apn-list-textarea"
+                        placeholder="Example: Near AMU Gate, Civil Lines, Aligarh, Uttar Pradesh"
+                        required
+                    ><%= listing.fullAddress || '' %></textarea>
+
+                    <div class="apn-list-feedback"></div>
+                </div>
+
+                <div class="apn-list-field-full">
+                    <label>Google Map Location Link</label>
+
+                    <input
+                        type="url"
+                        name="googleMapLink"
+                        class="apn-list-input"
+                        placeholder="Paste Google Maps location link here"
+                        value="<%= listing.googleMapLink || '' %>"
+                    >
+
+                    <div class="apn-list-feedback"></div>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- 05 NEARBY LANDMARKS -->
+
+        <section class="apn-list-step-section">
+
+            <div class="apn-list-step-header">
+                <div class="apn-list-step-number">05</div>
+
+                <div>
+                    <h2>Nearby Landmarks</h2>
+                    <p>Add nearby universities, markets, hospitals and important locations.</p>
+                </div>
+            </div>
+
+            <div id="apnListLandmarkContainer" class="apn-list-dynamic-area">
+
+                <% if (listing.nearbyLandmarks && listing.nearbyLandmarks.length) { %>
+
+                    <% listing.nearbyLandmarks.forEach((landmark, index) => { %>
+
+                        <div class="apn-list-landmark-row">
+
+                            <div>
+                                <label>Landmark Name</label>
+
+                                <input
+                                    type="text"
+                                    name="nearbyLandmarks[<%= index %>][landmarkName]"
+                                    class="apn-list-input"
+                                    placeholder="Example: AMU Gate"
+                                    value="<%= landmark.landmarkName || '' %>"
+                                >
+                            </div>
+
+                            <div>
+                                <label>Distance</label>
+
+                                <input
+                                    type="number"
+                                    name="nearbyLandmarks[<%= index %>][distance]"
+                                    class="apn-list-input"
+                                    placeholder="Example: 1.5"
+                                    min="0"
+                                    value="<%= landmark.distance ?? '' %>"
+                                >
+                            </div>
+
+                            <div>
+                                <label>Unit</label>
+
+                                <select
+                                    name="nearbyLandmarks[<%= index %>][distanceUnit]"
+                                    class="apn-list-select"
+                                >
+
+                                    <option value="km" <%= landmark.distanceUnit === "km" ? "selected" : "" %>>
+                                        km
+                                    </option>
+
+                                    <option value="m" <%= landmark.distanceUnit === "m" ? "selected" : "" %>>
+                                        m
+                                    </option>
+
+                                </select>
+                            </div>
+
+                            <input
+                                type="hidden"
+                                name="nearbyLandmarks[<%= index %>][mainlocation]"
+                                value="<%= landmark.mainlocation || '' %>"
+                            >
+
+                        </div>
+
+                    <% }) %>
+
+                <% } %>
+
+            </div>
+
+            <button
+                type="button"
+                id="apnListAddLandmark"
+                class="apn-list-outline-button"
+            >
+                <i class="fa-solid fa-plus"></i>
+                Add Another Landmark
+            </button>
+
+        </section>
+
+
+        <!-- 06 BUILDING DETAILS -->
+
+        <section class="apn-list-step-section">
+
+            <div class="apn-list-step-header">
+                <div class="apn-list-step-number">06</div>
+
+                <div>
+                    <h2>Building Information</h2>
+                    <p>Provide floor details so tenants know the exact property location.</p>
+                </div>
+            </div>
+
+            <div class="apn-list-fields-grid">
+
+                <div class="apn-list-field-box">
+                    <label>Total Floors in Property</label>
+
+                    <input
+                        type="number"
+                        name="totalFloors"
+                        class="apn-list-input"
+                        placeholder="Maximum 10 floors allowed"
+                        min="1"
+                        max="10"
+                        value="<%= listing.totalFloors ?? '' %>"
+                        required
+                    >
+
+                    <div class="apn-list-feedback"></div>
+                </div>
+
+                <div class="apn-list-field-box">
+                    <label>How Many Floors Available for Rent</label>
+
+                    <input
+                        type="number"
+                        name="floor"
+                        class="apn-list-input"
+                        placeholder="Example: 4"
+                        min="1"
+                        max="10"
+                        value="<%= listing.floor ?? '' %>"
+                        required
+                    >
+
+                    <div class="apn-list-feedback"></div>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- 07 TENANT PREFERENCE -->
+
+        <section class="apn-list-step-section">
+
+            <div class="apn-list-step-header">
+                <div class="apn-list-step-number">07</div>
+
+                <div>
+                    <h2>Tenant Preference</h2>
+                    <p>Choose which type of tenants you want for your property.</p>
+                </div>
+            </div>
+
+            <div class="apn-list-fields-grid">
+
+                <div class="apn-list-field-box">
+                    <label>Preferred Tenant</label>
+
+                    <select name="preferredTenant" class="apn-list-select" required>
+
+                        <option value="">Select tenant preference</option>
+
+                        <% ["Boys", "Girls", "Family", "Couples", "Anyone", "Student"].forEach(type => { %>
+
+                            <option
+                                value="<%= type %>"
+                                <%= listing.preferredTenant === type ? "selected" : "" %>
+                            >
+                                <%= type %>
+                            </option>
+
+                        <% }) %>
+
+                    </select>
+
+                    <div class="apn-list-feedback"></div>
+                </div>
+
+                <div class="apn-list-field-box">
+                    <label>Maximum Occupants</label>
+
+                    <input
+                        type="number"
+                        name="maxOccupants"
+                        class="apn-list-input"
+                        placeholder="Example: 4 people"
+                        min="1"
+                        value="<%= listing.maxOccupants ?? '' %>"
+                        required
+                    >
+
+                    <div class="apn-list-feedback"></div>
+                </div>
+
+                <div class="apn-list-field-box">
+                    <label>Roommate Available</label>
+
+                    <select
+                        name="roommateAvailable"
+                        id="apnListRoommateAvailable"
+                        class="apn-list-select"
+                        required
+                    >
+
+                        <option value="">Select roommate requirement</option>
+
+                        <option
+                            value="true"
+                            <%= listing.roommateAvailable === true ? "selected" : "" %>
+                        >
+                            Yes, roommate required
+                        </option>
+
+                        <option
+                            value="false"
+                            <%= listing.roommateAvailable === false ? "selected" : "" %>
+                        >
+                            No roommate required
+                        </option>
+
+                    </select>
+
+                    <div class="apn-list-feedback"></div>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- 08 ROOMMATE DETAILS -->
+
+        <section
+            class="apn-list-step-section"
+            id="apnListRoommateSection"
+        >
+
+            <div class="apn-list-step-header">
+                <div class="apn-list-step-number">08</div>
+
+                <div>
+                    <h2>Existing Roommate Details</h2>
+                    <p>Add current roommate information if rooms are already occupied.</p>
+                </div>
+            </div>
+
+            <div class="apn-list-field-box">
+
+                <label>Current Occupants</label>
+
+                <input
+                    type="number"
+                    name="currentOccupants"
+                    class="apn-list-input"
+                    placeholder="Example: 2 people already staying"
+                    min="0"
+                    value="<%= listing.currentOccupants ?? 0 %>"
+                >
+
+                <div class="apn-list-feedback"></div>
+
+            </div>
+
+            <div id="apnListRoommateContainer" class="apn-list-dynamic-area">
+
+                <% if (listing.roommates && listing.roommates.length) { %>
+
+                    <% listing.roommates.forEach((roommate, index) => { %>
+
+                        <div class="apn-list-roommate-row">
+
+                            <div>
+                                <label>Name</label>
+
+                                <input
+                                    type="text"
+                                    name="roommates[<%= index %>][name]"
+                                    class="apn-list-input"
+                                    placeholder="Example: Hina"
+                                    value="<%= roommate.name || '' %>"
+                                >
+                            </div>
+
+                            <div>
+                                <label>Gender</label>
+
+                                <select
+                                    name="roommates[<%= index %>][gender]"
+                                    class="apn-list-select"
+                                >
+
+                                    <option value="">Select Gender</option>
+
+                                    <option value="Female" <%= roommate.gender === "Female" ? "selected" : "" %>>
+                                        Female
+                                    </option>
+
+                                    <option value="Male" <%= roommate.gender === "Male" ? "selected" : "" %>>
+                                        Male
+                                    </option>
+
+                                </select>
+                            </div>
+
+                            <div>
+                                <label>Age</label>
+
+                                <input
+                                    type="number"
+                                    name="roommates[<%= index %>][age]"
+                                    class="apn-list-input"
+                                    placeholder="Example: 22"
+                                    min="1"
+                                    max="100"
+                                    value="<%= roommate.age ?? '' %>"
+                                >
+                            </div>
+
+                        </div>
+
+                    <% }) %>
+
+                <% } else { %>
+
+                    <div class="apn-list-roommate-row">
+
+                        <div>
+                            <label>Name</label>
+
+                            <input
+                                type="text"
+                                name="roommates[0][name]"
+                                class="apn-list-input"
+                                placeholder="Example: Hina"
+                            >
+                        </div>
+
+                        <div>
+                            <label>Gender</label>
+
+                            <select
+                                name="roommates[0][gender]"
+                                class="apn-list-select"
+                            >
+                                <option value="">Select Gender</option>
+                                <option value="Female">Female</option>
+                                <option value="Male">Male</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label>Age</label>
+
+                            <input
+                                type="number"
+                                name="roommates[0][age]"
+                                class="apn-list-input"
+                                placeholder="Example: 22"
+                                min="1"
+                                max="100"
+                            >
+                        </div>
+
+                    </div>
+
+                <% } %>
+
+            </div>
+
+            <button
+                type="button"
+                id="apnListAddRoommate"
+                class="apn-list-outline-button"
+            >
+                <i class="fa-solid fa-user-plus"></i>
+                Add Roommate
+            </button>
+
+        </section>
+
+
+        <!-- 09 AVAILABILITY AND LEASE -->
+
+        <section class="apn-list-step-section">
+
+            <div class="apn-list-step-header">
+                <div class="apn-list-step-number">09</div>
+
+                <div>
+                    <h2>Availability & Lease Details</h2>
+                    <p>Tell tenants when they can move in and minimum stay duration.</p>
+                </div>
+            </div>
+
+            <div class="apn-list-fields-grid">
+
+                <div class="apn-list-field-box">
+                    <label>Available From</label>
+
+                    <input
+                        type="date"
+                        name="availableFrom"
+                        class="apn-list-input"
+                        value="<%= listing.availableFrom ? new Date(listing.availableFrom).toISOString().split('T')[0] : '' %>"
+                        required
+                    >
+
+                    <div class="apn-list-feedback"></div>
+                </div>
+
+                <div class="apn-list-field-box">
+                    <label>Minimum Lease Period</label>
+
+                    <input
+                        type="number"
+                        name="minimumLeaseMonths"
+                        class="apn-list-input"
+                        placeholder="Example: 6 months"
+                        min="1"
+                        max="11"
+                        value="<%= listing.minimumLeaseMonths ?? '' %>"
+                        required
+                    >
+
+                    <div class="apn-list-feedback"></div>
+                </div>
+
+                <div class="apn-list-field-box">
+                    <label>Maximum Lease Period</label>
+
+                    <input
+                        type="number"
+                        name="maximumLeaseMonths"
+                        class="apn-list-input"
+                        placeholder="Example: 24 months"
+                        min="1"
+                        max="11"
+                        value="<%= listing.maximumLeaseMonths ?? '' %>"
+                    >
+
+                    <div class="apn-list-feedback"></div>
+                </div>
+
+                <div class="apn-list-field-box">
+                    <label>Property Status</label>
+
+                    <select name="status" class="apn-list-select" required>
+
+                        <option value="">Select status</option>
+
+                        <% ["Available", "Booked", "Rented", "Pending"].forEach(status => { %>
+
+                            <option
+                                value="<%= status %>"
+                                <%= listing.status === status ? "selected" : "" %>
+                            >
+                                <%= status %>
+                            </option>
+
+                        <% }) %>
+
+                    </select>
+
+                    <div class="apn-list-feedback"></div>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- 10 PROPERTY IMAGES -->
+
+        <section class="apn-list-step-section">
+
+            <div class="apn-list-step-header">
+                <div class="apn-list-step-number">10</div>
+
+                <div>
+                    <h2>Property Images</h2>
+
+                    <p>
+                        Manage your property photos. You can keep existing images,
+                        replace them, delete them or upload additional photos.
+                        Updating images is optional.
+                    </p>
+                </div>
+            </div>
+
+            <div class="apn-image-requirement-box">
+
+                <i class="fa-solid fa-circle-info"></i>
+
+                <div>
+                    <strong>Manage Your Property Images</strong>
+
+                    <p>
+                        You can keep existing images, replace them, delete them
+                        or upload additional photos. There is no minimum image
+                        requirement while editing your property.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <!-- EXISTING IMAGES -->
+
+            <% if (listing.images && listing.images.length) { %>
+
+                <div
+                    id="apnExistingImages"
+                    class="apn-existing-images-container"
+                >
+
+                    <% listing.images.forEach((img, index) => { %>
+
+                        <div
+                            class="apn-existing-image-card"
+                            data-image-index="<%= index %>"
+                        >
+
+                            <div class="apn-existing-image-preview">
+
+                                <img
+                                    src="<%= img.url %>"
+                                    alt="Property Image <%= index + 1 %>"
+                                >
+
+                            </div>
+
+                            <div class="apn-existing-image-info">
+
+                                <span class="apn-image-number">
+                                    Image <%= index + 1 %>
+                                </span>
+
+                                <span class="apn-image-status">
+                                    Existing Image
+                                </span>
+
+                                <div class="apn-image-action">
+
+                                    <label class="apn-replace-label">
+
+                                        <i class="fa-solid fa-rotate"></i>
+                                        Replace Image
+
+                                        <input
+                                            type="file"
+                                            name="replaceImage_<%= index %>"
+                                            class="apn-replace-input"
+                                            data-image-index="<%= index %>"
+                                            accept="image/*"
+                                            hidden
+                                        >
+
+                                    </label>
+
+                                    <span
+                                        class="apn-replace-name"
+                                        id="replaceName_<%= index %>"
+                                    >
+                                        No new image selected
+                                    </span>
+
+                                </div>
+
+                                <label class="apn-delete-image-label">
+
+                                    <input
+                                        type="checkbox"
+                                        name="deleteImages"
+                                        value="<%= index %>"
+                                        class="apn-delete-image-checkbox"
+                                        data-image-index="<%= index %>"
+                                    >
+
+                                    <span>
+                                        <i class="fa-solid fa-trash"></i>
+                                        Delete this image
+                                    </span>
+
+                                </label>
+
+                            </div>
+
+                        </div>
+
+                    <% }) %>
+
+                </div>
+
+            <% } else { %>
+
+                <div class="apn-no-existing-images">
+                    <i class="fa-solid fa-image"></i>
+                    <p>No existing property images found.</p>
+                </div>
+
+            <% } %>
+
+
+            <!-- UPLOAD NEW IMAGES -->
+
+            <div class="apn-list-upload-box">
+
+                <i class="fa-solid fa-images"></i>
+
+                <h3>Upload New Property Photos</h3>
+
+                <p>
+                    Upload additional images only if you want to add more photos.
+                    This step is optional while editing your property.
+                </p>
+
+                <input
+                    type="file"
+                    name="images"
+                    multiple
+                    accept="image/*"
+                    id="apnListImages"
+                    class="apn-list-file-input"
+                >
+
+                <div
+                    class="apn-new-image-preview"
+                    id="apnNewImagePreview"
+                ></div>
+
+                <div
+                    class="apn-list-feedback"
+                    id="apnImageFeedback"
+                ></div>
+
+            </div>
+
+
+            <!-- IMAGE COUNT -->
+
+            <div class="apn-image-count-box" id="apnImageCountBox">
+
+                <i class="fa-solid fa-images"></i>
+
+                <span>Total property images:</span>
+
+                <strong id="apnCurrentImageCount">
+                    <%= listing.images ? listing.images.length : 0 %>
+                </strong>
+
+            </div>
+
+        </section>
+
+
+        <!-- FINAL UPDATE -->
+
+        <section class="apn-list-submit-section">
+
+            <div class="apn-list-submit-content">
+
+                <div class="apn-list-submit-icon">
+                    <i class="fa-solid fa-house-circle-check"></i>
+                </div>
+
+                <h2>Update Your Property On Aligarh Rentals</h2>
+
+                <p>
+                    Check all details carefully before saving your changes.
+                    Your updated property information will be visible to tenants
+                    searching for rental homes in Aligarh.
+                </p>
+
+                <button
+                    type="submit"
+                    class="apn-list-submit-button"
+                >
+                    <i class="fa-solid fa-pen-to-square"></i>
+                    Update Listing
+                </button>
+
+            </div>
+
+        </section>
+
+    </form>
+
+</section>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+    const form = document.getElementById("apnListPropertyForm");
+
+    if (!form) return;
+
+
+    /* =====================================
+       ROOMMATE SECTION VISIBILITY
+    ===================================== */
+
+    const roommateAvailable =
+        document.getElementById("apnListRoommateAvailable");
+
+    const roommateSection =
+        document.getElementById("apnListRoommateSection");
+
+    function toggleRoommateSection() {
+
+        if (!roommateAvailable || !roommateSection) return;
+
+        roommateSection.style.display =
+            roommateAvailable.value === "true" ? "block" : "none";
+
+    }
+
+    toggleRoommateSection();
+
+    if (roommateAvailable) {
+        roommateAvailable.addEventListener("change", toggleRoommateSection);
+    }
+
+
+    /* =====================================
+       IMAGE ELEMENTS
+    ===================================== */
+
+    const existingImageCards =
+        document.querySelectorAll(".apn-existing-image-card");
+
+    const deleteCheckboxes =
+        document.querySelectorAll(".apn-delete-image-checkbox");
+
+    const replaceInputs =
+        document.querySelectorAll(".apn-replace-input");
+
+    const newImagesInput =
+        document.getElementById("apnListImages");
+
+    const currentImageCount =
+        document.getElementById("apnCurrentImageCount");
+
+    const imageFeedback =
+        document.getElementById("apnImageFeedback");
+
+    const newImagePreview =
+        document.getElementById("apnNewImagePreview");
+
+
+    /* =====================================
+       IMAGE COUNT
+       NO MINIMUM IMAGE RESTRICTION
+    ===================================== */
+
+    function calculateImageCount() {
+
+        const existingCount = existingImageCards.length;
+
+        let deletedCount = 0;
+
+        deleteCheckboxes.forEach((checkbox) => {
+
+            if (checkbox.checked) {
+                deletedCount++;
+            }
+
+        });
+
+        const newImagesCount =
+            newImagesInput && newImagesInput.files
+                ? newImagesInput.files.length
+                : 0;
+
+        const finalCount =
+            existingCount - deletedCount + newImagesCount;
+
+        if (currentImageCount) {
+            currentImageCount.textContent = finalCount;
+        }
+
+        return finalCount;
+
+    }
+
+
+    /* =====================================
+       DELETE EXISTING IMAGE
+    ===================================== */
+
+    deleteCheckboxes.forEach((checkbox) => {
+
+        checkbox.addEventListener("change", () => {
+
+            const index = checkbox.dataset.imageIndex;
+
+            const card = document.querySelector(
+                `.apn-existing-image-card[data-image-index="${index}"]`
+            );
+
+            if (card) {
+                card.classList.toggle(
+                    "image-marked-delete",
+                    checkbox.checked
+                );
+            }
+
+            calculateImageCount();
+
+        });
+
+    });
+
+
+    /* =====================================
+       REPLACE EXISTING IMAGE
+    ===================================== */
+
+    replaceInputs.forEach((input) => {
+
+        input.addEventListener("change", () => {
+
+            const index = input.dataset.imageIndex;
+
+            const nameElement = document.getElementById(
+                `replaceName_${index}`
+            );
+
+            if (!input.files || !input.files.length) return;
+
+            const file = input.files[0];
+
+            if (!file.type.startsWith("image/")) {
+
+                alert("Please select a valid image file.");
+
+                input.value = "";
+
+                if (nameElement) {
+                    nameElement.textContent = "No new image selected";
+                }
+
+                return;
+
+            }
+
+            if (file.size > 5 * 1024 * 1024) {
+
+                alert("Each image must be less than 5 MB.");
+
+                input.value = "";
+
+                if (nameElement) {
+                    nameElement.textContent = "No new image selected";
+                }
+
+                return;
+
+            }
+
+            if (nameElement) {
+                nameElement.textContent = file.name;
+            }
+
+        });
+
+    });
+
+
+    /* =====================================
+       NEW IMAGE PREVIEW
+    ===================================== */
+
+    if (newImagesInput) {
+
+        newImagesInput.addEventListener("change", () => {
+
+            if (newImagePreview) {
+                newImagePreview.innerHTML = "";
+            }
+
+            if (imageFeedback) {
+                imageFeedback.textContent = "";
+            }
+
+            const files = Array.from(newImagesInput.files);
+
+            const invalidFiles = [];
+
+            files.forEach((file) => {
+
+                if (!file.type.startsWith("image/")) {
+
+                    invalidFiles.push(file.name);
+                    return;
+
+                }
+
+                if (file.size > 5 * 1024 * 1024) {
+
+                    invalidFiles.push(file.name);
+                    return;
+
+                }
+
+                const reader = new FileReader();
+
+                reader.onload = (event) => {
+
+                    const preview = document.createElement("div");
+
+                    preview.className = "apn-new-image-preview-item";
+
+                    const image = document.createElement("img");
+
+                    image.src = event.target.result;
+                    image.alt = "New Property Image";
+
+                    preview.appendChild(image);
+
+                    if (newImagePreview) {
+                        newImagePreview.appendChild(preview);
+                    }
+
+                };
+
+                reader.readAsDataURL(file);
+
+            });
+
+
+            if (invalidFiles.length > 0) {
+
+                if (imageFeedback) {
+                    imageFeedback.textContent =
+                        "Invalid images or files larger than 5 MB: " +
+                        invalidFiles.join(", ");
+                }
+
+                alert(
+                    "Some selected files are invalid or larger than 5 MB. " +
+                    "Please select valid images."
+                );
+
+            }
+
+            calculateImageCount();
+
+        });
+
+    }
+
+
+    /* =====================================
+       FORM SUBMISSION
+       NO MINIMUM IMAGE VALIDATION
+    ===================================== */
+
+    form.addEventListener("submit", (event) => {
+
+        let invalidImageFound = false;
+
+        // Validate replacement images.
+        replaceInputs.forEach((input) => {
+
+            if (!input.files || !input.files.length) return;
+
+            const file = input.files[0];
+
+            if (
+                !file.type.startsWith("image/") ||
+                file.size > 5 * 1024 * 1024
+            ) {
+                invalidImageFound = true;
+            }
+
+        });
+
+
+        // Validate newly selected images.
+        if (newImagesInput && newImagesInput.files) {
+
+            Array.from(newImagesInput.files).forEach((file) => {
+
+                if (
+                    !file.type.startsWith("image/") ||
+                    file.size > 5 * 1024 * 1024
+                ) {
+                    invalidImageFound = true;
+                }
+
+            });
+
+        }
+
+
+        if (invalidImageFound) {
+
+            event.preventDefault();
+
+            alert(
+                "Please remove invalid images. Each image must be a valid image file under 5 MB."
+            );
+
+            return;
+
+        }
+
+        // No minimum image count check.
+        // Property details can be updated without uploading images.
+
+    });
+
+
+    /* =====================================
+       INITIAL IMAGE COUNT
+    ===================================== */
+
+    calculateImageCount();
+
+});
+</script>

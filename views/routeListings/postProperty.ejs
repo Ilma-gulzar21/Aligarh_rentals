@@ -1,0 +1,746 @@
+<% layout("fixLayout/boilerplate") %>
+<link rel="stylesheet" href="/css/showPage/postProperty.css">
+
+<section class="apn-list-create-page">
+
+    <!-- ================= INTRO SECTION ================= -->
+    <section class="apn-list-intro-section">
+
+        <div class="apn-list-intro-content">
+            <span class="apn-list-small-tag"> ALIGARH RENTALS </span>
+            <h1> List Your Property And Connect With Verified Tenants </h1>
+            <p>
+                Rent your flat, room, PG or independent house with Aligarh Rentals.
+                Add accurate details, pricing and photos to get better tenant enquiries
+                from students, families and working professionals.
+            </p>
+
+            <div class="apn-list-benefit-row">
+
+                <div class="apn-list-benefit-item">
+                    <i class="fa-solid fa-circle-check"></i>
+                    Verified Property Listing
+                </div>
+
+                <div class="apn-list-benefit-item">
+                    <i class="fa-solid fa-users"></i>
+                    Direct Tenant Reach
+                </div>
+
+                <div class="apn-list-benefit-item">
+                    <i class="fa-solid fa-location-dot"></i>
+                    Aligarh Local Network
+                </div>
+
+            </div>
+        </div>
+
+        <div class="apn-list-intro-card">
+            <div class="apn-list-intro-icon">
+                <i class="fa-solid fa-house-circle-check"></i>
+            </div>
+
+            <h3> Create Rental Listing</h3>
+            <p> Complete property information helps tenants understand your property better.</p>
+
+            <div class="apn-list-quality-box">
+                <span><i class="fa-solid fa-check"></i> Property Information</span>
+                <span><i class="fa-solid fa-check"></i> Location Details</span>
+                <span><i class="fa-solid fa-check"></i> Rental Pricing</span>
+                <span><i class="fa-solid fa-check"></i> Photos Upload</span>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- ================= MAIN FORM ================= -->
+  <form
+    action="/listings"
+    method="POST"
+    enctype="multipart/form-data"
+    class="apn-list-main-form"
+    id="apnListPropertyForm"
+    data-page="new"
+>
+
+        <!-- ========== 01 : PROPERTY DETAILS ========== -->
+        <section class="apn-list-step-section">
+
+            <div class="apn-list-step-header">
+                <div class="apn-list-step-number">01</div>
+                <div>
+                    <h2>Property Details</h2>
+                    <p>Tell tenants about your property type, space and facilities.</p>
+                </div>
+            </div>
+
+            <div class="apn-list-fields-grid">
+
+                <div class="apn-list-field-full">
+                    <label>Property Title</label>
+                    <input type="text" name="title" class="apn-list-input" placeholder="Example: Spacious 2 BHK Flat Near AMU Gate" required>
+                    <div class="apn-list-feedback"></div>
+                </div>
+
+                <div class="apn-list-field-full">
+                    <label>Property Description</label>
+                    <textarea name="description" class="apn-list-textarea" placeholder="Describe rooms, ventilation, parking, nearby places, facilities and special features..." required></textarea>
+                    <div class="apn-list-feedback"></div>
+                </div>
+
+                <div class="apn-list-field-box">
+                    <label>Property Type</label>
+                    <select name="propertyType" class="apn-list-select" required>
+                        <option value="">Select property type</option>
+                        <option>Flat</option>
+                        <option>Apartment</option>
+                        <option>Room</option>
+                        <option>House</option>
+                        <option>PG</option>
+                    </select>
+                    <div class="apn-list-feedback"></div>
+                </div>
+
+                <div class="apn-list-field-box">
+                    <label>BHK Configuration</label>
+                    <select name="bhk" class="apn-list-select" required>
+                        <option value="">Select BHK</option>
+                        <option>1 RK</option>
+                        <option>1 BHK</option>
+                        <option>2 BHK</option>
+                        <option>3 BHK</option>
+                        <option>4 BHK</option>
+                    </select>
+                    <div class="apn-list-feedback"></div>
+                </div>
+
+                <div class="apn-list-field-box">
+                    <label>Furnishing Type</label>
+                    <select name="furnishing" class="apn-list-select" required>
+                        <option value="">Select furnishing</option>
+                        <option>Furnished</option>
+                        <option>Semi Furnished</option>
+                        <option>Unfurnished</option>
+                    </select>
+                    <div class="apn-list-feedback"></div>
+                </div>
+
+                <div class="apn-list-field-box">
+                    <label>Available For</label>
+                    <select name="availableFor" class="apn-list-select" required>
+                        <option value="">Who can rent this property?</option>
+                        <option>Student</option>
+                        <option>Family</option>
+                        <option>Roommate</option>
+                        <option>Visitor</option>
+                    </select>
+                    <div class="apn-list-feedback"></div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ========== 02 : RENTAL PRICING ========== -->
+        <section class="apn-list-step-section">
+
+            <div class="apn-list-step-header">
+                <div class="apn-list-step-number">02</div>
+                <div>
+                    <h2>Rental Pricing</h2>
+                    <p>Set clear rental expectations so tenants can understand the complete cost.</p>
+                </div>
+            </div>
+
+            <div class="apn-list-fields-grid">
+
+                <div class="apn-list-field-box">
+                    <label>Monthly Rent</label>
+                    <input type="number" name="rentPrice" class="apn-list-input" placeholder="Example: ₹14000 per month" min="1" required>
+                    <div class="apn-list-feedback"></div>
+                </div>
+
+                <div class="apn-list-field-box">
+                    <label>Security Deposit</label>
+                    <input type="number" name="securityDeposit" class="apn-list-input" placeholder="Example: ₹28000" min="0" required>
+                    <div class="apn-list-feedback"></div>
+                </div>
+
+                <div class="apn-list-field-box">
+                    <label>Maintenance Charge</label>
+                    <input type="number" name="maintenanceCharge" class="apn-list-input" placeholder="Example: ₹800 per month" min="0">
+                    <div class="apn-list-feedback"></div>
+                </div>
+
+                <div class="apn-list-field-box">
+                    <label>Electricity Included</label>
+                    <select name="electricityIncluded" class="apn-list-select" required>
+                        <option value="">Select electricity option</option>
+                        <option value="true">Yes, included</option>
+                        <option value="false">No, separate payment</option>
+                    </select>
+                    <div class="apn-list-feedback"></div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ========== 03 : OWNER CONTACT DETAILS ========== -->
+        <section class="apn-list-step-section">
+
+            <div class="apn-list-step-header">
+                <div class="apn-list-step-number">03</div>
+                <div>
+                    <h2>Owner Contact Details</h2>
+                    <p>Enter your mobile number so interested tenants can contact you.</p>
+                </div>
+            </div>
+
+            <div class="apn-list-fields-grid">
+
+                <div class="apn-list-field-box">
+                    <label for="ownerPhone">Owner Mobile Number</label>
+
+                    <input
+                        type="tel"
+                        id="ownerPhone"
+                        name="ownerPhone"
+                        class="apn-list-input"
+                        placeholder="Enter 10-digit mobile number"
+                        pattern="[6-9][0-9]{9}"
+                        minlength="10"
+                        maxlength="10"
+                        inputmode="numeric"
+                        autocomplete="tel"
+                        required
+                    >
+
+                    <div class="apn-list-feedback"></div>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========== 04 : PROPERTY LOCATION ========== -->
+        <section class="apn-list-step-section">
+
+            <div class="apn-list-step-header">
+                <div class="apn-list-step-number">04</div>
+                <div>
+                    <h2>Property Location</h2>
+                    <p>Accurate location helps tenants find your property easily.</p>
+                </div>
+            </div>
+
+            <div class="apn-list-fields-grid">
+
+                <div class="apn-list-field-box">
+                    <label>Area / Locality</label>
+
+                    <select name="area" id="apnListArea" class="apn-list-select" required>
+
+                        <option value="">Select Aligarh Area / Locality</option>
+
+                        <!-- MAJOR ALIGARH AREAS -->
+                        <option value="Aligarh City">Aligarh City</option>
+                        <option value="Achaltal">Achaltal</option>
+                        <option value="Avas Vikas Colony">Avas Vikas Colony</option>
+                        <option value="Avas Vikas Colony Phase 1">Avas Vikas Colony Phase 1</option>
+                        <option value="Avas Vikas Colony Phase 2">Avas Vikas Colony Phase 2</option>
+                        <option value="Avas Vikas Colony Phase 3">Avas Vikas Colony Phase 3</option>
+
+                        <option value="AMU Campus">AMU Campus</option>
+                        <option value="AMU City Campus">AMU City Campus</option>
+                        <option value="Aligarh Muslim University Area">Aligarh Muslim University Area</option>
+                        <option value="University Road">University Road</option>
+                        <option value="Medical Road">Medical Road</option>
+                        <option value="AMU Gate">AMU Gate</option>
+                        <option value="Medical College">Medical College</option>
+                        <option value="AMU North Campus">AMU North Campus</option>
+                        <option value="AMU South Campus">AMU South Campus</option>
+
+                        <!-- CIVIL LINES / CENTRAL -->
+                        <option value="Civil Lines">Civil Lines</option>
+                        <option value="Civil Lines Extension">Civil Lines Extension</option>
+                        <option value="Centre Point">Centre Point</option>
+                        <option value="Marris Road">Marris Road</option>
+                        <option value="Ramghat Road">Ramghat Road</option>
+                        <option value="Mahendra Nagar">Mahendra Nagar</option>
+                        <option value="Lal Diggi">Lal Diggi</option>
+                        <option value="Lal Diggi Road">Lal Diggi Road</option>
+                        <option value="Begum Bagh">Begum Bagh</option>
+                        <option value="Dodhpur">Dodhpur</option>
+                        <option value="Dodhpur Road">Dodhpur Road</option>
+                        <option value="Sir Syed Nagar">Sir Syed Nagar</option>
+                        <option value="Sir Syed Nagar Extension">Sir Syed Nagar Extension</option>
+
+                        <!-- RAMGHAT / QUARSI SIDE -->
+                        <option value="Quarsi">Quarsi</option>
+                        <option value="Quarsi Bypass">Quarsi Bypass</option>
+                        <option value="Quarsi Chauraha">Quarsi Chauraha</option>
+                        <option value="Quarsi Farm">Quarsi Farm</option>
+                        <option value="Ramghat Road">Ramghat Road</option>
+                        <option value="Ramghat">Ramghat</option>
+                        <option value="Ramghat Road Extension">Ramghat Road Extension</option>
+                        <option value="Swarn Jayanti Nagar">Swarn Jayanti Nagar</option>
+                        <option value="Swarn Jayanti Nagar Extension">Swarn Jayanti Nagar Extension</option>
+                        <option value="Begum Bagh">Begum Bagh</option>
+                        <option value="Sasni Gate">Sasni Gate</option>
+
+                        <!-- GANDHI PARK / OLD CITY -->
+                        <option value="Gandhi Park">Gandhi Park</option>
+                        <option value="Gandhi Park Road">Gandhi Park Road</option>
+                        <option value="Achaltal">Achaltal</option>
+                        <option value="Agra Road">Agra Road</option>
+                        <option value="Delhi Gate">Delhi Gate</option>
+                        <option value="Dori Nagar">Dori Nagar</option>
+                        <option value="Gandhi Nagar">Gandhi Nagar</option>
+                        <option value="Rasal Ganj">Rasal Ganj</option>
+                        <option value="Jaiganj">Jaiganj</option>
+                        <option value="Sarai Rehman">Sarai Rehman</option>
+                        <option value="Sarai Hakeem">Sarai Hakeem</option>
+                        <option value="Sarai Sultani">Sarai Sultani</option>
+                        <option value="Upper Fort">Upper Fort</option>
+                        <option value="Lower Fort">Lower Fort</option>
+                        <option value="Jamalpur">Jamalpur</option>
+                        <option value="Jamalpur Road">Jamalpur Road</option>
+                        <option value="Mamu Bhanja">Mamu Bhanja</option>
+                        <option value="Mandi">Mandi</option>
+                        <option value="Rambagh">Rambagh</option>
+
+                        <!-- MARRIS / RAILWAY SIDE -->
+                        <option value="Marris Road">Marris Road</option>
+                        <option value="Marris Road Extension">Marris Road Extension</option>
+                        <option value="Railway Road">Railway Road</option>
+                        <option value="Railway Station Area">Railway Station Area</option>
+                        <option value="Gandhi Eye Hospital Area">Gandhi Eye Hospital Area</option>
+                        <option value="Baraula">Baraula</option>
+                        <option value="Baraula Bypass">Baraula Bypass</option>
+                        <option value="Baraula Jafrabad">Baraula Jafrabad</option>
+
+                        <!-- GT ROAD / DELHI ROAD -->
+                        <option value="G.T. Road">G.T. Road</option>
+                        <option value="GT Road">GT Road</option>
+                        <option value="GT Road Bypass">GT Road Bypass</option>
+                        <option value="Delhi Road">Delhi Road</option>
+                        <option value="Delhi Aligarh Road">Delhi Aligarh Road</option>
+                        <option value="Roravar">Roravar</option>
+                        <option value="Roravar Road">Roravar Road</option>
+                        <option value="Harduaganj Road">Harduaganj Road</option>
+
+                        <!-- TALA NAGRI / INDUSTRIAL -->
+                        <option value="Tala Nagri">Tala Nagri</option>
+                        <option value="Tala Nagri Industrial Area">Tala Nagri Industrial Area</option>
+                        <option value="Tala Nagri Phase 1">Tala Nagri Phase 1</option>
+                        <option value="Tala Nagri Phase 2">Tala Nagri Phase 2</option>
+                        <option value="Tala Nagri Phase 3">Tala Nagri Phase 3</option>
+                        <option value="Industrial Estate">Industrial Estate</option>
+                        <option value="Industrial Area">Industrial Area</option>
+                        <option value="Lodhi Vihar">Lodhi Vihar</option>
+
+                        <!-- NAGLA / COLONY AREAS -->
+                        <option value="Nagla Padi">Nagla Padi</option>
+                        <option value="Nagla Masani">Nagla Masani</option>
+                        <option value="Nagla Kalan">Nagla Kalan</option>
+                        <option value="Nagla Barah">Nagla Barah</option>
+                        <option value="Nagla Teli">Nagla Teli</option>
+                        <option value="Nagla Patwari">Nagla Patwari</option>
+                        <option value="Nagla Jorawar">Nagla Jorawar</option>
+                        <option value="Nagla Khar">Nagla Khar</option>
+                        <option value="Masani">Masani</option>
+
+                        <!-- COLONY / RESIDENTIAL AREAS -->
+                        <option value="Vishnupuri">Vishnupuri</option>
+                        <option value="Vishnupuri Extension">Vishnupuri Extension</option>
+                        <option value="Mahendra Nagar">Mahendra Nagar</option>
+                        <option value="Saraswati Vihar">Saraswati Vihar</option>
+                        <option value="Shanti Nagar">Shanti Nagar</option>
+                        <option value="Krishna Nagar">Krishna Nagar</option>
+                        <option value="Shivpuri">Shivpuri</option>
+                        <option value="Ram Nagar">Ram Nagar</option>
+                        <option value="Prem Nagar">Prem Nagar</option>
+                        <option value="Gandhi Nagar">Gandhi Nagar</option>
+                        <option value="Shastri Nagar">Shastri Nagar</option>
+                        <option value="Subhash Nagar">Subhash Nagar</option>
+                        <option value="Indra Nagar">Indra Nagar</option>
+                        <option value="Jawahar Nagar">Jawahar Nagar</option>
+                        <option value="Ramnagar Colony">Ramnagar Colony</option>
+                        <option value="Kalyan Nagar">Kalyan Nagar</option>
+                        <option value="Vijay Nagar">Vijay Nagar</option>
+                        <option value="Rajendra Nagar">Rajendra Nagar</option>
+                        <option value="Saket Colony">Saket Colony</option>
+                        <option value="Shiv Shakti Nagar">Shiv Shakti Nagar</option>
+
+                        <!-- KHAIR ROAD / SASNI GATE -->
+                        <option value="Khair Road">Khair Road</option>
+                        <option value="Khair Bypass">Khair Bypass</option>
+                        <option value="Sasni Gate">Sasni Gate</option>
+                        <option value="Sasni Gate Road">Sasni Gate Road</option>
+                        <option value="Banna Devi">Banna Devi</option>
+                        <option value="Banna Devi Road">Banna Devi Road</option>
+                        <option value="Madrak">Madrak</option>
+
+                        <!-- AGRA ROAD SIDE -->
+                        <option value="Agra Road">Agra Road</option>
+                        <option value="Agra Road Bypass">Agra Road Bypass</option>
+                        <option value="Sarai Rahman">Sarai Rahman</option>
+                        <option value="Madanpur">Madanpur</option>
+                        <option value="Barauli">Barauli</option>
+                        <option value="Barauli Road">Barauli Road</option>
+
+                        <!-- KASIMPUR / HARDUAGANJ SIDE -->
+                        <option value="Harduaganj">Harduaganj</option>
+                        <option value="Harduaganj Road">Harduaganj Road</option>
+                        <option value="Kasimpur">Kasimpur</option>
+                        <option value="Kasimpur Power House">Kasimpur Power House</option>
+                        <option value="Jawan">Jawan</option>
+                        <option value="Jawan Sikandarpur">Jawan Sikandarpur</option>
+
+                        <!-- ALIGARH BYPASS / OUTER -->
+                        <option value="Aligarh Bypass">Aligarh Bypass</option>
+                        <option value="Quarsi Bypass">Quarsi Bypass</option>
+                        <option value="Delhi Bypass">Delhi Bypass</option>
+                        <option value="GT Road Bypass">GT Road Bypass</option>
+                        <option value="Mathura Road">Mathura Road</option>
+                        <option value="Mathura Bypass">Mathura Bypass</option>
+
+                        <!-- OTHER LOCALITIES -->
+                        <option value="Kela Nagar">Kela Nagar</option>
+                        <option value="Kela Nagar Chauraha">Kela Nagar Chauraha</option>
+                        <option value="Zoravar Singh">Zoravar Singh</option>
+                        <option value="Sangam Vihar">Sangam Vihar</option>
+                        <option value="Green Park Colony">Green Park Colony</option>
+                        <option value="Shatabdi Nagar">Shatabdi Nagar</option>
+                        <option value="Friends Colony">Friends Colony</option>
+                        <option value="Swarna Jayanti Nagar">Swarna Jayanti Nagar</option>
+                        <option value="Nehru Nagar">Nehru Nagar</option>
+                        <option value="Naurangabad">Naurangabad</option>
+                        <option value="Rambagh Colony">Rambagh Colony</option>
+                        <option value="Saket Colony">Saket Colony</option>
+                        <option value="Prem Nagar">Prem Nagar</option>
+                        <option value="Surendra Nagar">Surendra Nagar</option>
+                        <option value="Surendra Nagar Extension">Surendra Nagar Extension</option>
+                        <option value="Shankar Vihar">Shankar Vihar</option>
+                        <option value="Shiv Vihar">Shiv Vihar</option>
+                        <option value="Raj Vihar">Raj Vihar</option>
+                        <option value="Anupshahr Road">Anupshahr Road</option>
+                        <option value="Anupshahr Road Bypass">Anupshahr Road Bypass</option>
+                        <option value="Ramghat Road">Ramghat Road</option>
+                        <option value="Bareilly Road">Bareilly Road</option>
+                        <option value="Bulandshahr Road">Bulandshahr Road</option>
+
+                    </select>
+
+                    <div class="apn-list-feedback"></div>
+                </div>
+
+                <div class="apn-list-field-box">
+                    <label>City</label>
+                    <input type="text" name="city" class="apn-list-input" value="Aligarh" placeholder="Enter city name" required readonly>
+                    <div class="apn-list-feedback"></div>
+                </div>
+
+                <div class="apn-list-field-box">
+                    <label>Country</label>
+                    <input type="text" name="country" class="apn-list-input" value="India" placeholder="Enter country name" required readonly>
+                    <div class="apn-list-feedback"></div>
+                </div>
+
+                <div class="apn-list-field-box">
+                    <label>Pincode</label>
+                    <input type="text" name="pincode" autocomplete="postal-code" class="apn-list-input" placeholder="Example: 202001" maxlength="6" pattern="[0-9]{6}" required>
+                    <div class="apn-list-feedback"></div>
+                </div>
+
+                <div class="apn-list-field-full">
+                    <label>Complete Property Address</label>
+                    <textarea name="fullAddress" autocomplete="off" class="apn-list-textarea" placeholder="Example: Near AMU Gate, Civil Lines, Aligarh, Uttar Pradesh" required></textarea>
+                    <div class="apn-list-feedback"></div>
+                </div>
+
+                <div class="apn-list-field-full">
+                    <label>Google Map Location Link</label>
+                    <input type="url" name="googleMapLink" class="apn-list-input" placeholder="Paste Google Maps location link here">
+                    <div class="apn-list-feedback"></div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ========== 05 : NEARBY LANDMARKS ========== -->
+        <section class="apn-list-step-section">
+
+            <div class="apn-list-step-header">
+                <div class="apn-list-step-number">05</div>
+                <div>
+                    <h2>Nearby Landmarks</h2>
+                    <p>Add nearby universities, markets, hospitals and important locations.</p>
+                </div>
+            </div>
+
+            <div id="apnListLandmarkContainer" class="apn-list-dynamic-area"></div>
+
+            <button type="button" id="apnListAddLandmark" class="apn-list-outline-button">
+                <i class="fa-solid fa-plus"></i>
+                Add Another Landmark
+            </button>
+
+        </section>
+
+
+        <!-- ========== 06 : BUILDING INFORMATION ========== -->
+        <section class="apn-list-step-section">
+
+            <div class="apn-list-step-header">
+                <div class="apn-list-step-number">06</div>
+                <div>
+                    <h2>Building Information</h2>
+                    <p>Provide floor details so tenants know the exact property location.</p>
+                </div>
+            </div>
+
+            <div class="apn-list-fields-grid">
+
+                <div class="apn-list-field-box">
+                    <label>Total Floors in property</label>
+                    <input type="number" name="totalFloors" class="apn-list-input" placeholder="Maximum 10 floors allowed" min="1" max="10" required>
+                    <div class="apn-list-feedback"></div>
+                </div>
+
+                <div class="apn-list-field-box">
+                    <label>How many Floors Available for Rent</label>
+                    <input type="number" name="floor" class="apn-list-input" placeholder="Example: 4" min="1" max="10" required>
+                    <div class="apn-list-feedback"></div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ========== 07 : TENANT PREFERENCE ========== -->
+        <section class="apn-list-step-section">
+
+            <div class="apn-list-step-header">
+                <div class="apn-list-step-number">07</div>
+                <div>
+                    <h2>Tenant Preference</h2>
+                    <p>Choose which type of tenants you want and how quickly you will respond to them.</p>
+                </div>
+            </div>
+
+            <div class="apn-list-fields-grid">
+
+                <div class="apn-list-field-box">
+                    <label>Preferred Tenant</label>
+                    <select name="preferredTenant" class="apn-list-select" required>
+                        <option value="">Select tenant preference</option>
+                        <option value="Boys">Boys</option>
+                        <option value="Girls">Girls</option>
+                        <option value="Family">Family</option>
+                        <option value="Couples">Couples</option>
+                        <option value="Anyone">Anyone</option>
+                        <option value="Student">Student</option>
+                    </select>
+                    <div class="apn-list-feedback"></div>
+                </div>
+
+                <div class="apn-list-field-box">
+                    <label>Maximum Occupants</label>
+                    <input type="number" name="maxOccupants" class="apn-list-input" placeholder="Example: 4 people" min="1" required>
+                    <div class="apn-list-feedback"></div>
+                </div>
+
+                <div class="apn-list-field-box">
+                    <label>Roommate Available</label>
+                    <select name="roommateAvailable" id="apnListRoommateAvailable" class="apn-list-select" required>
+                        <option value="">Select roommate requirement</option>
+                        <option value="true">Yes, roommate required</option>
+                        <option value="false">No roommate required</option>
+                    </select>
+                    <div class="apn-list-feedback"></div>
+                </div>
+
+                <div class="apn-list-field-box">
+                    <label>Response Time</label>
+                    <select name="responseTime" class="apn-list-select" required>
+                        <option value="">Select response time</option>
+                        <option value="Within 5 mins">Within 5 mins</option>
+                        <option value="Within 30 mins">Within 30 mins</option>
+                        <option value="Within 1 hour">Within 1 hour</option>
+                        <option value="Within 24 hours">Within 24 hours</option>
+                    </select>
+                    <div class="apn-list-feedback"></div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ========== 08 : EXISTING ROOMMATE DETAILS ========== -->
+        <section class="apn-list-step-section" id="apnListRoommateSection" style="display:none;">
+
+            <div class="apn-list-step-header">
+                <div class="apn-list-step-number">08</div>
+                <div>
+                    <h2>Existing Roommate Details</h2>
+                    <p>Add current roommate information if rooms are already occupied.</p>
+                </div>
+            </div>
+
+            <div class="apn-list-field-box">
+                <label>Current Occupants</label>
+
+                <input
+                    type="number"
+                    name="currentOccupants"
+                    class="apn-list-input"
+                    placeholder="Example: 2 people already staying"
+                    min="1"
+                >
+
+                <div class="apn-list-feedback"></div>
+            </div>
+
+            <div id="apnListRoommateContainer" class="apn-list-dynamic-area">
+
+                <div class="apn-list-roommate-row">
+
+                    <div>
+                        <label>Name</label>
+                        <input type="text" name="roommates[0][name]" class="apn-list-input" placeholder="Example: Hina">
+                    </div>
+
+                    <div>
+                        <label>Gender</label>
+                        <select name="roommates[0][gender]" class="apn-list-select">
+                            <option value="">Select Gender</option>
+                            <option value="Female">Female</option>
+                            <option value="Male">Male</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label>Age</label>
+                        <input type="number" name="roommates[0][age]" class="apn-list-input" placeholder="Example: 22" min="1" max="100">
+                    </div>
+
+                </div>
+
+            </div>
+
+            <button type="button" id="apnListAddRoommate" class="apn-list-outline-button">
+                <i class="fa-solid fa-user-plus"></i>
+                Add Roommate
+            </button>
+
+        </section>
+
+
+        <!-- ========== 09 : AVAILABILITY & LEASE ========== -->
+        <section class="apn-list-step-section">
+
+            <div class="apn-list-step-header">
+                <div class="apn-list-step-number">09</div>
+                <div>
+                    <h2>Availability & Lease Details</h2>
+                    <p>Tell tenants when they can move in and minimum stay duration.</p>
+                </div>
+            </div>
+
+            <div class="apn-list-fields-grid">
+
+                <div class="apn-list-field-box">
+                    <label>Available From</label>
+                    <input type="date" name="availableFrom" class="apn-list-input" required>
+                    <div class="apn-list-feedback"></div>
+                </div>
+
+                <div class="apn-list-field-box">
+                    <label>Minimum Lease Period</label>
+                    <input type="number" name="minimumLeaseMonths" class="apn-list-input" placeholder="Example: 6 months" min="1" required>
+                    <div class="apn-list-feedback"></div>
+                </div>
+
+                <div class="apn-list-field-box">
+                    <label>Maximum Lease Period</label>
+                    <input type="number" name="maximumLeaseMonths" class="apn-list-input" placeholder="Example: 24 months" min="1" max="11">
+                    <div class="apn-list-feedback"></div>
+                </div>
+
+                <div class="apn-list-field-box">
+                    <label>Property Status</label>
+                    <select name="status" class="apn-list-select" required>
+                        <option value="">Select status</option>
+                        <option value="Available">Available</option>
+                        <option value="Booked">Booked</option>
+                        <option value="Occupied">Occupied</option>
+                        <option value="Pending">Pending</option>
+                    </select>
+                    <div class="apn-list-feedback"></div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ========== 10 : PROPERTY IMAGES ========== -->
+        <section class="apn-list-step-section">
+
+            <div class="apn-list-step-header">
+                <div class="apn-list-step-number">10</div>
+                <div>
+                    <h2>Property Images</h2>
+                    <p>Upload clear photos of rooms, kitchen, bathroom and surroundings.</p>
+                </div>
+            </div>
+
+            <div class="apn-list-upload-box">
+
+                <i class="fa-solid fa-images"></i>
+
+                <h3>Upload Property Photos</h3>
+
+                <p>Minimum 3 images recommended. Maximum 10 images allowed.</p>
+
+                <input type="file" name="images" multiple accept="image/*" id="apnListImages" class="apn-list-file-input" required>
+
+                <div class="apn-list-feedback" id="apnImageFeedback"></div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========== FINAL PUBLISH ========== -->
+        <section class="apn-list-submit-section">
+
+            <div class="apn-list-submit-content">
+
+                <div class="apn-list-submit-icon">
+                    <i class="fa-solid fa-house-circle-check"></i>
+                </div>
+
+                <h2>Publish Your Property On Aligarh Rentals</h2>
+
+                <p>
+                    Check all details carefully before publishing.
+                    Your property will become visible to tenants searching for rental homes in Aligarh.
+                </p>
+
+                <button type="submit" class="apn-list-submit-button">
+                    <i class="fa-solid fa-paper-plane"></i>
+                    Publish Listing
+                </button>
+
+            </div>
+
+        </section>
+
+    </form>
+
+</section>

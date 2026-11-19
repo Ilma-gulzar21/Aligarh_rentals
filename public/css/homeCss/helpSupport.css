@@ -1,0 +1,694 @@
+/* ======================================
+   ALIGARH RENTALS - HELP & SUPPORT
+====================================== */
+
+.support-page {
+    width: min(1180px, 92%);
+    margin: 35px auto 70px;
+    color: #1e293b;
+}
+
+
+/* ======================================
+   HERO SECTION
+====================================== */
+
+.support-hero {
+    min-height: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 35px;
+
+    padding: 55px 65px;
+    border-radius: 25px;
+
+    background:
+        radial-gradient(circle at 90% 20%, rgba(167,139,250,.22), transparent 35%),
+        linear-gradient(120deg, #f5f3ff, #eff6ff);
+
+    overflow: hidden;
+}
+
+.support-hero-content {
+    max-width: 620px;
+}
+
+.support-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    color: #7c3aed;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+.support-hero h1 {
+    margin: 18px 0;
+    font-size: clamp(34px, 4vw, 49px);
+    font-weight: 850;
+    line-height: 1.15;
+    color: #172554;
+}
+
+.support-hero h1 span,
+.support-contact-info h2 span {
+    display: block;
+    color: #7c3aed;
+}
+
+.support-hero-content > p {
+    max-width: 520px;
+    color: #64748b;
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+.support-primary-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+
+    margin-top: 18px;
+    padding: 14px 23px;
+
+    border-radius: 10px;
+    background: #6d28d9;
+    color: white;
+    text-decoration: none;
+    font-weight: 700;
+
+    transition: .25s ease;
+}
+
+.support-primary-btn:hover {
+    background: #4c1d95;
+    color: white;
+    transform: translateY(-3px);
+}
+
+
+/* Hero illustration */
+
+.support-hero-visual {
+    position: relative;
+    width: 300px;
+    height: 250px;
+    flex-shrink: 0;
+
+    display: grid;
+    place-items: center;
+}
+
+.support-visual-circle {
+    width: 190px;
+    height: 190px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 50%;
+    background: linear-gradient(145deg, #8b5cf6, #4f46e5);
+    box-shadow: 0 25px 55px rgba(109, 40, 217, .25);
+}
+
+.support-visual-circle i {
+    color: white;
+    font-size: 85px;
+}
+
+.support-floating-card {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 13px 17px;
+    border-radius: 12px;
+
+    background: white;
+    box-shadow: 0 12px 35px rgba(15, 23, 42, .12);
+
+    font-size: 12px;
+    font-weight: 750;
+    color: #334155;
+}
+
+.support-floating-card i {
+    color: #7c3aed;
+    font-size: 18px;
+}
+
+.card-one {
+    top: 25px;
+    left: -5px;
+}
+
+.card-two {
+    right: -20px;
+    bottom: 25px;
+}
+
+
+/* ======================================
+   SECTION HEADINGS
+====================================== */
+
+.support-section-heading {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.support-section-heading > span {
+    color: #7c3aed;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.8px;
+}
+
+.support-section-heading h2 {
+    margin: 12px 0 9px;
+    font-size: clamp(25px, 3vw, 34px);
+    font-weight: 800;
+    color: #172554;
+}
+
+.support-section-heading p {
+    margin: 0;
+    color: #64748b;
+    font-size: 14px;
+}
+
+
+/* ======================================
+   SUPPORT CATEGORIES
+====================================== */
+
+.support-categories {
+    padding: 75px 0;
+}
+
+.support-category-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.support-category-card {
+    display: block;
+    padding: 25px 22px;
+
+    border: 1px solid #e9eaf3;
+    border-radius: 17px;
+
+    background: white;
+    text-decoration: none;
+
+    transition: .25s ease;
+}
+
+.support-category-card:hover {
+    transform: translateY(-6px);
+    border-color: #c4b5fd;
+    box-shadow: 0 15px 35px rgba(79, 70, 229, .09);
+}
+
+.support-category-icon {
+    width: 52px;
+    height: 52px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 14px;
+    font-size: 21px;
+}
+
+.support-category-icon.purple {
+    color: #7c3aed;
+    background: #f3e8ff;
+}
+
+.support-category-icon.blue {
+    color: #2563eb;
+    background: #dbeafe;
+}
+
+.support-category-icon.green {
+    color: #059669;
+    background: #d1fae5;
+}
+
+.support-category-icon.orange {
+    color: #ea580c;
+    background: #ffedd5;
+}
+
+.support-category-card h3 {
+    margin: 19px 0 9px;
+    font-size: 17px;
+    font-weight: 750;
+    color: #1e293b;
+}
+
+.support-category-card p {
+    min-height: 65px;
+    color: #64748b;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.category-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    margin-top: 8px;
+    color: #7c3aed;
+    font-size: 13px;
+    font-weight: 750;
+}
+
+
+/* ======================================
+   FAQ SECTION
+====================================== */
+
+.support-faq {
+    padding: 65px 0;
+    border-top: 1px solid #eef0f5;
+}
+
+.faq-container {
+    max-width: 850px;
+    margin: auto;
+}
+
+.faq-item {
+    margin-bottom: 13px;
+
+    border: 1px solid #e8eaf2;
+    border-radius: 13px;
+
+    background: white;
+    overflow: hidden;
+    transition: .2s ease;
+}
+
+.faq-item[open] {
+    border-color: #c4b5fd;
+    box-shadow: 0 8px 25px rgba(109, 40, 217, .06);
+}
+
+.faq-item summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+
+    padding: 19px 22px;
+
+    list-style: none;
+    cursor: pointer;
+
+    color: #1e293b;
+    font-size: 14px;
+    font-weight: 750;
+}
+
+.faq-item summary::-webkit-details-marker {
+    display: none;
+}
+
+.faq-item summary i {
+    color: #7c3aed;
+    font-size: 13px;
+    transition: .2s ease;
+}
+
+.faq-item[open] summary i {
+    transform: rotate(180deg);
+}
+
+.faq-answer {
+    padding: 0 22px 20px;
+    color: #64748b;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+
+/* ======================================
+   CONTACT SECTION
+====================================== */
+
+.support-contact {
+    display: grid;
+    grid-template-columns: .85fr 1.15fr;
+    gap: 45px;
+
+    padding: 55px;
+    border-radius: 24px;
+
+    background: #f8f7ff;
+}
+
+.support-contact-info h2 {
+    margin: 20px 0;
+    color: #172554;
+    font-size: clamp(29px, 3vw, 38px);
+    font-weight: 850;
+    line-height: 1.2;
+}
+
+.support-contact-info > p {
+    color: #64748b;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.support-contact-point {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.contact-point-icon {
+    width: 45px;
+    height: 45px;
+    flex-shrink: 0;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 12px;
+    background: white;
+    color: #7c3aed;
+    font-size: 17px;
+}
+
+.support-contact-point h4 {
+    margin: 0 0 4px;
+    font-size: 14px;
+    font-weight: 750;
+    color: #1e293b;
+}
+
+.support-contact-point p {
+    margin: 0;
+    color: #64748b;
+    font-size: 12px;
+}
+
+
+/* ======================================
+   SUPPORT FORM
+====================================== */
+
+.support-form-wrapper {
+    padding: 32px;
+    border-radius: 18px;
+    background: white;
+    box-shadow: 0 12px 40px rgba(15, 23, 42, .06);
+}
+
+.support-form-heading h3 {
+    margin: 0 0 7px;
+    font-size: 22px;
+    font-weight: 800;
+    color: #172554;
+}
+
+.support-form-heading p {
+    margin: 0 0 25px;
+    color: #64748b;
+    font-size: 13px;
+}
+
+.support-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.support-form-group {
+    margin-bottom: 18px;
+}
+
+.support-form-group label {
+    display: block;
+    margin-bottom: 8px;
+
+    color: #334155;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.support-form-group input,
+.support-form-group select,
+.support-form-group textarea {
+    width: 100%;
+    padding: 13px 14px;
+
+    border: 1px solid #e2e8f0;
+    border-radius: 9px;
+
+    outline: none;
+    background: #fff;
+    color: #1e293b;
+
+    font-family: inherit;
+    font-size: 13px;
+
+    transition: .2s ease;
+}
+
+.support-form-group input:focus,
+.support-form-group select:focus,
+.support-form-group textarea:focus {
+    border-color: #8b5cf6;
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, .10);
+}
+
+.support-form-group textarea {
+    resize: vertical;
+    min-height: 125px;
+}
+
+.support-submit-btn {
+    width: 100%;
+    padding: 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: #6d28d9;
+    color: white;
+
+    font-size: 14px;
+    font-weight: 750;
+    cursor: pointer;
+
+    transition: .25s ease;
+}
+
+.support-submit-btn:hover {
+    background: #4c1d95;
+    transform: translateY(-2px);
+}
+
+.support-form-note {
+    margin: 14px 0 0;
+    text-align: center;
+    color: #94a3b8;
+    font-size: 11px;
+}
+
+.support-form-note i {
+    margin-right: 5px;
+}
+
+
+/* ======================================
+   BOTTOM CTA
+====================================== */
+
+.support-bottom-cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+
+    margin-top: 45px;
+    padding: 35px 40px;
+
+    border-radius: 18px;
+    background: linear-gradient(110deg, #4c1d95, #7c3aed);
+}
+
+.support-bottom-cta h2 {
+    margin: 0 0 8px;
+    color: white;
+    font-size: 22px;
+    font-weight: 800;
+}
+
+.support-bottom-cta p {
+    margin: 0;
+    color: #ede9fe;
+    font-size: 13px;
+}
+
+.support-bottom-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 13px 19px;
+    border-radius: 9px;
+
+    background: white;
+    color: #6d28d9;
+    text-decoration: none;
+
+    font-size: 13px;
+    font-weight: 750;
+    white-space: nowrap;
+
+    transition: .2s ease;
+}
+
+.support-bottom-btn:hover {
+    background: #ede9fe;
+    color: #4c1d95;
+}
+
+
+/* ======================================
+   RESPONSIVE DESIGN
+====================================== */
+
+@media (max-width: 1000px) {
+
+    .support-category-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .support-contact {
+        gap: 25px;
+        padding: 35px;
+    }
+
+    .support-hero {
+        padding: 45px;
+    }
+
+    .support-hero-visual {
+        transform: scale(.85);
+    }
+}
+
+
+@media (max-width: 768px) {
+
+    .support-page {
+        width: 94%;
+        margin-top: 20px;
+    }
+
+    .support-hero {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 35px 25px;
+    }
+
+    .support-hero-visual {
+        align-self: center;
+        margin-top: 10px;
+    }
+
+    .support-categories,
+    .support-faq {
+        padding: 45px 0;
+    }
+
+    .support-contact {
+        grid-template-columns: 1fr;
+        padding: 25px;
+    }
+
+    .support-bottom-cta {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 28px;
+    }
+}
+
+
+@media (max-width: 520px) {
+
+    .support-hero {
+        padding: 30px 20px;
+        border-radius: 17px;
+    }
+
+    .support-hero h1 {
+        font-size: 34px;
+    }
+
+    .support-hero-visual {
+        width: 100%;
+        transform: scale(.85);
+    }
+
+    .support-category-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .support-category-card {
+        padding: 22px;
+    }
+
+    .support-category-card p {
+        min-height: auto;
+    }
+
+    .support-form-wrapper {
+        padding: 22px 17px;
+    }
+
+    .support-form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .support-contact {
+        padding: 23px 17px;
+    }
+
+    .support-bottom-cta h2 {
+        font-size: 19px;
+    }
+
+    .support-bottom-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .faq-item summary {
+        padding: 17px;
+        font-size: 13px;
+    }
+
+    .faq-answer {
+        padding: 0 17px 17px;
+    }
+}

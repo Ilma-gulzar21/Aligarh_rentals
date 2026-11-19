@@ -1,0 +1,128 @@
+<!-- ROOMMATE SECTION START -->
+ <link rel="stylesheet" href="/css/homeCss/ShowRoommate.css">
+<section class="rm-section">
+
+    <span class="rm-blob rm-blob-1"></span>
+    <span class="rm-blob rm-blob-2"></span>
+
+    <div class="rm-container">
+
+        <!-- LEFT CONTENT -->
+        <div class="rm-info rm-reveal">
+
+            <span class="rm-eyebrow">
+                <i class="fa-solid fa-people-roof"></i> Shared Living
+            </span>
+
+            <h2>Rent a Property <em>With Roommates</em></h2>
+
+            <p>
+                Don't want to live alone or pay the full rent? Choose a property
+                where roommates already live, move in and share the cost.
+                Safe, budget-friendly and student-friendly stays in Aligarh.
+            </p>
+
+            <ul class="rm-points">
+                <li><i class="fa-solid fa-check"></i> Properties with roommates already living in</li>
+                <li><i class="fa-solid fa-check"></i> Student &amp; working professional friendly</li>
+                <li><i class="fa-solid fa-check"></i> Split the rent and save every month</li>
+            </ul>
+
+            <a href="/listings/roommates" class="rm-btn">
+                <span>Explore Roommates</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+        </div>
+
+
+        <!-- RIGHT: PROPERTY COLLAGE -->
+        <div class="rm-visual rm-reveal">
+
+            <% if (typeof roommates !== "undefined" && roommates && roommates.length > 0) { %>
+
+                <div class="rm-grid">
+
+                    <% roommates.slice(0, 3).forEach((r, i) => {
+
+                        const img = (r.images && r.images.length > 0)
+                            ? r.images[0].url
+                            : "https://images.unsplash.com/photo-1501183638710-841dd1904471";
+
+                        const living = r.roommates ? r.roommates.length : 0;
+                        const needed = Math.max((r.maxOccupants || 0) - (r.currentOccupants || 0), 0);
+                        const rent   = Number(r.rentPrice || 0).toLocaleString("en-IN");
+                    %>
+
+                        <a href="/listings/<%= r._id %>" class="rm-card">
+
+                            <img src="<%= img %>" alt="<%= r.area %>" loading="lazy">
+
+                            <span class="rm-tag">
+                                <i class="fa-solid fa-user-group"></i> With Roommates
+                            </span>
+
+                            <div class="rm-overlay">
+
+                                <h4><%= r.area %></h4>
+
+                                <p class="rm-sub">
+                                    <%= r.propertyType %> &bull; <%= r.bhk %>
+                                </p>
+
+                                <div class="rm-bottom">
+
+                                    <div class="rm-people">
+                                        <% if (living > 0) { %>
+                                            <span class="rm-avatars">
+                                                <% r.roommates.slice(0, 3).forEach(m => { %>
+                                                    <b><%= (m.name || "R").charAt(0).toUpperCase() %></b>
+                                                <% }) %>
+                                            </span>
+                                            <small><%= living %> living</small>
+                                        <% } %>
+                                        <% if (needed > 0) { %>
+                                            <small class="rm-need">Need <%= needed %></small>
+                                        <% } %>
+                                    </div>
+
+                                    <span class="rm-price">₹<%= rent %><small>/mo</small></span>
+
+                                </div>
+
+                            </div>
+
+                        </a>
+
+                    <% }) %>
+
+                </div>
+
+           <% } else { %>
+
+    <div class="rm-ads">
+
+        <a href="/listings/roommates" class="rm-ad">
+            <img src="/images/roommate-add1.jpeg" alt="Shared rooms in Aligarh" loading="lazy">
+            <span class="rm-ad-label">Shared Rooms</span>
+        </a>
+
+        <a href="/listings/roommates" class="rm-ad">
+            <img src="/images/roommate-add2.jpeg" alt="Student friendly stays" loading="lazy">
+            <span class="rm-ad-label">Student Friendly</span>
+        </a>
+
+        <a href="/listings/roommates" class="rm-ad">
+            <img src="/images/roommate-add3.jpeg" alt="Split the rent" loading="lazy">
+            <span class="rm-ad-label">Split the Rent</span>
+        </a>
+
+    </div>
+
+<% } %>
+
+        </div>
+
+    </div>
+</section>
+  <script src="/js/homeJS/homeRoommateSec.js"> </script>

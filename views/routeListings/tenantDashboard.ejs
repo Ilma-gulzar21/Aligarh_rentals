@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Tenant Dashboard | Aligarh Rentals</title>
+
+    <link rel="stylesheet" href="/css/topSection/header.css">
+    <link rel="stylesheet" href="/css/topSection/footer.css">
+    <link rel="stylesheet" href="/css/homeCss/dashboard.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body>
+
+    <%- include("../includes/navbar.ejs") %>
+
+    <div class="tenant-dashboard-page">
+
+        <!-- SIDEBAR -->
+        <aside class="dashboard-sidebar">
+
+            <div class="sidebar-brand">
+
+                <div class="sidebar-brand-icon">
+                    <i class="fa-solid fa-house"></i>
+                </div>
+
+                <div>
+                    <h2>Aligarh Rentals</h2>
+                    <span>Tenant Panel</span>
+                </div>
+
+            </div>
+
+
+            <!-- USER PROFILE -->
+            <div class="sidebar-profile">
+
+                <div class="sidebar-avatar">
+
+                    <% if (currentUser && currentUser.profileImage && currentUser.profileImage.url) { %>
+
+                        <img src="<%= currentUser.profileImage.url %>" alt="Profile">
+
+                    <% } else { %>
+
+                        <i class="fa-solid fa-user"></i>
+
+                    <% } %>
+
+                </div>
+
+                <div class="sidebar-profile-info">
+
+                    <h4><%= currentUser ? currentUser.fullName : "Tenant" %></h4>
+
+                    <span>Tenant Account</span>
+
+                </div>
+
+            </div>
+
+
+            <!-- NAVIGATION -->
+            <nav class="dashboard-navigation">
+
+                <p class="sidebar-heading">MAIN MENU</p>
+
+                <a href="/listings/dashboard" class="dashboard-nav-link active">
+                    <i class="fa-solid fa-chart-pie"></i>
+                    <span>Dashboard</span>
+                </a>
+
+                <a href="/listings" class="dashboard-nav-link">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <span>Explore Properties</span>
+                </a>
+
+                <a href="/listings/roommates" class="dashboard-nav-link">
+                    <i class="fa-solid fa-people-group"></i>
+                    <span>Find Roommates</span>
+                </a>
+
+                <a href="/listings/myReviews" class="dashboard-nav-link">
+                    <i class="fa-solid fa-star"></i>
+                    <span>My Reviews</span>
+                </a>
+
+
+                <p class="sidebar-heading sidebar-heading-spaced">ACCOUNT</p>
+
+                <a href="/users/profile" class="dashboard-nav-link">
+                    <i class="fa-solid fa-user-gear"></i>
+                    <span>My Profile</span>
+                </a>
+
+                <a href="/" class="dashboard-nav-link">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Visit Website</span>
+                </a>
+
+            </nav>
+
+
+            <!-- ROLE SWITCH -->
+            <div class="sidebar-role-box">
+
+                <p>Want to list your property?</p>
+
+                <span>Switch to Owner account</span>
+
+                <form action="/listings/change-role" method="POST">
+
+                    <input type="hidden" name="role" value="Owner">
+
+                    <button type="submit" class="role-switch-btn">
+                        <i class="fa-solid fa-repeat"></i>
+                        Switch to Owner
+                    </button>
+
+                </form>
+
+            </div>
+
+        </aside>
+
+
+        <!-- MAIN CONTENT -->
+        <main class="dashboard-main">
+
+
+            <!-- HEADER -->
+            <header class="dashboard-topbar">
+
+                <div>
+
+                    <p class="dashboard-breadcrumb">
+                        Dashboard / Tenant
+                    </p>
+
+                    <h1>Tenant Dashboard</h1>
+
+                    <p class="dashboard-topbar-subtitle">
+                        Find your perfect rental space in Aligarh.
+                    </p>
+
+                </div>
+
+
+                <div class="dashboard-topbar-actions">
+
+                    <a href="/listings" class="topbar-add-btn">
+                        <i class="fa-solid fa-compass"></i>
+                        Explore Properties
+                    </a>
+
+
+                    <div class="topbar-user">
+
+                        <% if (currentUser && currentUser.profileImage && currentUser.profileImage.url) { %>
+
+                            <img src="<%= currentUser.profileImage.url %>" alt="Profile">
+
+                        <% } else { %>
+
+                            <div class="topbar-user-placeholder">
+                                <i class="fa-solid fa-user"></i>
+                            </div>
+
+                        <% } %>
+
+
+                        <div>
+
+                            <strong><%= currentUser ? currentUser.fullName : "Tenant" %></strong>
+
+                            <span>Tenant Account</span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <!-- WELCOME -->
+            <section class="dashboard-welcome tenant-welcome">
+
+                <div class="welcome-content">
+
+                    <span class="welcome-label">
+                        <i class="fa-solid fa-house-user"></i>
+                        YOUR RENTAL SPACE
+                    </span>
+
+                    <h2>
+                        Welcome back,
+                        <%= currentUser ? currentUser.fullName : "Tenant" %>!
+                    </h2>
+
+                    <p>
+                        Discover rental properties, connect with potential roommates
+                        and manage your rental journey in one place.
+                    </p>
+
+                    <a href="/listings" class="welcome-btn">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        Explore Properties
+                    </a>
+
+                </div>
+
+                <div class="welcome-illustration">
+                    <i class="fa-solid fa-house-user"></i>
+                    <i class="fa-solid fa-key"></i>
+                </div>
+
+            </section>
+
+
+            <!-- STATISTICS -->
+            <section class="dashboard-section">
+
+                <div class="dashboard-section-heading">
+
+                    <div>
+
+                        <span class="section-eyebrow">YOUR OVERVIEW</span>
+
+                        <h2>Dashboard Statistics</h2>
+
+                        <p>Quick overview of available rental resources.</p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="dashboard-stats-grid tenant-stats-grid">
+
+
+                    <div class="dashboard-stat-card stat-purple">
+
+                        <div class="stat-card-top">
+
+                            <div class="stat-icon">
+                                <i class="fa-solid fa-building"></i>
+                            </div>
+
+                            <span class="stat-label">EXPLORE</span>
+
+                        </div>
+
+                        <h3><%= totalAvailableProperties || 0 %></h3>
+
+                        <p>Available Properties</p>
+
+                    </div>
+
+
+                    <div class="dashboard-stat-card stat-blue">
+
+                        <div class="stat-card-top">
+
+                            <div class="stat-icon">
+                                <i class="fa-solid fa-people-group"></i>
+                            </div>
+
+                            <span class="stat-label">CONNECT</span>
+
+                        </div>
+
+                        <h3><%= totalRoommates || 0 %></h3>
+
+                        <p>Available Roommates</p>
+
+                    </div>
+
+
+                    <div class="dashboard-stat-card stat-orange">
+
+                        <div class="stat-card-top">
+
+                            <div class="stat-icon">
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+
+                            <span class="stat-label">FEEDBACK</span>
+
+                        </div>
+
+                        <h3><%= totalReviews || 0 %></h3>
+
+                        <p>My Reviews</p>
+
+                    </div>
+
+
+                </div>
+
+            </section>
+
+
+            <!-- QUICK ACTIONS -->
+            <section class="dashboard-section">
+
+                <div class="dashboard-section-heading">
+
+                    <div>
+
+                        <span class="section-eyebrow">QUICK ACCESS</span>
+
+                        <h2>What would you like to do?</h2>
+
+                        <p>Start exploring with these quick actions.</p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="dashboard-quick-actions">
+
+
+                    <a href="/listings" class="quick-action-card">
+
+                        <div class="quick-action-icon quick-purple">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </div>
+
+                        <div>
+
+                            <h3>Explore Properties</h3>
+
+                            <p>Find rental properties in Aligarh.</p>
+
+                        </div>
+
+                        <i class="fa-solid fa-arrow-right action-arrow"></i>
+
+                    </a>
+
+
+                    <a href="/listings/roommates" class="quick-action-card">
+
+                        <div class="quick-action-icon quick-blue">
+                            <i class="fa-solid fa-people-group"></i>
+                        </div>
+
+                        <div>
+
+                            <h3>Find Roommates</h3>
+
+                            <p>Connect with people looking for roommates.</p>
+
+                        </div>
+
+                        <i class="fa-solid fa-arrow-right action-arrow"></i>
+
+                    </a>
+
+
+                    <a href="/listings/myReviews" class="quick-action-card">
+
+                        <div class="quick-action-icon quick-orange">
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+
+                        <div>
+
+                            <h3>My Reviews</h3>
+
+                            <p>View your property feedback.</p>
+
+                        </div>
+
+                        <i class="fa-solid fa-arrow-right action-arrow"></i>
+
+                    </a>
+
+
+                    <a href="/users/profile" class="quick-action-card">
+
+                        <div class="quick-action-icon quick-green">
+                            <i class="fa-solid fa-user-pen"></i>
+                        </div>
+
+                        <div>
+
+                            <h3>Edit Profile</h3>
+
+                            <p>Manage your personal information.</p>
+
+                        </div>
+
+                        <i class="fa-solid fa-arrow-right action-arrow"></i>
+
+                    </a>
+
+
+                </div>
+
+            </section>
+
+
+            <!-- ACCOUNT INFORMATION -->
+            <section class="dashboard-bottom-grid">
+
+                <div class="dashboard-info-card">
+
+                    <div class="info-card-icon booked-icon">
+                        <i class="fa-solid fa-compass"></i>
+                    </div>
+
+                    <div>
+
+                        <span class="info-card-label">RENTAL DISCOVERY</span>
+
+                        <h3>Find Your Space</h3>
+
+                        <p>Explore properties that match your needs.</p>
+
+                        <a href="/listings" class="info-card-link">
+                            Browse Properties
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <div class="dashboard-info-card account-info-card">
+
+                    <div class="info-card-icon account-icon">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+
+                    <div>
+
+                        <span class="info-card-label">ACCOUNT STATUS</span>
+
+                        <h3>
+                            <% if (currentUser && currentUser.isActive !== false) { %>
+                                Active Account
+                            <% } else { %>
+                                Inactive Account
+                            <% } %>
+                        </h3>
+
+                        <p>Your tenant account is ready to use.</p>
+
+                    </div>
+
+                    <span class="account-status-dot"></span>
+
+                </div>
+
+            </section>
+
+
+            <footer class="dashboard-page-footer">
+
+                <p>
+                    © <%= new Date().getFullYear() %> Aligarh Rentals.
+                    Made for better rental experiences.
+                </p>
+
+            </footer>
+
+
+        </main>
+
+    </div>
+
+
+    <%- include("../includes/footer.ejs") %>
+
+    <script src="/js/homeJS/header.js" defer></script>
+
+</body>
+
+</html>

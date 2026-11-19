@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Owner Dashboard | Aligarh Rentals</title>
+
+    <link rel="stylesheet" href="/css/topSection/header.css">
+    <link rel="stylesheet" href="/css/topSection/footer.css">
+    <link rel="stylesheet" href="/css/homeCss/dashboard.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+
+<body>
+
+    <%- include("../includes/navbar.ejs") %>
+
+    <div class="owner-dashboard-page">
+
+        <!-- SIDEBAR -->
+        <aside class="dashboard-sidebar">
+
+            <div class="sidebar-brand">
+                <div class="sidebar-brand-icon">
+                    <i class="fa-solid fa-house"></i>
+                </div>
+
+                <div>
+                    <h2>Aligarh Rentals</h2>
+                    <span>Owner Panel</span>
+                </div>
+            </div>
+
+            <!-- OWNER PROFILE -->
+            <div class="sidebar-profile">
+
+                <div class="sidebar-avatar">
+                    <% if (currentUser && currentUser.profileImage && currentUser.profileImage.url) { %>
+                        <img src="<%= currentUser.profileImage.url %>" alt="Profile">
+                    <% } else { %>
+                        <i class="fa-solid fa-user"></i>
+                    <% } %>
+                </div>
+
+                <div class="sidebar-profile-info">
+                    <h4><%= currentUser ? currentUser.fullName : "Owner" %></h4>
+                    <span>Property Owner</span>
+                </div>
+
+            </div>
+
+            <!-- NAVIGATION -->
+            <nav class="dashboard-navigation">
+
+                <p class="sidebar-heading">MAIN MENU</p>
+
+                <a href="/listings/dashboard" class="dashboard-nav-link active">
+                    <i class="fa-solid fa-chart-pie"></i>
+                    <span>Dashboard</span>
+                </a>
+
+                <a href="/listings/myProperties" class="dashboard-nav-link">
+                    <i class="fa-solid fa-building"></i>
+                    <span>My Properties</span>
+                </a>
+
+                <a href="/listings/new" class="dashboard-nav-link">
+                    <i class="fa-solid fa-plus-circle"></i>
+                    <span>Add Property</span>
+                </a>
+
+                <a href="/listings" class="dashboard-nav-link">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <span>Explore Properties</span>
+                </a>
+
+            </nav>
+
+            <!-- ROLE SWITCH -->
+            <div class="sidebar-role-box">
+
+                <p>Looking for a rental?</p>
+                <span>Switch to Tenant account</span>
+
+                <form action="/listings/change-role" method="POST">
+                    <input type="hidden" name="role" value="Tenant">
+
+                    <button type="submit" class="role-switch-btn">
+                        <i class="fa-solid fa-repeat"></i>
+                        Switch to Tenant
+                    </button>
+                </form>
+
+            </div>
+
+        </aside>
+
+
+        <!-- MAIN CONTENT -->
+        <main class="dashboard-main">
+
+            <!-- HEADER -->
+            <header class="dashboard-topbar">
+
+                <div>
+                    <p class="dashboard-breadcrumb">Dashboard / Owner</p>
+
+                    <h1>Owner Dashboard</h1>
+
+                    <p class="dashboard-topbar-subtitle">
+                        Manage your rental properties from one place.
+                    </p>
+                </div>
+
+                <div class="dashboard-topbar-actions">
+
+                    <a href="/listings/new" class="topbar-add-btn">
+                        <i class="fa-solid fa-plus"></i>
+                        Add Property
+                    </a>
+
+                    <div class="topbar-user">
+
+                        <% if (currentUser && currentUser.profileImage && currentUser.profileImage.url) { %>
+                            <img src="<%= currentUser.profileImage.url %>" alt="Profile">
+                        <% } else { %>
+                            <div class="topbar-user-placeholder">
+                                <i class="fa-solid fa-user"></i>
+                            </div>
+                        <% } %>
+
+                        <div>
+                            <strong><%= currentUser ? currentUser.fullName : "Owner" %></strong>
+                            <span>Owner Account</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <!-- WELCOME -->
+            <section class="dashboard-welcome">
+
+                <div class="welcome-content">
+
+                    <span class="welcome-label">
+                        <i class="fa-solid fa-sun"></i>
+                        YOUR OWNER SPACE
+                    </span>
+
+                    <h2>
+                        Welcome back,
+                        <%= currentUser ? currentUser.fullName : "Owner" %>!
+                    </h2>
+
+                    <p>
+                        Here's an overview of your properties and their current
+                        status. Keep your listings updated to reach more tenants.
+                    </p>
+
+                    <a href="/listings/new" class="welcome-btn">
+                        <i class="fa-solid fa-plus"></i>
+                        List a Property
+                    </a>
+
+                </div>
+
+                <div class="welcome-illustration">
+                    <i class="fa-solid fa-house-chimney-window"></i>
+                    <i class="fa-solid fa-key"></i>
+                </div>
+
+            </section>
+
+
+            <!-- STATISTICS -->
+            <section class="dashboard-section">
+
+                <div class="dashboard-section-heading">
+                    <div>
+                        <span class="section-eyebrow">OVERVIEW</span>
+                        <h2>Property Statistics</h2>
+                        <p>Track your property performance.</p>
+                    </div>
+                </div>
+
+                <div class="dashboard-stats-grid">
+
+                    <div class="dashboard-stat-card stat-purple">
+                        <div class="stat-card-top">
+                            <div class="stat-icon">
+                                <i class="fa-solid fa-building"></i>
+                            </div>
+                            <span class="stat-label">TOTAL</span>
+                        </div>
+
+                        <h3><%= totalProperties || 0 %></h3>
+                        <p>Total Properties</p>
+                    </div>
+
+                    <div class="dashboard-stat-card stat-green">
+                        <div class="stat-card-top">
+                            <div class="stat-icon">
+                                <i class="fa-solid fa-circle-check"></i>
+                            </div>
+                            <span class="stat-label">ACTIVE</span>
+                        </div>
+
+                        <h3><%= availableProperties || 0 %></h3>
+                        <p>Available Properties</p>
+                    </div>
+
+                    <div class="dashboard-stat-card stat-orange">
+                        <div class="stat-card-top">
+                            <div class="stat-icon">
+                                <i class="fa-solid fa-clock"></i>
+                            </div>
+                            <span class="stat-label">REVIEW</span>
+                        </div>
+
+                        <h3><%= pendingProperties || 0 %></h3>
+                        <p>Pending Properties</p>
+                    </div>
+
+                    <div class="dashboard-stat-card stat-blue">
+                        <div class="stat-card-top">
+                            <div class="stat-icon">
+                                <i class="fa-solid fa-key"></i>
+                            </div>
+                            <span class="stat-label">OCCUPIED</span>
+                        </div>
+
+                        <h3><%= rentedProperties || 0 %></h3>
+                        <p>Rented Properties</p>
+                    </div>
+
+                    <div class="dashboard-stat-card stat-pink">
+                        <div class="stat-card-top">
+                            <div class="stat-icon">
+                                <i class="fa-solid fa-calendar-check"></i>
+                            </div>
+                            <span class="stat-label">BOOKINGS</span>
+                        </div>
+
+                        <h3><%= bookedProperties || 0 %></h3>
+                        <p>Booked Properties</p>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- QUICK ACTIONS -->
+            <section class="dashboard-section">
+
+                <div class="dashboard-section-heading">
+                    <div>
+                        <span class="section-eyebrow">GET STARTED</span>
+                        <h2>Quick Actions</h2>
+                        <p>Access your frequently used options.</p>
+                    </div>
+                </div>
+
+                <div class="dashboard-quick-actions">
+
+                    <a href="/listings/new" class="quick-action-card">
+                        <div class="quick-action-icon quick-purple">
+                            <i class="fa-solid fa-plus"></i>
+                        </div>
+
+                        <div>
+                            <h3>Add New Property</h3>
+                            <p>Create a new rental listing.</p>
+                        </div>
+
+                        <i class="fa-solid fa-arrow-right action-arrow"></i>
+                    </a>
+
+                    <a href="/listings/myProperties" class="quick-action-card">
+                        <div class="quick-action-icon quick-blue">
+                            <i class="fa-solid fa-house-user"></i>
+                        </div>
+
+                        <div>
+                            <h3>My Properties</h3>
+                            <p>Manage your existing listings.</p>
+                        </div>
+
+                        <i class="fa-solid fa-arrow-right action-arrow"></i>
+                    </a>
+
+                    <a href="/listings" class="quick-action-card">
+                        <div class="quick-action-icon quick-green">
+                            <i class="fa-solid fa-compass"></i>
+                        </div>
+
+                        <div>
+                            <h3>Explore Properties</h3>
+                            <p>Explore the rental marketplace.</p>
+                        </div>
+
+                        <i class="fa-solid fa-arrow-right action-arrow"></i>
+                    </a>
+
+                </div>
+
+            </section>
+
+
+            <!-- RECENT PROPERTIES -->
+            <section class="dashboard-section">
+
+                <div class="dashboard-section-heading recent-heading">
+
+                    <div>
+                        <span class="section-eyebrow">YOUR LISTINGS</span>
+                        <h2>Recent Properties</h2>
+                        <p>Your recently added rental properties.</p>
+                    </div>
+
+                    <a href="/listings/myProperties" class="view-all-link">
+                        View All
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+
+                </div>
+
+
+                <% if (recentProperties && recentProperties.length > 0) { %>
+
+                    <div class="recent-properties-grid">
+
+                        <% recentProperties.forEach(property => { %>
+
+                            <article class="recent-property-card">
+
+                                <div class="recent-property-image">
+
+                                    <% if (property.images && property.images.length > 0) { %>
+                                        <img src="<%= property.images[0].url %>"
+                                             alt="<%= property.title %>">
+                                    <% } else { %>
+                                        <div class="property-image-placeholder">
+                                            <i class="fa-solid fa-house"></i>
+                                        </div>
+                                    <% } %>
+
+                                    <span class="property-status status-<%= (property.status || 'pending').toLowerCase() %>">
+                                        <%= property.status || "Pending" %>
+                                    </span>
+
+                                </div>
+
+                                <div class="recent-property-details">
+
+                                    <h3><%= property.title %></h3>
+
+                                    <p class="property-location">
+                                        <i class="fa-solid fa-location-dot"></i>
+                                        <%= property.area || "Aligarh" %>
+                                    </p>
+
+                                    <div class="property-meta">
+                                        <span>
+                                            <i class="fa-solid fa-house"></i>
+                                            <%= property.propertyType || "Property" %>
+                                        </span>
+
+                                        <% if (property.bhk) { %>
+                                            <span>
+                                                <i class="fa-solid fa-bed"></i>
+                                                <%= property.bhk %>
+                                            </span>
+                                        <% } %>
+                                    </div>
+
+                                    <div class="property-card-bottom">
+
+                                        <div class="property-price">
+                                            ₹<%= Number(property.rentPrice || 0).toLocaleString("en-IN") %>
+                                            <span>/ month</span>
+                                        </div>
+
+                                        <a href="/listings/<%= property._id %>"
+                                           class="property-view-btn">
+                                            View
+                                        </a>
+
+                                    </div>
+
+                                </div>
+
+                            </article>
+
+                        <% }) %>
+
+                    </div>
+
+                <% } else { %>
+
+                    <div class="dashboard-empty-state">
+
+                        <div class="empty-state-icon">
+                            <i class="fa-solid fa-house-circle-check"></i>
+                        </div>
+
+                        <h3>No Properties Yet</h3>
+
+                        <p>
+                            You haven't added any rental properties.
+                            Start by creating your first listing.
+                        </p>
+
+                        <a href="/listings/new" class="welcome-btn">
+                            <i class="fa-solid fa-plus"></i>
+                            Add Your First Property
+                        </a>
+
+                    </div>
+
+                <% } %>
+
+            </section>
+
+
+            <!-- BOTTOM INFORMATION -->
+            <section class="dashboard-bottom-grid">
+
+                <div class="dashboard-info-card">
+
+                    <div class="info-card-icon booked-icon">
+                        <i class="fa-solid fa-calendar-check"></i>
+                    </div>
+
+                    <div>
+                        <span class="info-card-label">PROPERTY BOOKINGS</span>
+                        <h3><%= bookedProperties || 0 %></h3>
+                        <p>Properties currently booked.</p>
+                    </div>
+
+                </div>
+
+
+                <div class="dashboard-info-card account-info-card">
+
+                    <div class="info-card-icon account-icon">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+
+                    <div>
+                        <span class="info-card-label">ACCOUNT STATUS</span>
+
+                        <h3>
+                            <%= currentUser && currentUser.isActive !== false
+                                ? "Active Account"
+                                : "Inactive Account" %>
+                        </h3>
+
+                        <p>Your owner account information.</p>
+                    </div>
+
+                    <span class="account-status-dot"></span>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <%- include("../includes/footer.ejs") %>
+
+    <script src="/js/homeJS/header.js" defer></script>
+
+</body>
+</html>

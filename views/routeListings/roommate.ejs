@@ -1,0 +1,383 @@
+<% layout("fixLayout/boilerplate") %>
+
+<link rel="stylesheet" href="/css/showPage/roommates.css">
+
+<div class="roommate-page">
+
+<!-- ================= HERO ================= -->
+<section class="roommate-hero">
+
+    <span class="hero-blob hero-blob-one"></span>
+    <span class="hero-blob hero-blob-two"></span>
+
+    <div class="roommate-hero-content">
+
+        <div class="roommate-breadcrumb">
+            <a href="/listings">Home</a>
+            <i class="fa-solid fa-angle-right"></i>
+            <span>Roommate Matching</span>
+        </div>
+
+        <span class="roommate-eyebrow">
+            <i class="fa-solid fa-users"></i>
+            ROOMMATE MATCHING
+        </span>
+
+        <h1>
+            Find a Roommate
+            <span>in Aligarh</span>
+        </h1>
+
+        <p>
+            Explore rental properties where a roommate is currently required.
+            Compare location, rent, living arrangements and owner details
+            before choosing your next shared home.
+        </p>
+
+        <div class="roommate-hero-points">
+            <div>
+                <i class="fa-solid fa-house"></i>
+                <span>Shared Rental Homes</span>
+            </div>
+
+            <div>
+                <i class="fa-solid fa-user-group"></i>
+                <span>Roommate Required</span>
+            </div>
+
+            <div>
+                <i class="fa-solid fa-location-dot"></i>
+                <span>Aligarh Locations</span>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- HERO SUMMARY -->
+    <div class="roommate-summary">
+        <div class="roommate-summary-icon">
+            <i class="fa-solid fa-user-group"></i>
+        </div>
+
+        <div>
+            <strong><%= totalRequirements %></strong>
+            <span>Properties Looking<br>for Roommates</span>
+        </div>
+    </div>
+
+</section>
+
+
+<!-- ================= SECTION HEADING ================= -->
+<section class="roommate-section-heading">
+
+    <div>
+        <span class="section-kicker">AVAILABLE OPPORTUNITIES</span>
+        <h2>Properties Looking for Roommates</h2>
+        <p>Browse rental properties where an additional roommate is currently required.</p>
+    </div>
+
+    <div class="listing-count">
+        <i class="fa-solid fa-building"></i>
+        <span><%= roommateProperties.length %> Listings</span>
+    </div>
+
+</section>
+
+
+<!-- ================= PROPERTY LIST ================= -->
+<section class="roommate-list">
+
+    <% if (roommateProperties && roommateProperties.length > 0) { %>
+
+        <% roommateProperties.forEach((listing, index) => { %>
+
+            <%
+                const maxOccupants = Number(listing.maxOccupants) || 0;
+
+                const currentOccupants = Number(listing.currentOccupants) || 0;
+
+                const availableSpace = Math.max(
+                    maxOccupants - currentOccupants,
+                    0
+                );
+
+                const fillPercent = maxOccupants > 0
+                    ? Math.min(
+                        Math.round((currentOccupants / maxOccupants) * 100),
+                        100
+                    )
+                    : 0;
+
+                const ownerName =
+                    listing.owner?.fullName ||
+                    listing.owner?.username ||
+                    listing.ownerName ||
+                    "Property Owner";
+
+                const ownerInitial = ownerName.charAt(0).toUpperCase();
+            %>
+
+            <article class="roommate-property-card" style="--i:<%= index %>;">
+
+
+                <!-- ===== IMAGE ===== -->
+                <div class="roommate-image">
+
+                    <img
+                        src="<%= listing.images && listing.images.length ? listing.images[0].url : '/images/no-image.jpg' %>"
+                        alt="<%= listing.title || 'Rental Property' %>"
+                    >
+
+                    <div class="image-overlay"></div>
+
+                    <span class="property-type">
+                        <i class="fa-solid fa-house"></i>
+                        <%= listing.propertyType || "Rental Property" %>
+                    </span>
+
+                    <span class="roommate-required-badge">
+                        <i class="fa-solid fa-user-plus"></i>
+                        Roommate Required
+                    </span>
+
+                    <div class="image-price">
+                        <small>Monthly Rent</small>
+
+                        <strong>
+                            ₹<%= Number(listing.rentPrice || 0).toLocaleString("en-IN") %>
+                            <em>/ month</em>
+                        </strong>
+                    </div>
+
+                </div>
+
+
+                <!-- ===== BODY ===== -->
+                <div class="roommate-card-body">
+
+
+                    <!-- ===== PROPERTY TITLE ===== -->
+                    <div class="property-heading">
+
+                        <div class="property-heading-text">
+
+                            <h3>
+                                <%= listing.title || "Rental Property" %>
+                            </h3>
+
+                            <p class="property-location">
+                                <i class="fa-solid fa-location-dot"></i>
+
+                                <span>
+                                    <%= listing.area || "Area not specified" %>,
+                                    <%= listing.city || "Aligarh" %>
+                                </span>
+                            </p>
+
+                        </div>
+
+                        <% if (listing.ownerVerified) { %>
+
+                            <span class="verified-owner">
+                                <i class="fa-solid fa-circle-check"></i>
+                                Verified
+                            </span>
+
+                        <% } %>
+
+                    </div>
+
+
+                    <!-- ===== OCCUPANCY STATS ===== -->
+                    <div class="roommate-status-box">
+
+                        <div class="status-grid">
+
+                            <div class="status-item">
+                                <div class="status-icon">
+                                    <i class="fa-solid fa-users"></i>
+                                </div>
+
+                                <div>
+                                    <strong><%= maxOccupants %></strong>
+                                    <span>Max Occupants</span>
+                                </div>
+                            </div>
+
+
+                            <div class="status-item">
+                                <div class="status-icon">
+                                    <i class="fa-solid fa-user-check"></i>
+                                </div>
+
+                                <div>
+                                    <strong><%= currentOccupants %></strong>
+                                    <span>Currently Living</span>
+                                </div>
+                            </div>
+
+
+                            <div class="status-item available">
+                                <div class="status-icon">
+                                    <i class="fa-solid fa-door-open"></i>
+                                </div>
+
+                                <div>
+                                    <strong><%= availableSpace %></strong>
+                                    <span>Spots Open</span>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="occupancy-bar">
+                            <div
+                                class="occupancy-fill"
+                                style="width:<%= fillPercent %>%;"
+                            ></div>
+                        </div>
+
+                        <p class="occupancy-text">
+                            <%= currentOccupants %> of <%= maxOccupants %> spots filled
+                        </p>
+
+                    </div>
+
+
+                    <!-- ===== PROPERTY DETAILS ===== -->
+                    <div class="property-meta">
+
+                        <div class="meta-item">
+                            <i class="fa-solid fa-bed"></i>
+
+                            <div>
+                                <span>Property</span>
+                                <strong><%= listing.bhk || "N/A" %></strong>
+                            </div>
+                        </div>
+
+
+                        <div class="meta-item">
+                            <i class="fa-solid fa-couch"></i>
+
+                            <div>
+                                <span>Furnishing</span>
+                                <strong><%= listing.furnishing || "N/A" %></strong>
+                            </div>
+                        </div>
+
+
+                        <div class="meta-item">
+                            <i class="fa-solid fa-layer-group"></i>
+
+                            <div>
+                                <span>Floor</span>
+                                <strong><%= listing.floor || "N/A" %></strong>
+                            </div>
+                        </div>
+
+
+                        <div class="meta-item">
+                            <i class="fa-solid fa-user-check"></i>
+
+                            <div>
+                                <span>Preferred Tenant</span>
+                                <strong><%= listing.preferredTenant || "Anyone" %></strong>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <!-- ===== DESCRIPTION ===== -->
+                    <p class="roommate-description">
+                        <%= listing.description
+                            ? listing.description.substring(0, 140)
+                            : "Comfortable rental property looking for a suitable roommate." %><% if (listing.description && listing.description.length > 140) { %>...<% } %>
+                    </p>
+
+
+                    <!-- ===== DEPOSIT + BUTTON ===== -->
+                    <div class="roommate-card-bottom">
+
+                        <div class="rent-info">
+                            <span>Security Deposit</span>
+
+                            <h4>
+                                <i class="fa-solid fa-shield-halved"></i>
+                                ₹<%= Number(listing.securityDeposit || 0).toLocaleString("en-IN") %>
+                            </h4>
+                        </div>
+
+                        <a
+                            href="/listings/<%= listing._id %>"
+                            class="view-property-btn"
+                        >
+                            View Property
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+
+                    </div>
+
+
+                    <!-- ===== OWNER DETAILS ===== -->
+                    <div class="property-owner">
+
+                        <div class="owner-left">
+
+                            <div class="owner-avatar">
+                                <%= ownerInitial %>
+                            </div>
+
+                            <div>
+                                <span>Listed By</span>
+                                <strong><%= ownerName %></strong>
+                            </div>
+
+                        </div>
+
+                        <span class="owner-role">Property Owner</span>
+
+                    </div>
+
+
+                </div>
+
+            </article>
+
+        <% }) %>
+
+    <% } else { %>
+
+
+        <!-- ================= EMPTY STATE ================= -->
+        <div class="roommate-empty">
+
+            <div class="empty-icon">
+                <i class="fa-solid fa-user-group"></i>
+            </div>
+
+            <span class="section-kicker">NO MATCHING PROPERTIES</span>
+
+            <h2>No Roommate Opportunities Yet</h2>
+
+            <p>
+                There are currently no rental properties looking for roommates.
+                Please check again later.
+            </p>
+
+            <a href="/listings" class="browse-properties-btn">
+                Browse Rental Properties
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+        </div>
+
+    <% } %>
+
+</section>
+
+
+</div>

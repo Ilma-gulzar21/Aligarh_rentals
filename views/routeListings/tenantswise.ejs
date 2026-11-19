@@ -1,0 +1,571 @@
+<% layout("fixLayout/boilerplate") %>
+
+<link rel="stylesheet" href="/css/showPage/searchresult.css">
+
+
+<main class="sr-page">
+
+
+    <!-- ================= HERO ================= -->
+
+    <header class="sr-hero">
+
+        <span class="sr-shape sr-shape-1"></span>
+        <span class="sr-shape sr-shape-2"></span>
+        <span class="sr-shape sr-shape-3"></span>
+
+
+        <div class="sr-wrap sr-hero-inner">
+
+
+            <!-- BREADCRUMB -->
+
+            <nav class="sr-crumb">
+
+                <a href="/listings">
+                    <i class="fa-solid fa-house"></i>
+                    Home
+                </a>
+
+                <i class="fa-solid fa-angle-right"></i>
+
+                <span>
+                    Search Results
+                </span>
+
+            </nav>
+
+
+            <!-- BADGE -->
+
+            <div class="sr-badge">
+
+                <span class="sr-dot"></span>
+
+                SEARCH RESULTS
+
+            </div>
+
+
+            <!-- TITLE -->
+
+            <h1 class="sr-hero-title">
+
+                Rental Properties
+
+                <% if (location) { %>
+
+                    in <span><%= location %></span>
+
+                <% } else { %>
+
+                    <span>in Aligarh</span>
+
+                <% } %>
+
+            </h1>
+
+
+            <p class="sr-hero-sub">
+
+                Find your perfect rental property based on your
+                preferred location, property type and budget.
+
+            </p>
+
+
+            <!-- SEARCH TAGS -->
+
+            <div class="sr-tags">
+
+
+                <% if (location) { %>
+
+                    <span>
+
+                        <i class="fa-solid fa-location-dot"></i>
+
+                        <%= location %>
+
+                    </span>
+
+                <% } %>
+
+
+                <% if (propertyType) { %>
+
+                    <span>
+
+                        <i class="fa-solid fa-building"></i>
+
+                        <%= propertyType %>
+
+                    </span>
+
+                <% } %>
+
+
+                <% if (budget) { %>
+
+                    <span>
+
+                        <i class="fa-solid fa-indian-rupee-sign"></i>
+
+                        <% if (budget.startsWith("below-")) { %>
+
+                            Below ₹<%= Number(budget.replace("below-", "")).toLocaleString("en-IN") %>
+
+                        <% } else if (budget.startsWith("above-")) { %>
+
+                            Above ₹<%= Number(budget.replace("above-", "")).toLocaleString("en-IN") %>
+
+                        <% } else if (minPrice !== "" && maxPrice !== "") { %>
+
+                            ₹<%= Number(minPrice).toLocaleString("en-IN") %>
+                            -
+                            ₹<%= Number(maxPrice).toLocaleString("en-IN") %>
+
+                        <% } %>
+
+                    </span>
+
+                <% } %>
+
+
+            </div>
+
+
+        </div>
+
+    </header>
+
+
+
+    <!-- ================= STATS ================= -->
+
+    <div class="sr-wrap sr-stats-wrap">
+
+        <div class="sr-stats">
+
+
+            <!-- PROPERTY COUNT -->
+
+            <div class="sr-stat">
+
+                <span class="sr-stat-icon">
+
+                    <i class="fa-solid fa-house"></i>
+
+                </span>
+
+
+                <div class="sr-stat-text">
+
+                    <strong>
+
+                        <span
+                            class="sr-count"
+                            data-count="<%= totalProperties %>">
+                            0
+                        </span>
+
+                    </strong>
+
+                    <small>Properties Found</small>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- PROPERTY TYPE -->
+
+            <div class="sr-stat">
+
+                <span class="sr-stat-icon">
+
+                    <i class="fa-solid fa-building"></i>
+
+                </span>
+
+
+                <div class="sr-stat-text">
+
+                    <strong>
+
+                        <%= propertyType || "All Types" %>
+
+                    </strong>
+
+                    <small>Property Type</small>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- BUDGET -->
+
+            <div class="sr-stat">
+
+                <span class="sr-stat-icon">
+
+                    <i class="fa-solid fa-indian-rupee-sign"></i>
+
+                </span>
+
+
+                <div class="sr-stat-text">
+
+                    <strong>
+
+                        <% if (budget && budget.startsWith("below-")) { %>
+
+                            Below ₹<%= Number(budget.replace("below-", "")).toLocaleString("en-IN") %>
+
+                        <% } else if (budget && budget.startsWith("above-")) { %>
+
+                            Above ₹<%= Number(budget.replace("above-", "")).toLocaleString("en-IN") %>
+
+                        <% } else if (minPrice !== "" && maxPrice !== "") { %>
+
+                            ₹<%= Number(minPrice).toLocaleString("en-IN") %>
+                            -
+                            ₹<%= Number(maxPrice).toLocaleString("en-IN") %>
+
+                        <% } else { %>
+
+                            Any Budget
+
+                        <% } %>
+
+                    </strong>
+
+                    <small>Budget Range</small>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================= LISTINGS ================= -->
+
+    <section class="sr-wrap sr-listings">
+
+
+        <div class="sr-bar">
+
+            <h2>
+
+                Available Rental Properties
+
+                <% if (location) { %>
+
+                    in <%= location %>
+
+                <% } %>
+
+            </h2>
+
+
+            <span>
+
+                <%= listings.length %> results
+
+            </span>
+
+        </div>
+
+
+
+        <div class="sr-grid">
+
+
+            <% if (listings.length > 0) { %>
+
+
+                <% listings.forEach(listing => { %>
+
+
+                    <article class="sr-card">
+
+
+                        <!-- IMAGE -->
+
+                        <a
+                            href="/listings/<%= listing._id %>"
+                            class="sr-img">
+
+
+                            <img
+                                src="<%= listing.images && listing.images.length ? listing.images[0].url : '/images/no-image.jpg' %>"
+                                alt="<%= listing.title %>"
+                                loading="lazy"
+                            >
+
+
+                            <span class="sr-type">
+
+                                <%= listing.propertyType %>
+
+                            </span>
+
+
+                            <% if (listing.ownerVerified) { %>
+
+                                <span class="sr-verified">
+
+                                    <i class="fa-solid fa-circle-check"></i>
+
+                                    Verified
+
+                                </span>
+
+                            <% } %>
+
+
+                        </a>
+
+
+
+                        <!-- BODY -->
+
+                        <div class="sr-body">
+
+
+                            <!-- PRICE -->
+
+                            <div class="sr-price">
+
+                                ₹<%= listing.rentPrice.toLocaleString("en-IN") %>
+
+                                <small>/ month</small>
+
+                            </div>
+
+
+
+                            <!-- TITLE -->
+
+                            <h3 class="sr-title">
+
+                                <%= listing.title %>
+
+                            </h3>
+
+
+
+                            <!-- LOCATION -->
+
+                            <p class="sr-loc">
+
+                                <i class="fa-solid fa-location-dot"></i>
+
+                                <%= listing.area %>, <%= listing.city %>
+
+                            </p>
+
+
+
+                            <!-- PROPERTY DETAILS -->
+
+                            <ul class="sr-chips">
+
+                                <li>
+
+                                    <i class="fa-solid fa-bed"></i>
+
+                                    <%= listing.bhk %>
+
+                                </li>
+
+
+                                <li>
+
+                                    <i class="fa-solid fa-couch"></i>
+
+                                    <%= listing.furnishing %>
+
+                                </li>
+
+
+                                <li>
+
+                                    <i class="fa-solid fa-layer-group"></i>
+
+                                    Floor <%= listing.floor %>
+
+                                </li>
+
+                            </ul>
+
+
+
+                            <!-- DESCRIPTION -->
+
+                            <p class="sr-desc">
+
+                                <%= (listing.description || "").substring(0, 100) %>...
+
+                            </p>
+
+
+
+                            <!-- OWNER -->
+
+                            <div class="sr-owner">
+
+
+                                <span class="sr-avatar">
+
+                                    <%= (
+
+                                        listing.owner && listing.owner.fullName
+
+                                            ? listing.owner.fullName
+
+                                            : "O"
+
+                                    ).charAt(0).toUpperCase() %>
+
+                                </span>
+
+
+
+                                <div class="sr-owner-info">
+
+                                    <small>Listed by</small>
+
+
+                                    <strong>
+
+                                        <%= listing.owner && listing.owner.fullName
+
+                                            ? listing.owner.fullName
+
+                                            : "Owner"
+
+                                        %>
+
+                                    </strong>
+
+                                </div>
+
+
+
+                                <a
+                                    href="/listings/<%= listing._id %>"
+                                    class="sr-btn"
+                                    aria-label="View details">
+
+                                    View
+
+                                    <i class="fa-solid fa-arrow-right"></i>
+
+                                </a>
+
+
+                            </div>
+
+
+                        </div>
+
+
+                    </article>
+
+
+                <% }) %>
+
+
+
+            <% } else { %>
+
+
+                <!-- NO RESULTS -->
+
+                <div class="sr-empty">
+
+                    <i class="fa-solid fa-house-circle-xmark"></i>
+
+
+                    <h2>
+
+                        No Property Found
+
+                    </h2>
+
+
+                    <p>
+
+                        No rental properties match your selected filters.
+
+                        Try changing your location, property type or budget.
+
+                    </p>
+
+
+                    <a href="/listings">
+
+                        View All Properties
+
+                    </a>
+
+
+                </div>
+
+
+            <% } %>
+
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+
+<!-- ================= COUNT ANIMATION ================= -->
+
+<script>
+
+    document.querySelectorAll(".sr-count").forEach(function (el) {
+
+        var target = parseInt(el.dataset.count, 10) || 0;
+
+        var current = 0;
+
+        var step = Math.max(1, Math.ceil(target / 40));
+
+
+        var timer = setInterval(function () {
+
+            current += step;
+
+
+            if (current >= target) {
+
+                current = target;
+
+                clearInterval(timer);
+
+            }
+
+
+            el.textContent = current;
+
+        }, 30);
+
+    });
+
+</script>

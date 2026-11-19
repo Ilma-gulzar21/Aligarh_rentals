@@ -1,0 +1,1215 @@
+/* =========================================
+   ALIGARH RENTALS DASHBOARD
+   OWNER + TENANT
+========================================= */
+
+.owner-dashboard-page,
+.tenant-dashboard-page {
+    --dash-primary: #635bdb;
+    --dash-primary-dark: #5047c5;
+    --dash-text: #20243a;
+    --dash-muted: #85899d;
+    --dash-border: #eceef4;
+    --dash-background: #f6f7fb;
+
+    display: flex;
+    width: 100%;
+    min-height: 850px;
+    background: var(--dash-background);
+    color: var(--dash-text);
+    font-family: "Poppins", sans-serif;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.owner-dashboard-page *,
+.tenant-dashboard-page * {
+    box-sizing: border-box;
+}
+
+
+/* =========================================
+   SIDEBAR
+========================================= */
+
+.owner-dashboard-page .dashboard-sidebar,
+.tenant-dashboard-page .dashboard-sidebar {
+    width: 260px;
+    min-width: 260px;
+    background: #ffffff;
+    border-right: 1px solid var(--dash-border);
+    padding: 28px 17px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 2;
+}
+
+.owner-dashboard-page .sidebar-brand,
+.tenant-dashboard-page .sidebar-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 8px 27px;
+    border-bottom: 1px solid var(--dash-border);
+}
+
+.owner-dashboard-page .sidebar-brand-icon,
+.tenant-dashboard-page .sidebar-brand-icon {
+    width: 43px;
+    height: 43px;
+    background: linear-gradient(135deg, #746df0, #5148c8);
+    color: white;
+    border-radius: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 19px;
+    box-shadow: 0 5px 14px rgba(99, 91, 219, 0.23);
+}
+
+.owner-dashboard-page .sidebar-brand h2,
+.tenant-dashboard-page .sidebar-brand h2 {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0;
+    color: #252840;
+}
+
+.owner-dashboard-page .sidebar-brand span,
+.tenant-dashboard-page .sidebar-brand span {
+    display: block;
+    font-size: 11px;
+    color: var(--dash-muted);
+    margin-top: 3px;
+}
+
+
+/* PROFILE */
+
+.owner-dashboard-page .sidebar-profile,
+.tenant-dashboard-page .sidebar-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 23px 8px;
+    border-bottom: 1px solid var(--dash-border);
+}
+
+.owner-dashboard-page .sidebar-avatar,
+.tenant-dashboard-page .sidebar-avatar {
+    height: 43px;
+    width: 43px;
+    min-width: 43px;
+    border-radius: 50%;
+    background: #eeedff;
+    color: var(--dash-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    overflow: hidden;
+}
+
+.owner-dashboard-page .sidebar-avatar img,
+.tenant-dashboard-page .sidebar-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.owner-dashboard-page .sidebar-profile-info,
+.tenant-dashboard-page .sidebar-profile-info {
+    min-width: 0;
+}
+
+.owner-dashboard-page .sidebar-profile-info h4,
+.tenant-dashboard-page .sidebar-profile-info h4 {
+    font-size: 13px;
+    font-weight: 600;
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #252840;
+}
+
+.owner-dashboard-page .sidebar-profile-info span,
+.tenant-dashboard-page .sidebar-profile-info span {
+    display: block;
+    color: var(--dash-muted);
+    font-size: 11px;
+    margin-top: 4px;
+}
+
+
+/* NAVIGATION */
+
+.owner-dashboard-page .dashboard-navigation,
+.tenant-dashboard-page .dashboard-navigation {
+    padding-top: 22px;
+    flex: 1;
+}
+
+.owner-dashboard-page .sidebar-heading,
+.tenant-dashboard-page .sidebar-heading {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    color: #a0a3b2;
+    padding: 0 12px;
+    margin: 0 0 11px;
+}
+
+.owner-dashboard-page .sidebar-heading-spaced,
+.tenant-dashboard-page .sidebar-heading-spaced {
+    margin-top: 29px;
+}
+
+.owner-dashboard-page .dashboard-nav-link,
+.tenant-dashboard-page .dashboard-nav-link {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    min-height: 45px;
+    padding: 11px 13px;
+    border-radius: 9px;
+    margin-bottom: 5px;
+    text-decoration: none;
+    color: #72768b;
+    font-size: 12px;
+    font-weight: 500;
+    transition: 0.25s ease;
+}
+
+.owner-dashboard-page .dashboard-nav-link i,
+.tenant-dashboard-page .dashboard-nav-link i {
+    width: 18px;
+    text-align: center;
+    font-size: 15px;
+}
+
+.owner-dashboard-page .dashboard-nav-link:hover,
+.tenant-dashboard-page .dashboard-nav-link:hover {
+    background: #f3f2ff;
+    color: var(--dash-primary);
+    transform: translateX(3px);
+}
+
+.owner-dashboard-page .dashboard-nav-link.active,
+.tenant-dashboard-page .dashboard-nav-link.active {
+    background: #eeedff;
+    color: var(--dash-primary);
+    font-weight: 600;
+}
+
+
+/* ROLE SWITCH */
+
+.owner-dashboard-page .sidebar-role-box,
+.tenant-dashboard-page .sidebar-role-box {
+    background: #f7f6ff;
+    border: 1px solid #e9e7ff;
+    padding: 16px 13px;
+    border-radius: 12px;
+    margin-top: 25px;
+}
+
+.owner-dashboard-page .sidebar-role-box p,
+.tenant-dashboard-page .sidebar-role-box p {
+    font-size: 12px;
+    font-weight: 600;
+    margin: 0 0 5px;
+    color: #33364e;
+}
+
+.owner-dashboard-page .sidebar-role-box span,
+.tenant-dashboard-page .sidebar-role-box span {
+    font-size: 10px;
+    color: var(--dash-muted);
+}
+
+.owner-dashboard-page .role-switch-btn,
+.tenant-dashboard-page .role-switch-btn {
+    width: 100%;
+    border: none;
+    background: var(--dash-primary);
+    color: white;
+    border-radius: 8px;
+    padding: 11px 8px;
+    margin-top: 13px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+.owner-dashboard-page .role-switch-btn:hover,
+.tenant-dashboard-page .role-switch-btn:hover {
+    background: var(--dash-primary-dark);
+    transform: translateY(-2px);
+}
+
+
+/* =========================================
+   MAIN CONTENT
+========================================= */
+
+.owner-dashboard-page .dashboard-main,
+.tenant-dashboard-page .dashboard-main {
+    flex: 1;
+    min-width: 0;
+    padding: 30px 35px;
+}
+
+
+/* TOPBAR */
+
+.owner-dashboard-page .dashboard-topbar,
+.tenant-dashboard-page .dashboard-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 27px;
+}
+
+.owner-dashboard-page .dashboard-breadcrumb,
+.tenant-dashboard-page .dashboard-breadcrumb {
+    font-size: 11px;
+    color: #a0a3b2;
+    margin: 0 0 7px;
+}
+
+.owner-dashboard-page .dashboard-topbar h1,
+.tenant-dashboard-page .dashboard-topbar h1 {
+    font-size: 25px;
+    font-weight: 700;
+    margin: 0;
+    color: #252840;
+}
+
+.owner-dashboard-page .dashboard-topbar-subtitle,
+.tenant-dashboard-page .dashboard-topbar-subtitle {
+    font-size: 12px;
+    color: var(--dash-muted);
+    margin: 7px 0 0;
+}
+
+.owner-dashboard-page .dashboard-topbar-actions,
+.tenant-dashboard-page .dashboard-topbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+}
+
+.owner-dashboard-page .topbar-add-btn,
+.tenant-dashboard-page .topbar-add-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 16px;
+    border-radius: 9px;
+    background: var(--dash-primary);
+    color: white;
+    font-size: 11px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.25s ease;
+}
+
+.owner-dashboard-page .topbar-add-btn:hover,
+.tenant-dashboard-page .topbar-add-btn:hover {
+    background: var(--dash-primary-dark);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.owner-dashboard-page .topbar-user,
+.tenant-dashboard-page .topbar-user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.owner-dashboard-page .topbar-user img,
+.tenant-dashboard-page .topbar-user img,
+.owner-dashboard-page .topbar-user-placeholder,
+.tenant-dashboard-page .topbar-user-placeholder {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.owner-dashboard-page .topbar-user-placeholder,
+.tenant-dashboard-page .topbar-user-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #eeedff;
+    color: var(--dash-primary);
+}
+
+.owner-dashboard-page .topbar-user strong,
+.tenant-dashboard-page .topbar-user strong {
+    display: block;
+    font-size: 12px;
+    color: #30334a;
+}
+
+.owner-dashboard-page .topbar-user span,
+.tenant-dashboard-page .topbar-user span {
+    display: block;
+    font-size: 10px;
+    color: var(--dash-muted);
+    margin-top: 3px;
+}
+
+
+/* =========================================
+   WELCOME BANNER
+========================================= */
+
+.owner-dashboard-page .dashboard-welcome,
+.tenant-dashboard-page .dashboard-welcome {
+    min-height: 215px;
+    padding: 30px 34px;
+    border-radius: 17px;
+    background: linear-gradient(115deg, #5e56d7, #8179ee);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 36px;
+}
+
+.owner-dashboard-page .welcome-content,
+.tenant-dashboard-page .welcome-content {
+    max-width: 600px;
+    position: relative;
+    z-index: 1;
+}
+
+.owner-dashboard-page .welcome-label,
+.tenant-dashboard-page .welcome-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 10px;
+    letter-spacing: 1.3px;
+    font-weight: 600;
+    opacity: 0.85;
+}
+
+.owner-dashboard-page .welcome-content h2,
+.tenant-dashboard-page .welcome-content h2 {
+    color: white;
+    font-size: 27px;
+    font-weight: 700;
+    margin: 15px 0 10px;
+}
+
+.owner-dashboard-page .welcome-content p,
+.tenant-dashboard-page .welcome-content p {
+    color: rgba(255,255,255,0.83);
+    font-size: 12px;
+    line-height: 1.8;
+    max-width: 490px;
+    margin: 0 0 19px;
+}
+
+.owner-dashboard-page .welcome-btn,
+.tenant-dashboard-page .welcome-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 12px 17px;
+    background: white;
+    color: var(--dash-primary);
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.25s ease;
+}
+
+.owner-dashboard-page .welcome-btn:hover,
+.tenant-dashboard-page .welcome-btn:hover {
+    transform: translateY(-3px);
+    color: var(--dash-primary-dark);
+}
+
+.owner-dashboard-page .welcome-illustration,
+.tenant-dashboard-page .welcome-illustration {
+    position: relative;
+    width: 180px;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.18);
+    font-size: 115px;
+}
+
+.owner-dashboard-page .welcome-illustration .fa-key,
+.tenant-dashboard-page .welcome-illustration .fa-key {
+    position: absolute;
+    right: 5px;
+    bottom: 0;
+    font-size: 38px;
+    color: rgba(255,255,255,0.55);
+}
+
+
+/* =========================================
+   SECTION HEADING
+========================================= */
+
+.owner-dashboard-page .dashboard-section,
+.tenant-dashboard-page .dashboard-section {
+    margin-bottom: 37px;
+}
+
+.owner-dashboard-page .dashboard-section-heading,
+.tenant-dashboard-page .dashboard-section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 19px;
+    gap: 15px;
+}
+
+.owner-dashboard-page .section-eyebrow,
+.tenant-dashboard-page .section-eyebrow {
+    color: var(--dash-primary);
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    font-weight: 700;
+}
+
+.owner-dashboard-page .dashboard-section-heading h2,
+.tenant-dashboard-page .dashboard-section-heading h2 {
+    color: #282b43;
+    font-size: 19px;
+    font-weight: 700;
+    margin: 5px 0;
+}
+
+.owner-dashboard-page .dashboard-section-heading p,
+.tenant-dashboard-page .dashboard-section-heading p {
+    color: var(--dash-muted);
+    font-size: 11px;
+    margin: 0;
+}
+
+
+/* =========================================
+   STATISTICS CARDS
+========================================= */
+
+.owner-dashboard-page .dashboard-stats-grid,
+.tenant-dashboard-page .dashboard-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 15px;
+}
+
+.owner-dashboard-page .dashboard-stat-card,
+.tenant-dashboard-page .dashboard-stat-card {
+    background: white;
+    padding: 20px 17px;
+    border-radius: 13px;
+    border: 1px solid #eff0f5;
+    box-shadow: 0 3px 15px rgba(33, 35, 70, 0.025);
+    transition: 0.25s ease;
+    min-width: 0;
+}
+
+.owner-dashboard-page .dashboard-stat-card:hover,
+.tenant-dashboard-page .dashboard-stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 9px 24px rgba(33, 35, 70, 0.07);
+}
+
+.owner-dashboard-page .stat-card-top,
+.tenant-dashboard-page .stat-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 7px;
+}
+
+.owner-dashboard-page .stat-icon,
+.tenant-dashboard-page .stat-icon {
+    width: 39px;
+    height: 39px;
+    border-radius: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+}
+
+.owner-dashboard-page .stat-label,
+.tenant-dashboard-page .stat-label {
+    font-size: 8px;
+    letter-spacing: 0.8px;
+    font-weight: 700;
+    color: #a2a5b4;
+}
+
+.owner-dashboard-page .dashboard-stat-card h3,
+.tenant-dashboard-page .dashboard-stat-card h3 {
+    font-size: 27px;
+    font-weight: 700;
+    color: #292d45;
+    margin: 17px 0 3px;
+}
+
+.owner-dashboard-page .dashboard-stat-card p,
+.tenant-dashboard-page .dashboard-stat-card p {
+    font-size: 10px;
+    color: #8b8fa1;
+    margin: 0;
+}
+
+
+/* STAT COLORS */
+
+.owner-dashboard-page .stat-purple .stat-icon,
+.tenant-dashboard-page .stat-purple .stat-icon {
+    background: #eeedff;
+    color: #675fe0;
+}
+
+.owner-dashboard-page .stat-green .stat-icon,
+.tenant-dashboard-page .stat-green .stat-icon {
+    background: #e5f8ee;
+    color: #26a66b;
+}
+
+.owner-dashboard-page .stat-orange .stat-icon,
+.tenant-dashboard-page .stat-orange .stat-icon {
+    background: #fff2e3;
+    color: #ed983d;
+}
+
+.owner-dashboard-page .stat-blue .stat-icon,
+.tenant-dashboard-page .stat-blue .stat-icon {
+    background: #e6f2ff;
+    color: #3b8ee5;
+}
+
+.owner-dashboard-page .stat-pink .stat-icon,
+.tenant-dashboard-page .stat-pink .stat-icon {
+    background: #ffedf4;
+    color: #e56d9e;
+}
+
+.tenant-dashboard-page .tenant-stats-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+
+/* =========================================
+   QUICK ACTIONS
+========================================= */
+
+.owner-dashboard-page .dashboard-quick-actions,
+.tenant-dashboard-page .dashboard-quick-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.owner-dashboard-page .quick-action-card,
+.tenant-dashboard-page .quick-action-card {
+    background: white;
+    padding: 19px;
+    border-radius: 12px;
+    border: 1px solid #eff0f5;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
+    transition: 0.25s ease;
+    min-width: 0;
+}
+
+.owner-dashboard-page .quick-action-card:hover,
+.tenant-dashboard-page .quick-action-card:hover {
+    transform: translateY(-3px);
+    border-color: #d9d6ff;
+    box-shadow: 0 8px 22px rgba(33, 35, 70, 0.06);
+}
+
+.owner-dashboard-page .quick-action-icon,
+.tenant-dashboard-page .quick-action-icon {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    border-radius: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+}
+
+.owner-dashboard-page .quick-purple,
+.tenant-dashboard-page .quick-purple {
+    background: #eeedff;
+    color: #675fe0;
+}
+
+.owner-dashboard-page .quick-blue,
+.tenant-dashboard-page .quick-blue {
+    background: #e6f2ff;
+    color: #3b8ee5;
+}
+
+.owner-dashboard-page .quick-green,
+.tenant-dashboard-page .quick-green {
+    background: #e5f8ee;
+    color: #26a66b;
+}
+
+.owner-dashboard-page .quick-orange,
+.tenant-dashboard-page .quick-orange {
+    background: #fff2e3;
+    color: #ed983d;
+}
+
+.owner-dashboard-page .quick-action-card h3,
+.tenant-dashboard-page .quick-action-card h3 {
+    font-size: 12px;
+    font-weight: 600;
+    color: #33364c;
+    margin: 0 0 5px;
+}
+
+.owner-dashboard-page .quick-action-card p,
+.tenant-dashboard-page .quick-action-card p {
+    font-size: 10px;
+    color: var(--dash-muted);
+    margin: 0;
+    line-height: 1.5;
+}
+
+.owner-dashboard-page .action-arrow,
+.tenant-dashboard-page .action-arrow {
+    color: #b0b2c1;
+    font-size: 12px;
+    margin-left: auto;
+}
+
+
+/* =========================================
+   RECENT PROPERTIES
+========================================= */
+
+.owner-dashboard-page .recent-properties-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 17px;
+}
+
+.owner-dashboard-page .recent-property-card {
+    background: white;
+    border: 1px solid #eff0f5;
+    border-radius: 13px;
+    overflow: hidden;
+    transition: 0.25s ease;
+    min-width: 0;
+}
+
+.owner-dashboard-page .recent-property-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(33, 35, 70, 0.08);
+}
+
+.owner-dashboard-page .recent-property-image {
+    height: 160px;
+    position: relative;
+    overflow: hidden;
+    background: #f0efff;
+}
+
+.owner-dashboard-page .recent-property-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.4s ease;
+}
+
+.owner-dashboard-page .recent-property-card:hover .recent-property-image img {
+    transform: scale(1.05);
+}
+
+.owner-dashboard-page .property-image-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 38px;
+    color: #aaa5ed;
+}
+
+.owner-dashboard-page .property-status {
+    position: absolute;
+    top: 11px;
+    right: 11px;
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 9px;
+    font-weight: 600;
+    background: white;
+    color: #555;
+}
+
+.owner-dashboard-page .status-available {
+    background: #e4f8ec;
+    color: #20975d;
+}
+
+.owner-dashboard-page .status-rented {
+    background: #e7f1ff;
+    color: #3279ca;
+}
+
+.owner-dashboard-page .status-booked {
+    background: #fff1df;
+    color: #d78a2f;
+}
+
+.owner-dashboard-page .status-pending {
+    background: #fff0e3;
+    color: #d98536;
+}
+
+.owner-dashboard-page .recent-property-details {
+    padding: 16px;
+}
+
+.owner-dashboard-page .recent-property-details h3 {
+    color: #292d45;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0 0 8px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.owner-dashboard-page .property-location {
+    font-size: 10px;
+    color: #8b8fa1;
+    margin: 0 0 13px;
+}
+
+.owner-dashboard-page .property-location i {
+    color: var(--dash-primary);
+    margin-right: 4px;
+}
+
+.owner-dashboard-page .property-meta {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    flex-wrap: wrap;
+    color: #85899d;
+    font-size: 10px;
+    padding-bottom: 13px;
+    border-bottom: 1px solid #f0f1f5;
+}
+
+.owner-dashboard-page .property-meta i {
+    margin-right: 4px;
+    color: var(--dash-primary);
+}
+
+.owner-dashboard-page .property-card-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-top: 13px;
+}
+
+.owner-dashboard-page .property-price {
+    font-size: 15px;
+    font-weight: 700;
+    color: #302e65;
+}
+
+.owner-dashboard-page .property-price span {
+    font-size: 9px;
+    font-weight: 400;
+    color: #999cad;
+}
+
+.owner-dashboard-page .property-view-btn {
+    padding: 8px 13px;
+    background: #eeedff;
+    color: var(--dash-primary);
+    border-radius: 7px;
+    font-size: 10px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.owner-dashboard-page .property-view-btn:hover {
+    background: var(--dash-primary);
+    color: white;
+}
+
+.owner-dashboard-page .view-all-link {
+    color: var(--dash-primary);
+    font-size: 11px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.owner-dashboard-page .view-all-link i {
+    margin-left: 5px;
+}
+
+
+/* EMPTY STATE */
+
+.owner-dashboard-page .dashboard-empty-state {
+    background: white;
+    border: 1px dashed #d9d6f6;
+    border-radius: 14px;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.owner-dashboard-page .empty-state-icon {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    background: #eeedff;
+    color: var(--dash-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    margin: 0 auto 15px;
+}
+
+.owner-dashboard-page .dashboard-empty-state h3 {
+    font-size: 16px;
+    margin: 0 0 8px;
+}
+
+.owner-dashboard-page .dashboard-empty-state p {
+    font-size: 11px;
+    color: var(--dash-muted);
+    margin: 0 0 20px;
+}
+
+
+/* =========================================
+   BOTTOM INFO CARDS
+========================================= */
+
+.owner-dashboard-page .dashboard-bottom-grid,
+.tenant-dashboard-page .dashboard-bottom-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 17px;
+    margin-bottom: 35px;
+}
+
+.owner-dashboard-page .dashboard-info-card,
+.tenant-dashboard-page .dashboard-info-card {
+    background: white;
+    border: 1px solid #eff0f5;
+    border-radius: 13px;
+    padding: 22px;
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    position: relative;
+}
+
+.owner-dashboard-page .info-card-icon,
+.tenant-dashboard-page .info-card-icon {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    border-radius: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+}
+
+.owner-dashboard-page .booked-icon,
+.tenant-dashboard-page .booked-icon {
+    background: #eeedff;
+    color: var(--dash-primary);
+}
+
+.owner-dashboard-page .account-icon,
+.tenant-dashboard-page .account-icon {
+    background: #e5f8ee;
+    color: #26a66b;
+}
+
+.owner-dashboard-page .info-card-label,
+.tenant-dashboard-page .info-card-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #a0a3b2;
+}
+
+.owner-dashboard-page .dashboard-info-card h3,
+.tenant-dashboard-page .dashboard-info-card h3 {
+    font-size: 17px;
+    color: #292d45;
+    margin: 7px 0;
+}
+
+.owner-dashboard-page .dashboard-info-card p,
+.tenant-dashboard-page .dashboard-info-card p {
+    color: var(--dash-muted);
+    font-size: 10px;
+    margin: 0;
+}
+
+.owner-dashboard-page .info-card-link,
+.tenant-dashboard-page .info-card-link {
+    display: inline-block;
+    margin-top: 11px;
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--dash-primary);
+    text-decoration: none;
+}
+
+.owner-dashboard-page .info-card-link i,
+.tenant-dashboard-page .info-card-link i {
+    margin-left: 4px;
+}
+
+.owner-dashboard-page .account-status-dot,
+.tenant-dashboard-page .account-status-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #28b979;
+    position: absolute;
+    top: 25px;
+    right: 23px;
+}
+
+
+/* FOOTER */
+
+.owner-dashboard-page .dashboard-page-footer,
+.tenant-dashboard-page .dashboard-page-footer {
+    padding: 18px 0 5px;
+    border-top: 1px solid #e9eaf0;
+    color: #a0a3b2;
+    font-size: 10px;
+    text-align: center;
+}
+
+
+/* =========================================
+   RESPONSIVE DESIGN
+========================================= */
+
+@media (max-width: 1200px) {
+
+    .owner-dashboard-page .dashboard-sidebar,
+    .tenant-dashboard-page .dashboard-sidebar {
+        width: 230px;
+        min-width: 230px;
+    }
+
+    .owner-dashboard-page .dashboard-main,
+    .tenant-dashboard-page .dashboard-main {
+        padding: 25px 23px;
+    }
+
+    .owner-dashboard-page .dashboard-stats-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .owner-dashboard-page .recent-properties-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+@media (max-width: 900px) {
+
+    .owner-dashboard-page,
+    .tenant-dashboard-page {
+        flex-direction: column;
+    }
+
+    .owner-dashboard-page .dashboard-sidebar,
+    .tenant-dashboard-page .dashboard-sidebar {
+        width: 100%;
+        min-width: 0;
+        padding: 15px 20px;
+        border-right: none;
+        border-bottom: 1px solid var(--dash-border);
+    }
+
+    .owner-dashboard-page .sidebar-brand,
+    .tenant-dashboard-page .sidebar-brand {
+        padding-bottom: 14px;
+    }
+
+    .owner-dashboard-page .sidebar-profile,
+    .tenant-dashboard-page .sidebar-profile {
+        padding: 12px 5px;
+    }
+
+    .owner-dashboard-page .dashboard-navigation,
+    .tenant-dashboard-page .dashboard-navigation {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        padding-top: 13px;
+    }
+
+    .owner-dashboard-page .sidebar-heading,
+    .tenant-dashboard-page .sidebar-heading {
+        display: none;
+    }
+
+    .owner-dashboard-page .dashboard-nav-link,
+    .tenant-dashboard-page .dashboard-nav-link {
+        margin: 0;
+        padding: 10px 12px;
+        font-size: 11px;
+    }
+
+    .owner-dashboard-page .sidebar-role-box,
+    .tenant-dashboard-page .sidebar-role-box {
+        margin-top: 13px;
+    }
+
+    .owner-dashboard-page .dashboard-main,
+    .tenant-dashboard-page .dashboard-main {
+        padding: 25px 20px;
+    }
+
+}
+
+@media (max-width: 650px) {
+
+    .owner-dashboard-page .dashboard-topbar,
+    .tenant-dashboard-page .dashboard-topbar {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .owner-dashboard-page .dashboard-topbar-actions,
+    .tenant-dashboard-page .dashboard-topbar-actions {
+        width: 100%;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+    .owner-dashboard-page .dashboard-welcome,
+    .tenant-dashboard-page .dashboard-welcome {
+        padding: 25px 22px;
+        min-height: 190px;
+    }
+
+    .owner-dashboard-page .welcome-content h2,
+    .tenant-dashboard-page .welcome-content h2 {
+        font-size: 21px;
+    }
+
+    .owner-dashboard-page .welcome-illustration,
+    .tenant-dashboard-page .welcome-illustration {
+        display: none;
+    }
+
+    .owner-dashboard-page .dashboard-stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .tenant-dashboard-page .tenant-stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .owner-dashboard-page .dashboard-quick-actions,
+    .tenant-dashboard-page .dashboard-quick-actions {
+        grid-template-columns: 1fr;
+    }
+
+    .owner-dashboard-page .recent-properties-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .owner-dashboard-page .dashboard-bottom-grid,
+    .tenant-dashboard-page .dashboard-bottom-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@media (max-width: 420px) {
+
+    .owner-dashboard-page .dashboard-main,
+    .tenant-dashboard-page .dashboard-main {
+        padding: 20px 13px;
+    }
+
+    .owner-dashboard-page .dashboard-topbar h1,
+    .tenant-dashboard-page .dashboard-topbar h1 {
+        font-size: 21px;
+    }
+
+    .owner-dashboard-page .dashboard-stats-grid,
+    .tenant-dashboard-page .tenant-stats-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 9px;
+    }
+
+    .owner-dashboard-page .dashboard-stat-card,
+    .tenant-dashboard-page .dashboard-stat-card {
+        padding: 14px 11px;
+    }
+
+    .owner-dashboard-page .dashboard-stat-card h3,
+    .tenant-dashboard-page .dashboard-stat-card h3 {
+        font-size: 23px;
+    }
+
+    .owner-dashboard-page .dashboard-stat-card p,
+    .tenant-dashboard-page .dashboard-stat-card p {
+        font-size: 9px;
+    }
+
+    .owner-dashboard-page .stat-label,
+    .tenant-dashboard-page .stat-label {
+        font-size: 7px;
+    }
+
+    .owner-dashboard-page .dashboard-nav-link,
+    .tenant-dashboard-page .dashboard-nav-link {
+        font-size: 10px;
+        padding: 9px;
+    }
+
+    .owner-dashboard-page .dashboard-nav-link i,
+    .tenant-dashboard-page .dashboard-nav-link i {
+        font-size: 13px;
+    }
+
+}

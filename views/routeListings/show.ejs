@@ -1,0 +1,1361 @@
+<% layout("fixLayout/boilerplate") %>
+
+<main id="detail-main">
+
+    <div id="arShowPageWrapper">
+
+        <div class="ar-show-page">
+
+            <!-- =====================================
+                 PROPERTY PAGE HEADING
+                 DIRECTLY BELOW NAVBAR
+            ====================================== -->
+<div class="ar-property-page-heading">
+    <div class="ar-heading-label">
+        <span class="ar-heading-dot"></span>
+        PROPERTY DETAILS
+    </div>
+
+    <h1>
+        <%= listing.title
+            ? listing.title.charAt(0).toUpperCase() + listing.title.slice(1)
+            : "" %>
+    </h1>
+
+    <p class="ar-heading-subtitle">
+        Explore the property, discover its features, and find the right place for you.
+    </p>
+</div>
+
+
+            <!-- =====================================
+                 IMAGE GALLERY
+            ====================================== -->
+
+            <section
+                class="ar-gallery-container"
+                id="propertyGallery"
+                data-images="<%= JSON.stringify(listing.images ? listing.images.map(img => img.url) : []) %>"
+            >
+
+                <!-- GALLERY ACTIONS -->
+
+                <div class="ar-gallery-actions">
+
+                    <button
+                        type="button"
+                        class="ar-share-btn"
+                        id="sharePropertyBtn"
+                    >
+                        <i class="fa-solid fa-share-nodes"></i>
+                        Share
+                    </button>
+
+                    <button
+                        type="button"
+                        class="ar-save-btn"
+                    >
+                        <i class="fa-regular fa-heart"></i>
+                    </button>
+
+                </div>
+
+
+                <% if (listing.images && listing.images.length > 0) { %>
+
+                    <div class="ar-slider">
+
+                        <!-- PREVIOUS IMAGE -->
+
+                        <button
+                            type="button"
+                            class="ar-slider-arrow ar-slider-prev"
+                            id="prevSlide"
+                            aria-label="Previous image"
+                        >
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </button>
+
+
+                        <!-- IMAGE + WHITE PROPERTY TITLE -->
+
+                        <div class="ar-slider-image-wrapper">
+
+                            <img
+                                src="<%= listing.images[0].url %>"
+                                alt="<%= listing.title %>"
+                                class="ar-slider-image ar-property-image"
+                                id="mainSliderImage"
+                                data-index="0"
+                            >
+
+                            <div class="ar-image-title-overlay">
+
+                                <h1>
+                                    <%= listing.title
+                                        ? listing.title.charAt(0).toUpperCase() + listing.title.slice(1)
+                                        : ""
+                                    %>
+                                </h1>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- NEXT IMAGE -->
+
+                        <button
+                            type="button"
+                            class="ar-slider-arrow ar-slider-next"
+                            id="nextSlide"
+                            aria-label="Next image"
+                        >
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+
+
+                        <!-- IMAGE COUNTER -->
+
+                        <div class="ar-slider-counter" id="sliderCounter">
+                            1 / <%= listing.images.length %>
+                        </div>
+
+
+                        <!-- SLIDER INDICATORS -->
+
+                        <div class="ar-slider-indicators" id="sliderIndicators">
+
+                            <% listing.images.forEach((img, index) => { %>
+
+                                <button
+                                    type="button"
+                                    class="ar-slider-indicator <%= index === 0 ? 'active' : '' %>"
+                                    data-slide="<%= index %>"
+                                    aria-label="Go to image <%= index + 1 %>"
+                                ></button>
+
+                            <% }) %>
+
+                        </div>
+
+                    </div>
+
+                <% } else { %>
+
+                    <!-- =====================================
+                         NO IMAGE FALLBACK
+                    ====================================== -->
+
+                    <div class="ar-no-images">
+
+                        <div class="ar-no-image-title">
+
+                            <h1>
+                                <%= listing.title
+                                    ? listing.title.charAt(0).toUpperCase() + listing.title.slice(1)
+                                    : ""
+                                %>
+                            </h1>
+
+                            <p class="ar-no-image-location">
+
+                                <i class="fa-solid fa-location-dot"></i>
+
+                                <%= listing.area %>,
+                                <%= listing.city || "Aligarh" %>
+
+                            </p>
+
+                        </div>
+
+                        <i class="fa-solid fa-image"></i>
+
+                        <p>No property images available.</p>
+
+                    </div>
+
+                <% } %>
+
+            </section>
+
+
+            <!-- =====================================
+                 PROPERTY CONTENT
+            ====================================== -->
+
+            <div class="ar-property-content">
+
+
+                <!-- =====================================
+                     OWNER ACTION BUTTONS
+                ====================================== -->
+
+                <% if (isListingOwner) { %>
+
+                    <div class="property-action-buttons">
+
+                        <a
+                            href="/listings/<%= listing._id %>/edit"
+                            class="unique-edit-btn"
+                        >
+                            <i class="fa-solid fa-pen-to-square"></i>
+                            Edit Property
+                        </a>
+
+
+                        <form
+                            action="/listings/<%= listing._id %>?_method=DELETE"
+                            method="POST"
+                            class="unique-delete-form"
+                            onsubmit="return confirm('Are you sure you want to delete this property?')"
+                        >
+
+                            <button
+                                type="submit"
+                                class="unique-delete-btn"
+                            >
+                                <i class="fa-solid fa-trash"></i>
+                                Delete Property
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                <% } %>
+
+
+                <!-- =====================================
+                     DESCRIPTION
+                ====================================== -->
+
+                <section class="ar-description-section">
+
+                    <h2>About This Property</h2>
+
+                    <p>
+                        <%= listing.description %>
+                    </p>
+
+                </section>
+
+
+                <!-- =====================================
+                     RENTAL INFORMATION
+                ====================================== -->
+
+                <section class="ar-rent-section">
+
+                    <h2>Rental Information</h2>
+
+                    <div class="ar-detail-grid">
+
+                        <div class="ar-detail-item">
+
+                            <i class="fa-solid fa-indian-rupee-sign"></i>
+
+                            <span>Monthly Rent</span>
+
+                            <b>
+                                ₹ <%= Number(listing.rentPrice || 0).toLocaleString("en-IN") %>
+                            </b>
+
+                        </div>
+
+
+                        <div class="ar-detail-item">
+
+                            <i class="fa-solid fa-wallet"></i>
+
+                            <span>Security Deposit</span>
+
+                            <b>
+                                ₹ <%= Number(listing.securityDeposit || 0).toLocaleString("en-IN") %>
+                            </b>
+
+                        </div>
+
+
+                        <div class="ar-detail-item">
+
+                            <i class="fa-solid fa-screwdriver-wrench"></i>
+
+                            <span>Maintenance Charge</span>
+
+                            <b>
+                                ₹ <%= Number(listing.maintenanceCharge || 0).toLocaleString("en-IN") %>
+                            </b>
+
+                        </div>
+
+
+                        <div class="ar-detail-item">
+
+                            <i class="fa-solid fa-bolt"></i>
+
+                            <span>Electricity</span>
+
+                            <b>
+                                <%= listing.electricityIncluded ? "Included" : "Not Included" %>
+                            </b>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =====================================
+                     PROPERTY DETAILS
+                ====================================== -->
+
+                <section class="ar-property-details-section">
+
+                    <h2>Property Details</h2>
+
+                    <div class="ar-detail-grid">
+
+                        <div class="ar-detail-item">
+
+                            <i class="fa-solid fa-house"></i>
+
+                            <span>Property Type</span>
+
+                            <b>
+                                <%= listing.propertyType || "Not specified" %>
+                            </b>
+
+                        </div>
+
+
+                        <div class="ar-detail-item">
+
+                            <i class="fa-solid fa-bed"></i>
+
+                            <span>Bedrooms</span>
+
+                            <b>
+                                <%= listing.bhk || "Not specified" %>
+                            </b>
+
+                        </div>
+
+
+                        <div class="ar-detail-item">
+
+                            <i class="fa-solid fa-couch"></i>
+
+                            <span>Furnishing</span>
+
+                            <b>
+                                <%= listing.furnishing || "Not specified" %>
+                            </b>
+
+                        </div>
+
+
+                        <div class="ar-detail-item">
+
+                            <i class="fa-solid fa-building"></i>
+
+                            <span>Floor</span>
+
+                            <b>
+                                <%= listing.floor || "N/A" %>
+                                of
+                                <%= listing.totalFloors || "N/A" %>
+                            </b>
+
+                        </div>
+
+
+                        <div class="ar-detail-item">
+
+                            <i class="fa-solid fa-users"></i>
+
+                            <span>Preferred Tenant</span>
+
+                            <b>
+                                <%= listing.preferredTenant || "Not specified" %>
+                            </b>
+
+                        </div>
+
+
+                        <div class="ar-detail-item">
+
+                            <i class="fa-solid fa-user-group"></i>
+
+                            <span>Maximum Occupants</span>
+
+                            <b>
+                                <%= listing.maxOccupants || "Not specified" %>
+                            </b>
+
+                        </div>
+
+
+                        <div class="ar-detail-item">
+
+                            <i class="fa-solid fa-calendar-check"></i>
+
+                            <span>Available For</span>
+
+                            <b>
+                                <%= listing.availableFor || "Not specified" %>
+                            </b>
+
+                        </div>
+
+
+                        <div class="ar-detail-item">
+
+                            <i class="fa-solid fa-calendar-days"></i>
+
+                            <span>Available From</span>
+
+                            <b>
+                                <%= listing.availableFrom
+                                    ? new Date(listing.availableFrom).toLocaleDateString("en-IN")
+                                    : "Immediately"
+                                %>
+                            </b>
+
+                        </div>
+
+
+                        <div class="ar-detail-item">
+
+                            <i class="fa-solid fa-hourglass-half"></i>
+
+                            <span>Minimum Lease</span>
+
+                            <b>
+                                <%= listing.minimumLeaseMonths || "Not specified" %>
+                                Months
+                            </b>
+
+                        </div>
+
+
+                        <div class="ar-detail-item">
+
+                            <i class="fa-solid fa-hourglass-end"></i>
+
+                            <span>Maximum Lease</span>
+
+                            <b>
+                                <%= listing.maximumLeaseMonths || "Not specified" %>
+                                Months
+                            </b>
+
+                        </div>
+
+
+                        <div class="ar-detail-item">
+
+                            <i class="fa-solid fa-door-open"></i>
+
+                            <span>Roommate Available</span>
+
+                            <b>
+                                <%= listing.roommateAvailable ? "Yes" : "No" %>
+                            </b>
+
+                        </div>
+
+
+                        <div class="ar-detail-item">
+
+                            <i class="fa-solid fa-circle-check"></i>
+
+                            <span>Property Status</span>
+
+                            <b>
+                                <%= listing.status || "Available" %>
+                            </b>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =====================================
+                     PROPERTY LOCATION
+                ====================================== -->
+
+                <section class="ar-location-section">
+
+                    <h2>Property Location</h2>
+
+                    <div class="ar-address-card">
+
+                        <i class="fa-solid fa-location-dot"></i>
+
+                        <div>
+
+                            <b>
+                                <%= listing.area %>,
+                                <%= listing.city || "Aligarh" %>
+                            </b>
+
+                            <p>
+                                <%= listing.fullAddress || "" %>
+                            </p>
+
+                            <% if (listing.pincode) { %>
+
+                                <span>
+                                    PIN Code: <%= listing.pincode %>
+                                </span>
+
+                            <% } %>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- GOOGLE MAP -->
+
+                    <div class="ar-map-container">
+
+                        <iframe
+                            title="Property Location"
+                            src="https://www.google.com/maps?q=<%= encodeURIComponent((listing.fullAddress || listing.area || '') + ', ' + (listing.city || 'Aligarh')) %>&output=embed"
+                            width="100%"
+                            height="350"
+                            style="border:0;"
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"
+                            allowfullscreen
+                        ></iframe>
+
+                    </div>
+
+
+                    <% if (listing.googleMapLink) { %>
+
+                        <a
+                            href="<%= listing.googleMapLink %>"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="ar-map-link"
+                        >
+                            <i class="fa-solid fa-map-location-dot"></i>
+                            Open Property Location in Google Maps
+                        </a>
+
+                    <% } %>
+
+                </section>
+
+
+                <!-- =====================================
+                     NEARBY LANDMARKS
+                ====================================== -->
+
+                <% if (
+                    (listing.nearbyLandmarks && listing.nearbyLandmarks.length > 0) ||
+                    listing.landmark
+                ) { %>
+
+                    <section class="ar-landmarks-section">
+
+                        <h2>Nearby Landmarks</h2>
+
+                        <div class="ar-landmarks-grid">
+
+                            <% if (listing.nearbyLandmarks && listing.nearbyLandmarks.length > 0) { %>
+
+                                <% listing.nearbyLandmarks.forEach(landmark => { %>
+
+                                    <div class="ar-landmark-card">
+
+                                        <i class="fa-solid fa-location-crosshairs"></i>
+
+                                        <div>
+
+                                            <h3>
+                                                <%= landmark.landmarkName || "Nearby Landmark" %>
+                                            </h3>
+
+                                            <% if (landmark.mainlocation) { %>
+
+                                                <p>
+                                                    <%= landmark.mainlocation %>
+                                                </p>
+
+                                            <% } %>
+
+
+                                            <% if (
+                                                landmark.distance !== undefined &&
+                                                landmark.distance !== null &&
+                                                landmark.distance !== ""
+                                            ) { %>
+
+                                                <span>
+
+                                                    <i class="fa-solid fa-route"></i>
+
+                                                    <%= landmark.distance %>
+                                                    <%= landmark.distanceUnit || "km" %> away
+
+                                                </span>
+
+                                            <% } %>
+
+                                        </div>
+
+                                    </div>
+
+                                <% }) %>
+
+                            <% } %>
+
+
+                            <!-- SINGLE LANDMARK SUPPORT -->
+
+                            <% if (listing.landmark) { %>
+
+                                <div class="ar-landmark-card">
+
+                                    <i class="fa-solid fa-location-crosshairs"></i>
+
+                                    <div>
+
+                                        <h3>
+                                            <%= typeof listing.landmark === "string"
+                                                ? listing.landmark
+                                                : (listing.landmark.landmarkName || "Nearby Landmark")
+                                            %>
+                                        </h3>
+
+
+                                        <% if (
+                                            typeof listing.landmark === "object" &&
+                                            listing.landmark.mainlocation
+                                        ) { %>
+
+                                            <p>
+                                                <%= listing.landmark.mainlocation %>
+                                            </p>
+
+                                        <% } %>
+
+
+                                        <% if (
+                                            typeof listing.landmark === "object" &&
+                                            listing.landmark.distance !== undefined
+                                        ) { %>
+
+                                            <span>
+
+                                                <i class="fa-solid fa-route"></i>
+
+                                                <%= listing.landmark.distance %>
+                                                <%= listing.landmark.distanceUnit || "km" %> away
+
+                                            </span>
+
+                                        <% } %>
+
+                                    </div>
+
+                                </div>
+
+                            <% } %>
+
+                        </div>
+
+                    </section>
+
+                <% } %>
+
+<!-- =====================================
+     ROOMMATE DETAILS BUTTON
+====================================== -->
+
+<% if (hasRoommateDetails) { %>
+
+<section class="ar-roommate-action-section">
+
+    <div class="ar-roommate-action-card">
+
+        <div class="ar-roommate-action-info">
+
+            <h2>
+                <i class="fa-solid fa-user-group"></i>
+                Roommate Information
+            </h2>
+
+            <p>
+                Roommate details are available for this property.
+            </p>
+
+        </div>
+
+        <button
+            type="button"
+            class="ar-contact-btn"
+            id="viewRoommateDetailsBtn"
+            data-property-id="<%= listing._id %>">
+
+            <i class="fa-solid fa-eye"></i>
+            View Roommate Details
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<% } %>
+
+                <!-- =====================================
+                     OWNER DETAILS
+                ====================================== -->
+
+                <section class="ar-owner-section">
+
+                    <div class="ar-owner-card">
+
+                        <div class="ar-owner-avatar">
+
+                            <i class="fa-solid fa-user"></i>
+
+                        </div>
+
+
+                        <div class="ar-owner-info">
+
+                            <h2>Property Owner</h2>
+
+                            <p>
+                                Contact the property owner directly for more information.
+                            </p>
+
+
+                            <div class="ar-owner-detail">
+
+                                <i class="fa-solid fa-clock"></i>
+
+                                Response time:
+                                <%= listing.responseTime || "Within 1 hour" %>
+
+                            </div>
+
+
+                            <% if (listing.ownerVerified) { %>
+
+                                <div class="ar-owner-detail">
+
+                                    <i class="fa-solid fa-circle-check"></i>
+
+                                    Verified Property Owner
+
+                                </div>
+
+                            <% } %>
+
+                        </div>
+
+
+                        <% if (!isListingOwner) { %>
+
+                            <button
+                                type="button"
+                                class="ar-contact-btn"
+                                id="viewOwnerDetailsBtn"
+                                data-property-id="<%= listing._id %>"
+                            >
+
+                                <i class="fa-solid fa-phone"></i>
+
+                                View Owner Details
+
+                            </button>
+
+                        <% } %>
+
+                    </div>
+
+
+                    <!-- OWNER CONTACT INFORMATION -->
+
+                    <div
+                        id="ownerDetailsContainer"
+                        class="ar-owner-details-container"
+                        style="display:none;"
+                    >
+
+                        <h3>Owner Contact Information</h3>
+
+                        <p id="ownerName"></p>
+
+                        <p id="ownerPhone"></p>
+
+
+                        <a
+                            href="#"
+                            id="ownerCallButton"
+                            class="ar-contact-btn"
+                            style="display:none;"
+                        >
+
+                            <i class="fa-solid fa-phone"></i>
+
+                            Call Owner
+
+                        </a>
+
+                    </div>
+
+
+                    <p
+                        id="ownerDetailsMessage"
+                        class="ar-owner-message"
+                        aria-live="polite"
+                    ></p>
+
+                </section>
+<!-- =====================================
+     ROOMMATE DETAILS
+     ONLY FOR LOGGED-IN USERS
+====================================== -->
+<% if (hasRoommateDetails) { %>
+
+<section
+    class="ar-roommate-details-section"
+    id="roommateDetailsSection"
+    style="display: none;">
+
+    <h2>
+        <i class="fa-solid fa-users"></i>
+        Available Roommate Details
+    </h2>
+
+    <p>
+        The following roommate information has been provided for this property.
+    </p>
+
+    <div
+        class="ar-roommate-details-grid"
+        id="roommateDetailsGrid">
+    </div>
+
+    <p
+        id="roommateDetailsMessage"
+        aria-live="polite">
+    </p>
+
+</section>
+
+<% } %>
+
+                <!-- =====================================
+                     ABOUT ALIGARH RENTALS
+                ====================================== -->
+
+                <section class="ar-about-platform">
+
+                    <h2>Why Choose Aligarh Rentals?</h2>
+
+                    <p>
+                        Finding the right home in Aligarh should be simple,
+                        safe and stress free. Aligarh Rentals helps students,
+                        families and working professionals discover rental
+                        properties according to their budget, location and lifestyle.
+                    </p>
+
+                    <p>
+                        Our platform connects tenants directly with property
+                        owners and provides detailed information about rent,
+                        location, property images and availability.
+                    </p>
+
+                    <p>
+                        Whether you are looking for a room near your college,
+                        a family home or shared accommodation, we make your
+                        rental search easier and more transparent.
+                    </p>
+
+                </section>
+
+
+                <!-- =====================================
+                     REVIEW FORM
+                     ONLY FOR LOGGED-IN USERS
+                ====================================== -->
+
+                <% if (currentUser) { %>
+
+                    <section class="ar-review-wrapper">
+
+                        <div class="ar-review-top">
+
+                            <div>
+
+                                <span class="ar-review-badge">
+
+                                    <i class="fa-solid fa-star"></i>
+
+                                    Guest Reviews
+
+                                </span>
+
+                                <h2>Write Your Review</h2>
+
+                                <p>
+                                    Tell other renters about your experience
+                                    with this property.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="ar-review-box">
+
+                            <div class="ar-review-left">
+
+                                <form
+                                    action="/listings/<%= listing._id %>/reviews"
+                                    method="POST"
+                                    class="ar-review-form"
+                                    id="reviewForm"
+                                >
+
+                                    <!-- RATING -->
+
+                                    <div class="ar-form-group">
+
+                                        <label>Your Rating</label>
+
+                                        <div class="ar-stars">
+
+                                            <input
+                                                type="radio"
+                                                id="star5"
+                                                name="review[rating]"
+                                                value="5"
+                                                required
+                                            >
+
+                                            <label for="star5">
+                                                <i class="fa-solid fa-star"></i>
+                                            </label>
+
+
+                                            <input
+                                                type="radio"
+                                                id="star4"
+                                                name="review[rating]"
+                                                value="4"
+                                            >
+
+                                            <label for="star4">
+                                                <i class="fa-solid fa-star"></i>
+                                            </label>
+
+
+                                            <input
+                                                type="radio"
+                                                id="star3"
+                                                name="review[rating]"
+                                                value="3"
+                                            >
+
+                                            <label for="star3">
+                                                <i class="fa-solid fa-star"></i>
+                                            </label>
+
+
+                                            <input
+                                                type="radio"
+                                                id="star2"
+                                                name="review[rating]"
+                                                value="2"
+                                            >
+
+                                            <label for="star2">
+                                                <i class="fa-solid fa-star"></i>
+                                            </label>
+
+
+                                            <input
+                                                type="radio"
+                                                id="star1"
+                                                name="review[rating]"
+                                                value="1"
+                                            >
+
+                                            <label for="star1">
+                                                <i class="fa-solid fa-star"></i>
+                                            </label>
+
+                                        </div>
+
+                                        <div class="ar-review-feedback-container"></div>
+
+                                    </div>
+
+
+                                    <!-- REVIEW TITLE -->
+
+                                    <div class="ar-form-group">
+
+                                        <label>Review Title</label>
+
+                                        <input
+                                            type="text"
+                                            name="review[title]"
+                                            placeholder="Example: Great location and friendly owner"
+                                            maxlength="80"
+                                        >
+
+                                    </div>
+
+
+                                    <!-- REVIEW COMMENT -->
+
+                                    <div class="ar-form-group">
+
+                                        <label>Your Experience</label>
+
+                                        <textarea
+                                            name="review[comment]"
+                                            rows="7"
+                                            maxlength="500"
+                                            placeholder="Describe your experience with this property..."
+                                            required
+                                        ></textarea>
+
+                                    </div>
+
+
+                                    <!-- REVIEW FOOTER -->
+
+                                    <div class="ar-review-footer">
+
+                                        <div class="ar-review-info">
+
+                                            <i class="fa-solid fa-circle-info"></i>
+
+                                            Your review will be visible after verification.
+
+                                        </div>
+
+
+                                        <button
+                                            type="submit"
+                                            class="ar-review-btn"
+                                        >
+
+                                            <i class="fa-solid fa-paper-plane"></i>
+
+                                            Submit Review
+
+                                        </button>
+
+                                    </div>
+
+                                </form>
+
+                            </div>
+
+
+                            <!-- REVIEW GUIDELINES -->
+
+                            <aside class="ar-review-right">
+
+                                <div class="ar-review-card">
+
+                                    <div class="ar-review-icon">
+
+                                        <i class="fa-solid fa-shield-heart"></i>
+
+                                    </div>
+
+                                    <h3>Review Guidelines</h3>
+
+                                    <p>
+                                        Help other renters by writing a genuine
+                                        review based on your personal experience.
+                                    </p>
+
+
+                                    <ul>
+
+                                        <li>
+                                            <i class="fa-solid fa-circle-check"></i>
+                                            Give an honest rating.
+                                        </li>
+
+                                        <li>
+                                            <i class="fa-solid fa-circle-check"></i>
+                                            Mention cleanliness and location.
+                                        </li>
+
+                                        <li>
+                                            <i class="fa-solid fa-circle-check"></i>
+                                            Avoid offensive language.
+                                        </li>
+
+                                        <li>
+                                            <i class="fa-solid fa-circle-check"></i>
+                                            Write only about your actual experience.
+                                        </li>
+
+                                    </ul>
+
+                                </div>
+
+                            </aside>
+
+                        </div>
+
+                    </section>
+
+                <% } %>
+
+
+                <!-- =====================================
+                     REVIEW LIST
+                     VISIBLE TO EVERYONE
+                ====================================== -->
+
+                <section class="ar-review-list-wrapper">
+
+                    <div class="ar-review-list-heading">
+
+                        <h2>
+
+                            <i class="fa-solid fa-star"></i>
+
+                            <%= totalReviews || 0 %> Reviews
+
+                        </h2>
+
+                    </div>
+
+
+                    <div class="ar-review-grid">
+
+                        <% reviews.forEach((review, index) => { %>
+
+                            <div class="ar-review-item <%= index >= 6 ? 'ar-hidden-review' : '' %>">
+
+
+                                <!-- REVIEW USER -->
+
+                                <div class="ar-review-user">
+
+                                    <div class="ar-review-user-image">
+
+                                        <% if (review.user && review.user.fullName) { %>
+
+                                            <%= review.user.fullName.charAt(0).toUpperCase() %>
+
+                                        <% } else { %>
+
+                                            <i class="fa-solid fa-user"></i>
+
+                                        <% } %>
+
+                                    </div>
+
+
+                                    <div class="ar-review-user-info">
+
+                                        <h3>
+                                            @<%= review.user
+                                                ? review.user.fullName
+                                                : "Anonymous User"
+                                            %>
+                                        </h3>
+
+                                        <p>Member of Aligarh Rentals</p>
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- REVIEW RATING AND DATE -->
+
+                                <div class="ar-review-rating-row">
+
+                                    <div class="ar-review-stars">
+
+                                        <% for (let i = 1; i <= 5; i++) { %>
+
+                                            <i class="fa-solid fa-star <%= i <= review.rating ? 'active' : '' %>"></i>
+
+                                        <% } %>
+
+                                    </div>
+
+
+                                    <span>
+
+                                        <%= review.createdAt
+                                            ? new Date(review.createdAt).toLocaleDateString(
+                                                "en-IN",
+                                                {
+                                                    day: "numeric",
+                                                    month: "short",
+                                                    year: "numeric",
+                                                    timeZone: "Asia/Kolkata"
+                                                }
+                                            )
+                                            : ""
+                                        %>
+
+                                    </span>
+
+                                </div>
+
+
+                                <!-- REVIEW TITLE -->
+
+                                <% if (review.title) { %>
+
+                                    <h4 class="ar-review-title">
+                                        <%= review.title %>
+                                    </h4>
+
+                                <% } %>
+
+
+                                <!-- REVIEW COMMENT -->
+
+                                <p class="ar-review-text">
+                                    <%= review.comment %>
+                                </p>
+
+
+                                <!-- DELETE OWN REVIEW -->
+
+                                <% if (
+                                    currentUser &&
+                                    review.user &&
+                                    review.user._id.toString() === currentUser._id.toString()
+                                ) { %>
+
+                                    <form
+                                        action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE"
+                                        method="POST"
+                                        class="ar-review-delete-form"
+                                        onsubmit="return confirm('Are you sure you want to delete this review?')"
+                                    >
+
+                                        <button
+                                            type="submit"
+                                            class="ar-review-delete-btn"
+                                        >
+
+                                            <i class="fa-solid fa-trash"></i>
+
+                                            Delete Review
+
+                                        </button>
+
+                                    </form>
+
+                                <% } %>
+
+                            </div>
+
+                        <% }) %>
+
+                    </div>
+
+
+                    <!-- SHOW ALL REVIEWS BUTTON -->
+
+                    <% if (reviews.length > 6) { %>
+
+                        <div class="ar-review-show-all">
+
+                            <button
+                                id="arShowAllReviewsBtn"
+                                type="button"
+                            >
+                                Show all <%= totalReviews %> reviews
+                            </button>
+
+                        </div>
+
+                    <% } %>
+
+                </section>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<!-- =====================================
+     FULLSCREEN IMAGE VIEWER
+====================================== -->
+
+<div id="imageViewer" class="ar-image-viewer">
+
+    <button
+        id="closeViewer"
+        type="button"
+        aria-label="Close image viewer"
+    >
+        <i class="fa-solid fa-xmark"></i>
+    </button>
+
+
+    <button
+        id="prevImage"
+        type="button"
+        aria-label="Previous image"
+    >
+        <i class="fa-solid fa-chevron-left"></i>
+    </button>
+
+
+    <img
+        id="viewerImage"
+        src=""
+        alt="Property image"
+    >
+
+
+    <button
+        id="nextImage"
+        type="button"
+        aria-label="Next image"
+    >
+        <i class="fa-solid fa-chevron-right"></i>
+    </button>
+
+
+    <div id="imageCounter"></div>
+
+</div>
+
+
+<!-- =====================================
+     JAVASCRIPT FILES
+====================================== -->
+
+<script src="/js/homeJS/show.js"></script>
+
+<script src="/js/homeJS/review.js"></script>

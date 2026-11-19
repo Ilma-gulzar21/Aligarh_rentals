@@ -1,0 +1,225 @@
+    <link rel="stylesheet" href="/css/homeCss/reviews.css">
+<section class="reviews-section">
+
+    <div class="reviews-wrapper">
+
+        <!-- SECTION HEADER -->
+        <div class="reviews-header">
+            <span class="section-label">
+                <i class="fa-solid fa-star"></i>
+                Ratings & Reviews
+            </span>
+
+            <h2>Trusted by Our Community</h2>
+
+            <p>
+                Real experiences shared by people using Nestlust to find
+                their next home.
+            </p>
+        </div>
+
+
+        <!-- DATABASE STATS -->
+        <div class="review-stats-grid">
+
+            <!-- AVAILABLE HOMES -->
+            <div class="review-stat-card">
+                <div class="stat-icon stat-home">
+                    <i class="fa-solid fa-house"></i>
+                </div>
+
+                <div class="stat-content">
+                    <h3>
+                        <span class="count-up" data-count="<%= totalListings %>">0</span>+
+                    </h3>
+                    <p>Available Homes</p>
+                </div>
+            </div>
+
+
+            <!-- VERIFIED OWNERS -->
+            <div class="review-stat-card">
+                <div class="stat-icon stat-owner">
+                    <i class="fa-solid fa-user-check"></i>
+                </div>
+
+                <div class="stat-content">
+                    <h3>
+                        <span class="count-up" data-count="<%= totalOwners %>">0</span>+
+                    </h3>
+                    <p>Verified Owners</p>
+                </div>
+            </div>
+
+
+            <!-- TOTAL REVIEWS -->
+            <div class="review-stat-card">
+                <div class="stat-icon stat-review">
+                    <i class="fa-solid fa-comments"></i>
+                </div>
+
+                <div class="stat-content">
+                    <h3>
+                        <span class="count-up" data-count="<%= totalReviews %>">0</span>+
+                    </h3>
+                    <p>Total Reviews</p>
+                </div>
+            </div>
+
+
+            <!-- AVERAGE RATING -->
+            <div class="review-stat-card">
+                <div class="stat-icon stat-rating">
+                    <i class="fa-solid fa-star"></i>
+                </div>
+
+                <div class="stat-content">
+                    <h3>
+                        <span class="count-up" data-count="<%= averageRating %>">0</span><span>/5</span>
+                    </h3>
+
+                    <p>Average Rating</p>
+                </div>
+            </div>
+
+        </div>
+
+
+       
+        <!-- REAL DATABASE REVIEWS -->
+        <div class="reviews-grid">
+
+            <% if(reviews && reviews.length > 0){ %>
+
+                <% reviews.forEach(review => { %>
+
+                    <article class="review-card">
+
+                        <div class="review-card-top">
+
+                            <div class="review-user-info">
+
+                                <div class="review-avatar">
+                                    <% if(review.user && review.user.fullName){ %>
+                                        <%= review.user.fullName.charAt(0).toUpperCase() %>
+                                    <% } else { %>
+                                        <i class="fa-solid fa-user"></i>
+                                    <% } %>
+                                </div>
+
+
+                                <div class="review-user-details">
+
+                                    <h3>
+                                        <%= review.user
+                                            ? review.user.fullName
+                                            : "Nestlust User"
+                                        %>
+                                    </h3>
+
+                                    <span class="verified-user">
+                                        <i class="fa-solid fa-circle-check"></i>
+                                        Verified User
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="review-rating-badge">
+                                <i class="fa-solid fa-star"></i>
+                                <%= review.rating %>.0
+                            </div>
+
+                        </div>
+
+
+                        <!-- STARS -->
+                        <div class="review-stars">
+
+                            <% for(let i = 1; i <= 5; i++){ %>
+
+                                <% if(i <= review.rating){ %>
+                                    <i class="fa-solid fa-star" style="--i:<%= i %>"></i>
+                                <% } else { %>
+                                    <i class="fa-regular fa-star" style="--i:<%= i %>"></i>
+                                <% } %>
+
+                            <% } %>
+
+                        </div>
+
+
+                        <!-- COMMENT -->
+                        <p class="review-comment">
+                            <i class="fa-solid fa-quote-left"></i>
+                            <%= review.comment %>
+                        </p>
+
+
+                        <!-- OWNER REPLY -->
+                        <% if(
+                            review.ownerReply &&
+                            review.ownerReply.message
+                        ){ %>
+
+                            <div class="owner-reply">
+
+                                <div class="owner-reply-title">
+                                    <i class="fa-solid fa-reply"></i>
+                                    Owner Response
+                                </div>
+
+                                <p>
+                                    <%= review.ownerReply.message %>
+                                </p>
+
+                            </div>
+
+                        <% } %>
+
+
+                        <!-- FOOTER -->
+                        <div class="review-card-footer">
+
+                            <span>
+                                <i class="fa-regular fa-calendar"></i>
+
+                                <%= new Date(
+                                    review.createdAt
+                                ).toLocaleDateString(
+                                    "en-IN",
+                                    {
+                                        day: "2-digit",
+                                        month: "short",
+                                        year: "numeric"
+                                    }
+                                ) %>
+                            </span>
+
+
+                            <span class="helpful-count">
+                                <i class="fa-regular fa-thumbs-up"></i>
+
+                                <%= review.helpfulBy
+                                    ? review.helpfulBy.length
+                                    : 0
+                                %>
+                                Helpful
+                            </span>
+
+                        </div>
+
+                    </article>
+
+                <% }) %>
+
+            <% } %>
+
+        </div>
+
+    </div>
+
+</section>
+    <script src="/js/homeJS/homeRating.js"> </script>

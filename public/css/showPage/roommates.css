@@ -1,0 +1,1101 @@
+/* =====================================================
+   ALIGARH RENTALS - ROOMMATE MATCHING PAGE
+===================================================== */
+
+:root{
+    --rm-primary:#6d5dfc;
+    --rm-primary-dark:#5545dd;
+    --rm-indigo:#4f46e5;
+    --rm-text:#202033;
+    --rm-muted:#77778b;
+    --rm-light:#9999aa;
+    --rm-border:#e7e6ef;
+    --rm-soft:#f0eeff;
+    --rm-bg:#f6f6fb;
+    --rm-green:#16a34a;
+}
+
+/* ================= PAGE ================= */
+
+.roommate-page{
+    width:100%;
+    min-height:100vh;
+    padding:30px 0 80px;
+    background:var(--rm-bg);
+    color:var(--rm-text);
+}
+
+/* ================= ANIMATIONS ================= */
+
+@keyframes rmFadeUp{
+    from{opacity:0;transform:translateY(28px);}
+    to{opacity:1;transform:translateY(0);}
+}
+
+@keyframes rmFloat{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-14px);}
+}
+
+@keyframes rmPulse{
+    0%{box-shadow:0 0 0 0 rgba(109,93,252,.45);}
+    70%{box-shadow:0 0 0 10px rgba(109,93,252,0);}
+    100%{box-shadow:0 0 0 0 rgba(109,93,252,0);}
+}
+
+@keyframes rmGrow{
+    from{width:0;}
+}
+
+/* ================= HERO ================= */
+
+.roommate-hero{
+    position:relative;
+    width:calc(100% - 40px);
+    max-width:1200px;
+    margin:0 auto;
+    padding:48px 56px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:40px;
+    background:linear-gradient(135deg,#ffffff 0%,#f4f1ff 100%);
+    border:1px solid var(--rm-border);
+    border-radius:28px;
+    box-shadow:0 18px 48px rgba(35,30,80,.08);
+    overflow:hidden;
+    animation:rmFadeUp .7s ease both;
+}
+
+.hero-blob{
+    position:absolute;
+    border-radius:50%;
+    pointer-events:none;
+    animation:rmFloat 7s ease-in-out infinite;
+}
+
+.hero-blob-one{
+    width:260px;
+    height:260px;
+    top:-110px;
+    right:180px;
+    background:rgba(109,93,252,.10);
+}
+
+.hero-blob-two{
+    width:150px;
+    height:150px;
+    bottom:-70px;
+    left:42%;
+    background:rgba(79,70,229,.08);
+    animation-delay:1.5s;
+}
+
+.roommate-hero-content{
+    position:relative;
+    z-index:2;
+    width:100%;
+    max-width:700px;
+}
+
+.roommate-breadcrumb{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    margin-bottom:20px;
+    color:var(--rm-muted);
+    font-size:13px;
+}
+
+.roommate-breadcrumb a{
+    color:var(--rm-primary);
+    text-decoration:none;
+    font-weight:600;
+    transition:.2s;
+}
+
+.roommate-breadcrumb a:hover{color:var(--rm-primary-dark);}
+
+.roommate-breadcrumb i{
+    color:#a1a1b0;
+    font-size:9px;
+}
+
+.roommate-eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:8px 14px;
+    background:var(--rm-soft);
+    border-radius:30px;
+    color:var(--rm-primary);
+    font-size:10.5px;
+    font-weight:800;
+    letter-spacing:1.3px;
+}
+
+.roommate-hero h1{
+    margin:16px 0 12px;
+    color:var(--rm-text);
+    font-size:46px;
+    line-height:1.1;
+    letter-spacing:-1.6px;
+}
+
+.roommate-hero h1 span{
+    display:block;
+    background:linear-gradient(90deg,var(--rm-primary),var(--rm-indigo));
+    -webkit-background-clip:text;
+    background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.roommate-hero p{
+    max-width:620px;
+    margin:0;
+    color:var(--rm-muted);
+    font-size:15px;
+    line-height:1.8;
+}
+
+.roommate-hero-points{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-top:26px;
+}
+
+.roommate-hero-points div{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:9px 15px;
+    background:#fff;
+    border:1px solid #ece9fb;
+    border-radius:50px;
+    color:#444458;
+    font-size:12.5px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.roommate-hero-points div:hover{
+    transform:translateY(-3px);
+    border-color:#c9c1ff;
+    box-shadow:0 8px 18px rgba(109,93,252,.14);
+}
+
+.roommate-hero-points i{
+    color:var(--rm-primary);
+    font-size:13px;
+}
+
+/* ================= SUMMARY ================= */
+
+.roommate-summary{
+    position:relative;
+    z-index:2;
+    min-width:245px;
+    display:flex;
+    align-items:center;
+    gap:17px;
+    padding:24px;
+    background:#fff;
+    border:1px solid var(--rm-border);
+    border-radius:22px;
+    box-shadow:0 14px 34px rgba(35,30,80,.09);
+    transition:.35s;
+}
+
+.roommate-summary:hover{
+    transform:translateY(-6px);
+    box-shadow:0 20px 44px rgba(109,93,252,.18);
+}
+
+.roommate-summary-icon{
+    width:60px;
+    height:60px;
+    flex-shrink:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(135deg,var(--rm-primary),var(--rm-indigo));
+    border-radius:18px;
+    color:#fff;
+    font-size:23px;
+    animation:rmPulse 2.4s infinite;
+}
+
+.roommate-summary strong{
+    display:block;
+    color:var(--rm-text);
+    font-size:32px;
+    line-height:1.1;
+}
+
+.roommate-summary span{
+    display:block;
+    margin-top:5px;
+    color:var(--rm-muted);
+    font-size:12px;
+    line-height:1.5;
+}
+
+/* ================= SECTION HEADING ================= */
+
+.roommate-section-heading{
+    width:calc(100% - 40px);
+    max-width:1200px;
+    margin:50px auto 24px;
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:25px;
+    animation:rmFadeUp .7s ease .15s both;
+}
+
+.section-kicker{
+    display:block;
+    margin-bottom:8px;
+    color:var(--rm-primary);
+    font-size:10.5px;
+    font-weight:800;
+    letter-spacing:1.4px;
+}
+
+.roommate-section-heading h2{
+    margin:0;
+    color:var(--rm-text);
+    font-size:30px;
+    line-height:1.25;
+    letter-spacing:-.7px;
+}
+
+.roommate-section-heading p{
+    margin:8px 0 0;
+    color:var(--rm-muted);
+    font-size:13.5px;
+    line-height:1.6;
+}
+
+.listing-count{
+    flex-shrink:0;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:10px 16px;
+    background:#fff;
+    border:1px solid var(--rm-border);
+    border-radius:30px;
+    color:#555568;
+    font-size:12px;
+    font-weight:700;
+}
+
+.listing-count i{color:var(--rm-primary);}
+
+/* ================= LIST ================= */
+
+.roommate-list{
+    width:calc(100% - 40px);
+    max-width:1200px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:26px;
+}
+
+/* ================= CARD ================= */
+
+.roommate-property-card{
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+    background:#fff;
+    border:1px solid var(--rm-border);
+    border-radius:24px;
+    box-shadow:0 10px 30px rgba(35,30,75,.06);
+    transition:transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+    animation:rmFadeUp .7s ease both;
+    animation-delay:calc(var(--i, 0) * .12s + .2s);
+}
+
+.roommate-property-card:hover{
+    transform:translateY(-8px);
+    border-color:#d8d1ff;
+    box-shadow:0 24px 50px rgba(109,93,252,.18);
+}
+
+/* ================= IMAGE ================= */
+
+.roommate-image{
+    position:relative;
+    width:100%;
+    height:250px;
+    overflow:hidden;
+    background:#eeeef4;
+}
+
+.roommate-image img{
+    width:100%;
+    height:100%;
+    display:block;
+    object-fit:cover;
+    transition:transform .6s ease;
+}
+
+.roommate-property-card:hover .roommate-image img{
+    transform:scale(1.08);
+}
+
+.image-overlay{
+    position:absolute;
+    inset:0;
+    background:linear-gradient(to bottom,rgba(0,0,0,.10),transparent 40%,rgba(0,0,0,.62));
+    pointer-events:none;
+}
+
+.property-type,
+.roommate-required-badge{
+    position:absolute;
+    top:15px;
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    padding:8px 13px;
+    border-radius:30px;
+    font-size:11px;
+    font-weight:700;
+}
+
+.property-type{
+    left:15px;
+    background:rgba(255,255,255,.95);
+    color:#333344;
+}
+
+.property-type i{color:var(--rm-primary);}
+
+.roommate-required-badge{
+    right:15px;
+    background:linear-gradient(135deg,var(--rm-primary),var(--rm-indigo));
+    color:#fff;
+    box-shadow:0 6px 16px rgba(109,93,252,.4);
+}
+
+.image-price{
+    position:absolute;
+    left:18px;
+    bottom:16px;
+    color:#fff;
+    z-index:2;
+}
+
+.image-price small{
+    display:block;
+    margin-bottom:2px;
+    color:rgba(255,255,255,.8);
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:.4px;
+}
+
+.image-price strong{
+    font-size:26px;
+    line-height:1.1;
+    font-weight:800;
+    text-shadow:0 2px 10px rgba(0,0,0,.35);
+}
+
+.image-price em{
+    font-style:normal;
+    font-size:12px;
+    font-weight:500;
+    opacity:.85;
+}
+
+/* ================= BODY ================= */
+
+.roommate-card-body{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    padding:24px;
+}
+
+/* Title */
+
+.property-heading{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:14px;
+}
+
+.property-heading-text{min-width:0;}
+
+.property-heading h3{
+    margin:0;
+    color:var(--rm-text);
+    font-size:20px;
+    line-height:1.3;
+    transition:.25s;
+}
+
+.roommate-property-card:hover .property-heading h3{
+    color:var(--rm-primary);
+}
+
+.property-location{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    margin:8px 0 0;
+    color:var(--rm-muted);
+    font-size:13px;
+}
+
+.property-location i{color:var(--rm-primary);}
+
+.verified-owner{
+    flex-shrink:0;
+    display:inline-flex;
+    align-items:center;
+    gap:5px;
+    padding:6px 11px;
+    background:#ecfdf3;
+    border:1px solid #c9f0d8;
+    border-radius:30px;
+    color:#15803d;
+    font-size:11px;
+    font-weight:700;
+}
+
+/* ================= OCCUPANCY BOX ================= */
+
+.roommate-status-box{
+    margin:20px 0;
+    padding:16px;
+    background:linear-gradient(135deg,#f5f3ff,#faf9ff);
+    border:1px solid #e5e1ff;
+    border-radius:18px;
+}
+
+.status-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+}
+
+.status-item{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:8px;
+    padding:12px 6px;
+    text-align:center;
+    background:#fff;
+    border:1px solid #ece9fb;
+    border-radius:14px;
+    transition:.3s;
+}
+
+.status-item:hover{
+    transform:translateY(-3px);
+    box-shadow:0 8px 18px rgba(109,93,252,.14);
+}
+
+.status-icon{
+    width:36px;
+    height:36px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:var(--rm-soft);
+    border-radius:11px;
+    color:var(--rm-primary);
+    font-size:14px;
+}
+
+.status-item strong{
+    display:block;
+    color:var(--rm-text);
+    font-size:20px;
+    line-height:1;
+}
+
+.status-item span{
+    display:block;
+    margin-top:4px;
+    color:var(--rm-muted);
+    font-size:11px;
+    font-weight:600;
+    line-height:1.3;
+}
+
+.status-item.available{
+    background:#f0fdf5;
+    border-color:#c9f0d8;
+}
+
+.status-item.available .status-icon{
+    background:#dcfce7;
+    color:var(--rm-green);
+}
+
+.status-item.available strong{color:var(--rm-green);}
+
+.occupancy-bar{
+    height:8px;
+    margin-top:14px;
+    background:#e4dfff;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.occupancy-fill{
+    height:100%;
+    background:linear-gradient(90deg,var(--rm-primary),var(--rm-indigo));
+    border-radius:20px;
+    animation:rmGrow 1.3s ease both;
+    animation-delay:.6s;
+}
+
+.occupancy-text{
+    margin:8px 0 0;
+    color:var(--rm-muted);
+    font-size:11.5px;
+    font-weight:600;
+    text-align:right;
+}
+
+/* ================= PROPERTY DETAILS ================= */
+
+.property-meta{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+}
+
+.meta-item{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:12px 14px;
+    background:#fafafd;
+    border:1px solid #efeff6;
+    border-radius:14px;
+    transition:.3s;
+}
+
+.meta-item:hover{
+    background:#fff;
+    border-color:#d8d1ff;
+    transform:translateY(-3px);
+    box-shadow:0 8px 18px rgba(109,93,252,.10);
+}
+
+.meta-item > i{
+    width:36px;
+    height:36px;
+    flex-shrink:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:var(--rm-soft);
+    border-radius:11px;
+    color:var(--rm-primary);
+    font-size:14px;
+    transition:.3s;
+}
+
+.meta-item:hover > i{
+    background:var(--rm-primary);
+    color:#fff;
+}
+
+.meta-item div{min-width:0;}
+
+.meta-item span{
+    display:block;
+    color:#888899;
+    font-size:11px;
+    font-weight:600;
+}
+
+.meta-item strong{
+    display:block;
+    margin-top:2px;
+    color:#2d2d40;
+    font-size:13.5px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+
+/* ================= DESCRIPTION ================= */
+
+.roommate-description{
+    min-height:44px;
+    margin:18px 0;
+    color:#707084;
+    font-size:13px;
+    line-height:1.75;
+}
+
+/* ================= DEPOSIT + BUTTON ================= */
+
+.roommate-card-bottom{
+    margin-top:auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:18px;
+    padding:16px 18px;
+    background:#faf9ff;
+    border:1px solid #ece9fb;
+    border-radius:16px;
+}
+
+.rent-info > span{
+    display:block;
+    color:#888899;
+    font-size:11px;
+    font-weight:600;
+}
+
+.rent-info h4{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    margin:4px 0 0;
+    color:var(--rm-text);
+    font-size:20px;
+    line-height:1.2;
+}
+
+.rent-info h4 i{
+    color:var(--rm-primary);
+    font-size:15px;
+}
+
+.view-property-btn{
+    min-height:46px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    padding:0 22px;
+    background:linear-gradient(135deg,var(--rm-primary),var(--rm-indigo));
+    border-radius:12px;
+    color:#fff;
+    text-decoration:none;
+    font-size:13px;
+    font-weight:700;
+    box-shadow:0 8px 18px rgba(109,93,252,.3);
+    transition:.3s;
+}
+
+.view-property-btn i{
+    font-size:11px;
+    transition:transform .3s ease;
+}
+
+.view-property-btn:hover{
+    color:#fff;
+    transform:translateY(-3px);
+    box-shadow:0 14px 26px rgba(109,93,252,.42);
+}
+
+.view-property-btn:hover i{
+    transform:translateX(5px);
+}
+
+/* ================= OWNER ================= */
+
+.property-owner{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+    margin-top:18px;
+    padding-top:16px;
+    border-top:1px dashed #e0dff0;
+}
+
+.owner-left{
+    display:flex;
+    align-items:center;
+    gap:11px;
+}
+
+.owner-avatar{
+    width:38px;
+    height:38px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:var(--rm-soft);
+    border-radius:50%;
+    color:var(--rm-primary);
+    font-size:13px;
+    transition:.3s;
+}
+
+.roommate-property-card:hover .owner-avatar{
+    background:var(--rm-primary);
+    color:#fff;
+}
+
+.owner-left span{
+    display:block;
+    color:var(--rm-light);
+    font-size:10.5px;
+}
+
+.owner-left strong{
+    display:block;
+    margin-top:2px;
+    color:#333344;
+    font-size:13px;
+}
+
+.owner-role{
+    padding:5px 12px;
+    background:#f4f4f9;
+    border-radius:30px;
+    color:var(--rm-muted);
+    font-size:10.5px;
+    font-weight:600;
+}
+
+/* ================= EMPTY STATE ================= */
+
+.roommate-empty{
+    grid-column:1/-1;
+    width:100%;
+    padding:80px 25px;
+    text-align:center;
+    background:#fff;
+    border:1px solid var(--rm-border);
+    border-radius:26px;
+    animation:rmFadeUp .7s ease both;
+}
+
+.empty-icon{
+    width:76px;
+    height:76px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin:0 auto 20px;
+    background:var(--rm-soft);
+    border-radius:22px;
+    color:var(--rm-primary);
+    font-size:28px;
+    animation:rmFloat 4s ease-in-out infinite;
+}
+
+.roommate-empty h2{
+    margin:0;
+    color:var(--rm-text);
+    font-size:26px;
+}
+
+.roommate-empty p{
+    max-width:500px;
+    margin:10px auto 24px;
+    color:var(--rm-muted);
+    font-size:14px;
+    line-height:1.7;
+}
+
+.browse-properties-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:9px;
+    padding:13px 22px;
+    background:linear-gradient(135deg,var(--rm-primary),var(--rm-indigo));
+    border-radius:12px;
+    color:#fff;
+    text-decoration:none;
+    font-size:13px;
+    font-weight:700;
+    box-shadow:0 8px 18px rgba(109,93,252,.3);
+    transition:.3s;
+}
+
+.browse-properties-btn:hover{
+    color:#fff;
+    transform:translateY(-3px);
+    box-shadow:0 14px 26px rgba(109,93,252,.42);
+}
+
+/* ================= TABLET ================= */
+
+@media(max-width:1000px){
+
+    .roommate-hero{padding:42px 36px;}
+
+    .roommate-hero h1{font-size:40px;}
+
+    .roommate-summary{min-width:210px;}
+
+    .roommate-list{grid-template-columns:1fr;}
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:700px){
+
+    .roommate-page{padding:15px 0 50px;}
+
+    .roommate-hero{
+        width:calc(100% - 24px);
+        display:block;
+        padding:28px 20px;
+        border-radius:22px;
+    }
+
+    .roommate-breadcrumb{
+        margin-bottom:16px;
+        font-size:12px;
+    }
+
+    .roommate-hero h1{
+        font-size:32px;
+        letter-spacing:-1px;
+    }
+
+    .roommate-hero p{
+        font-size:13px;
+        line-height:1.75;
+    }
+
+    .roommate-hero-points{
+        gap:9px;
+        margin-top:20px;
+    }
+
+    .roommate-hero-points div{
+        font-size:12px;
+        padding:8px 13px;
+    }
+
+    .roommate-summary{
+        width:100%;
+        min-width:0;
+        margin-top:24px;
+        padding:18px;
+    }
+
+    .roommate-summary-icon{
+        width:52px;
+        height:52px;
+        font-size:20px;
+    }
+
+    .roommate-summary strong{font-size:27px;}
+
+    .roommate-section-heading{
+        width:calc(100% - 24px);
+        display:block;
+        margin:36px auto 20px;
+    }
+
+    .roommate-section-heading h2{font-size:24px;}
+
+    .roommate-section-heading p{font-size:13px;}
+
+    .listing-count{
+        width:fit-content;
+        margin-top:14px;
+    }
+
+    .roommate-list{
+        width:calc(100% - 24px);
+        gap:20px;
+    }
+
+    .roommate-image{height:220px;}
+
+    .image-price strong{font-size:22px;}
+
+    .roommate-card-body{padding:18px;}
+
+    .property-heading{display:block;}
+
+    .property-heading h3{font-size:18px;}
+
+    .verified-owner{
+        width:fit-content;
+        margin-top:10px;
+    }
+
+    .roommate-status-box{padding:12px;}
+
+    .status-item{padding:10px 4px;}
+
+    .status-item strong{font-size:18px;}
+
+    .status-item span{font-size:10px;}
+
+    .roommate-card-bottom{
+        flex-direction:column;
+        align-items:stretch;
+        gap:14px;
+    }
+
+    .view-property-btn{width:100%;}
+}
+
+/* ================= SMALL MOBILE ================= */
+
+@media(max-width:430px){
+
+    .roommate-image{height:200px;}
+
+    .property-type,
+    .roommate-required-badge{
+        top:10px;
+        padding:6px 10px;
+        font-size:10px;
+    }
+
+    .property-type{left:10px;}
+    .roommate-required-badge{right:10px;}
+
+    .image-price{left:14px;bottom:12px;}
+
+    .property-meta{grid-template-columns:1fr;}
+
+    .owner-role{display:none;}
+
+    .roommate-empty{padding:60px 18px;}
+
+    .roommate-empty h2{font-size:22px;}
+}
+
+/* Jinko animation pasand nahi / motion reduce kiya hai unke liye */
+@media (prefers-reduced-motion: reduce){
+    *{
+        animation:none !important;
+        transition:none !important;
+    }
+}
+/* =========================================
+   ROOMMATE DETAILS - PROPERTY SHOW PAGE
+========================================= */
+
+.ar-roommate-action-section {
+    width: 100%;
+    margin: 30px 0;
+}
+
+.ar-roommate-action-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 24px;
+    background: #fff;
+    border: 1px solid #e7e6ef;
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(35, 30, 80, 0.06);
+}
+
+.ar-roommate-action-info h2 {
+    margin: 0 0 8px;
+    color: #202033;
+    font-size: 22px;
+}
+
+.ar-roommate-action-info p {
+    margin: 0;
+    color: #77778b;
+}
+
+.ar-roommate-details-section,
+#roommateDetailsSection {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    height: auto !important;
+    width: 100%;
+    margin: 30px 0;
+    padding: 28px;
+    background: #fff;
+    border: 1px solid #e7e6ef;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(35, 30, 80, 0.06);
+    scroll-margin-top: 110px;
+}
+
+.ar-roommate-details-section h2 {
+    margin: 0 0 10px;
+    color: #202033;
+    font-size: 24px;
+}
+
+.ar-roommate-details-section > p {
+    color: #77778b;
+    margin-bottom: 22px;
+}
+
+.ar-roommate-details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+}
+
+.ar-roommate-detail-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 20px;
+    background: #f8f7ff;
+    border: 1px solid #e7e6ef;
+    border-radius: 16px;
+}
+
+.ar-roommate-avatar {
+    width: 52px;
+    height: 52px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #eae7ff;
+    border-radius: 50%;
+    color: #6d5dfc;
+    font-size: 21px;
+}
+
+.ar-roommate-info h3 {
+    margin: 0 0 8px;
+    color: #202033;
+    font-size: 17px;
+}
+
+.ar-roommate-info p {
+    margin: 5px 0;
+    color: #77778b;
+    font-size: 13px;
+}
+
+@media(max-width:600px) {
+    .ar-roommate-action-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .ar-roommate-details-section,
+    #roommateDetailsSection {
+        padding: 18px;
+    }
+
+    .ar-roommate-details-section h2 {
+        font-size: 20px;
+    }
+}

@@ -1,0 +1,291 @@
+<link rel="stylesheet" href="/css/UserAuthenticate/login.css">
+<% layout("fixLayout/boilerplate") %>
+
+<div class="ar-login-page">
+
+    <!-- ANIMATED BACKGROUND -->
+    <div class="ar-bg" aria-hidden="true">
+        <span class="ar-orb ar-orb-1"></span>
+        <span class="ar-orb ar-orb-2"></span>
+        <span class="ar-orb ar-orb-3"></span>
+
+        <i class="fa-solid fa-house ar-float ar-f1"></i>
+        <i class="fa-solid fa-key ar-float ar-f2"></i>
+        <i class="fa-solid fa-location-dot ar-float ar-f3"></i>
+        <i class="fa-solid fa-building ar-float ar-f4"></i>
+        <i class="fa-solid fa-couch ar-float ar-f5"></i>
+    </div>
+
+    <!-- MAIN CARD -->
+    <div class="ar-shell">
+
+        <!-- LEFT : BRAND -->
+        <aside class="ar-side">
+
+            <div class="ar-brand">
+                <div class="ar-logo">
+                    <i class="fa-solid fa-house"></i>
+                </div>
+
+                <div class="ar-brand-text">
+                    ALIGARH
+                    <span>RENTALS</span>
+                </div>
+            </div>
+
+            <div class="ar-side-body">
+
+                <p class="ar-eyebrow">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    Trusted Rental Platform
+                </p>
+
+                <h1 class="ar-title">
+                    Find your perfect
+                    <span class="ar-rotator">
+                        <span class="ar-rotator-inner">
+                            <b>Room</b>
+                            <b>Flat</b>
+                            <b>PG</b>
+                            <b>Roommate</b>
+                            <b>Room</b>
+                        </span>
+                    </span>
+                    in Aligarh
+                </h1>
+
+                <p class="ar-desc">
+                    Verified rental properties, comfortable living spaces
+                    aur apne jaise roommates, sab ek hi jagah.
+                </p>
+
+                <ul class="ar-points">
+                    <li>
+                        <i class="fa-solid fa-circle-check"></i>
+                        Verified Rental Properties
+                    </li>
+
+                    <li>
+                        <i class="fa-solid fa-location-dot"></i>
+                        Local Aligarh Listings
+                    </li>
+
+                    <li>
+                        <i class="fa-solid fa-users"></i>
+                        Find Roommates Easily
+                    </li>
+                </ul>
+
+            </div>
+
+            <p class="ar-side-foot">
+                <i class="fa-regular fa-copyright"></i>
+                Aligarh Rentals
+            </p>
+
+        </aside>
+
+
+        <!-- RIGHT : FORM -->
+        <main class="ar-main">
+
+            <div class="ar-form-wrap">
+
+                <div class="ar-head">
+
+                    <div class="ar-head-icon">
+                        <i class="fa-solid fa-house-user"></i>
+                    </div>
+
+                    <h2>Welcome Back</h2>
+
+                    <p>Login to continue your rental journey</p>
+
+                </div>
+
+
+                <!-- ERROR MESSAGE -->
+                <% if(error && error.length){ %>
+
+                    <div class="ar-login-error">
+
+                        <i class="fa-solid fa-circle-exclamation"></i>
+
+                        <span><%= error %></span>
+
+                    </div>
+
+                <% } %>
+
+
+                <!-- LOGIN FORM -->
+                <form action="/login" method="POST" id="arLoginForm">
+
+                    <!-- IMPORTANT: PRESERVE REDIRECT URL -->
+
+                    <input
+                        type="hidden"
+                        name="redirect"
+                        value="<%= redirectUrl || '' %>"
+                    >
+
+
+                    <!-- EMAIL / MOBILE -->
+                    <div class="ar-input-box">
+
+                        <i class="fa-solid fa-user"></i>
+
+                        <input
+                            type="text"
+                            name="email"
+                            id="ar-email"
+                            placeholder=" "
+                            autocomplete="username"
+                            required
+                        >
+
+                        <label for="ar-email">
+                            Email or Mobile Number
+                        </label>
+
+                    </div>
+
+
+                    <!-- PASSWORD -->
+                    <div class="ar-input-box">
+
+                        <i class="fa-solid fa-lock"></i>
+
+                        <input
+                            type="password"
+                            name="password"
+                            id="ar-password"
+                            placeholder=" "
+                            autocomplete="current-password"
+                            required
+                        >
+
+                        <label for="ar-password">
+                            Password
+                        </label>
+
+                        <button
+                            type="button"
+                            class="ar-eye"
+                            id="arEye"
+                            aria-label="Show password"
+                        >
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+
+                    </div>
+
+
+                    <!-- OPTIONS -->
+                    <div class="ar-options">
+
+                        <label class="ar-check">
+
+                            <input type="checkbox">
+
+                            <span class="ar-box"></span>
+
+                            Remember me
+
+                        </label>
+
+                        <a href="#">Forgot password?</a>
+
+                    </div>
+
+
+                    <!-- LOGIN BUTTON -->
+                    <button
+                        type="submit"
+                        class="ar-btn"
+                        id="arBtn"
+                    >
+
+                        <span class="ar-btn-text">
+                            Login
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </span>
+
+                        <span class="ar-spinner"></span>
+
+                    </button>
+
+                </form>
+
+
+                <!-- SIGNUP LINK -->
+                <p class="ar-create">
+
+                    Don't have an account?
+
+                    <a href="/signup">Create Account</a>
+
+                </p>
+
+            </div>
+
+        </main>
+
+    </div>
+
+</div>
+
+
+<!-- LOGIN JAVASCRIPT -->
+<script src="/js/signup-login/login.js"></script>
+
+<script>
+
+    (function () {
+
+        // =====================================
+        // SHOW / HIDE PASSWORD
+        // =====================================
+
+        var eye = document.getElementById("arEye");
+
+        var pass = document.getElementById("ar-password");
+
+        if (eye && pass) {
+
+            eye.addEventListener("click", function () {
+
+                var show = pass.type === "password";
+
+                pass.type = show ? "text" : "password";
+
+                eye.innerHTML = show
+                    ? '<i class="fa-solid fa-eye-slash"></i>'
+                    : '<i class="fa-solid fa-eye"></i>';
+
+            });
+
+        }
+
+
+        // =====================================
+        // LOGIN LOADING SPINNER
+        // =====================================
+
+        var form = document.getElementById("arLoginForm");
+
+        var btn = document.getElementById("arBtn");
+
+        if (form && btn) {
+
+            form.addEventListener("submit", function () {
+
+                btn.classList.add("loading");
+
+            });
+
+        }
+
+    })();
+
+</script>

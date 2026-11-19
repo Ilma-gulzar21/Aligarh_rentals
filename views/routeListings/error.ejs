@@ -1,0 +1,79 @@
+<% layout("fixLayout/boilerplate") %>
+
+
+<div class="ar-error-page">
+
+
+    <div class="ar-error-card">
+
+
+        <!-- ICON -->
+
+        <div class="ar-error-icon">
+
+            <i class="fa-solid fa-triangle-exclamation"></i>
+
+        </div>
+
+
+
+        <!-- STATUS -->
+
+        <h1>
+            <%= err.statusCode || 500 %>
+        </h1>
+
+
+
+        <!-- TITLE -->
+
+        <h2>
+            Something went wrong
+        </h2>
+
+
+
+        <!-- MESSAGE -->
+
+        <p>
+
+            <%= err.message || "Something went wrong. Please try again later." %>
+
+        </p>
+
+
+
+
+        <!-- ACTION BUTTONS -->
+
+        <div class="ar-error-actions">
+
+
+            <a href="/" class="ar-error-home">
+
+                <i class="fa-solid fa-house"></i>
+
+                Go Home
+
+            </a>
+
+
+
+            <button 
+            onclick="history.back()"
+            class="ar-error-back">
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                Go Back
+
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+
+</div>

@@ -1,0 +1,204 @@
+<% layout("fixLayout/boilerplate") %>
+
+<section class="category-intro">
+
+    <div class="intro-wrapper">
+
+
+        <span>
+            Aligarh Rentals
+        </span>
+
+
+        <h1>
+            <%= propertyType %> For Rent in Aligarh
+        </h1>
+
+
+        <p>
+            Explore verified <%= propertyType %> rental properties
+            available across Aligarh. Find comfortable homes,
+            affordable prices and trusted owners according to
+            your requirement.
+        </p>
+
+
+        <div class="property-count">
+
+            <i class="fa-solid fa-house"></i>
+
+            <strong>
+                <%= listings.length %>+
+            </strong>
+
+            <label>
+                Available Properties
+            </label>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+
+
+<section class="listing-wrapper">
+
+
+<div class="result-header">
+
+
+<h2>
+Available <%= propertyType %> Properties
+</h2>
+
+
+<p>
+Showing the best rental options for <%= propertyType %> category
+in Aligarh.
+</p>
+
+
+</div>
+
+
+
+
+
+<div class="property-grid">
+
+
+<% if(listings.length > 0){ %>
+
+
+<% listings.forEach(listing=>{ %>
+
+
+<div class="property-card">
+
+
+<div class="image-box">
+
+<img 
+src="<%= listing.images[0].url || listing.images[0] %>"
+alt="property image"
+>
+
+
+<span>
+<%= listing.propertyType %>
+</span>
+
+
+</div>
+
+
+
+
+<div class="card-content">
+
+
+<h3>
+<%= listing.title %>
+</h3>
+
+
+
+<p class="location">
+
+<i class="fa-solid fa-location-dot"></i>
+
+<%= listing.area %>
+
+</p>
+
+
+
+
+<div class="property-info">
+
+
+<div>
+
+<i class="fa-solid fa-bed"></i>
+
+<%= listing.bhk %> BHK
+
+</div>
+
+
+
+<div>
+
+<i class="fa-solid fa-chair"></i>
+
+<%= listing.furnishing %>
+
+</div>
+
+
+</div>
+
+
+
+
+<h2>
+
+₹<%= listing.rentPrice %>
+
+<small>
+/ month
+</small>
+
+</h2>
+
+
+
+<a href="/listings/<%= listing._id %>">
+
+View Property
+
+<i class="fa-solid fa-arrow-right"></i>
+
+</a>
+
+
+</div>
+
+
+
+</div>
+
+
+<% }) %>
+
+
+<% } else { %>
+
+
+<div class="no-property">
+
+<h2>
+No <%= propertyType %> Available
+</h2>
+
+<p>
+Try exploring other property categories.
+</p>
+
+</div>
+
+
+<% } %>
+
+
+
+</div>
+
+
+
+</section>

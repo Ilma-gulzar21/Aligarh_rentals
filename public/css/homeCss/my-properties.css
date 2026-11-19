@@ -1,0 +1,1194 @@
+/* =========================================================
+   MY PROPERTIES PAGE
+========================================================= */
+
+.my-properties-page {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 30px 35px 70px;
+
+    background: #f8f8fc;
+    color: #29253a;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.mp-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 25px;
+
+    padding: 28px 30px;
+    margin-bottom: 25px;
+
+    background: #ffffff;
+
+    border: 1px solid #e7e4ee;
+    border-radius: 18px;
+
+    box-shadow: 0 5px 20px rgba(40, 35, 70, 0.04);
+}
+
+
+.mp-header-content {
+    display: flex;
+    align-items: center;
+
+    gap: 16px;
+}
+
+
+.mp-header-icon {
+    width: 58px;
+    height: 58px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    background: #6d5dfc;
+    color: #ffffff;
+
+    border-radius: 14px;
+
+    font-size: 22px;
+}
+
+
+.mp-eyebrow {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #766d96;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: 1.4px;
+}
+
+
+.mp-header h1 {
+    margin: 0;
+
+    color: #29253a;
+
+    font-size: 28px;
+    font-weight: 800;
+}
+
+
+.mp-header p {
+    margin: 6px 0 0;
+
+    color: #85818f;
+
+    font-size: 12px;
+}
+
+
+.mp-add-btn {
+    min-height: 44px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 0 20px;
+
+    background: #6d5dfc;
+    color: #ffffff !important;
+
+    border-radius: 9px;
+
+    text-decoration: none;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    transition: 0.2s ease;
+}
+
+
+.mp-add-btn:hover {
+    background: #5848e8;
+    color: #ffffff !important;
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   STATISTICS
+   ONLY 3 CARDS
+========================================================= */
+
+.mp-stats {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    gap: 18px;
+
+    margin-bottom: 35px;
+}
+
+
+/* Hide rented card if it still exists in EJS */
+.mp-stats .mp-stat-card:nth-child(4) {
+    display: none;
+}
+
+
+.mp-stat-card {
+    width: 100%;
+    min-height: 125px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 20px;
+
+    padding: 25px;
+
+    background: #ffffff;
+
+    border: 1px solid #e6e3ed;
+    border-radius: 16px;
+
+    box-shadow: 0 5px 20px rgba(40, 35, 70, 0.04);
+
+    transition: 0.25s ease;
+}
+
+
+.mp-stat-card:hover {
+    transform: translateY(-4px);
+
+    box-shadow: 0 12px 28px rgba(40, 35, 70, 0.09);
+}
+
+
+.mp-stat-icon {
+    width: 55px;
+    height: 55px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 14px;
+
+    font-size: 20px;
+}
+
+
+.mp-purple {
+    background: #f0edff;
+    color: #6d5dfc;
+}
+
+
+.mp-green {
+    background: #eaf8ef;
+    color: #249457;
+}
+
+
+.mp-orange {
+    background: #fff4e5;
+    color: #d48622;
+}
+
+
+.mp-blue {
+    background: #eaf3fc;
+    color: #397bb9;
+}
+
+
+.mp-stat-card span {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #85818f;
+
+    font-size: 11px;
+    font-weight: 600;
+}
+
+
+.mp-stat-card strong {
+    display: block;
+
+    color: #29253a;
+
+    font-size: 30px;
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   LIST HEADER
+========================================================= */
+
+.mp-list-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-bottom: 18px;
+}
+
+
+.mp-list-header h2 {
+    margin: 0;
+
+    color: #2c283c;
+
+    font-size: 21px;
+    font-weight: 800;
+}
+
+
+.mp-list-header p {
+    margin: 5px 0 0;
+
+    color: #8d8996;
+
+    font-size: 11px;
+}
+
+
+.mp-count {
+    padding: 8px 13px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e2eb;
+    border-radius: 8px;
+
+    color: #777281;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   PROPERTY GRID
+========================================================= */
+
+.mp-grid {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    gap: 22px;
+}
+
+
+/* =========================================================
+   PROPERTY CARD
+========================================================= */
+
+.mp-card {
+    overflow: hidden;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e2eb;
+    border-radius: 16px;
+
+    box-shadow: 0 5px 20px rgba(40, 35, 70, 0.045);
+
+    transition: 0.25s ease;
+}
+
+
+.mp-card:hover {
+    transform: translateY(-5px);
+
+    box-shadow: 0 14px 32px rgba(40, 35, 70, 0.10);
+}
+
+
+/* =========================================================
+   IMAGE
+========================================================= */
+
+.mp-image {
+    position: relative;
+
+    width: 100%;
+    height: 220px;
+
+    overflow: hidden;
+
+    background: #eeeaf6;
+}
+
+
+.mp-image img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    transition: 0.35s ease;
+}
+
+
+.mp-card:hover .mp-image img {
+    transform: scale(1.04);
+}
+
+
+/* =========================================================
+   NO IMAGE
+========================================================= */
+
+.mp-no-image {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    background: #f2f0f7;
+
+    color: #918c9e;
+
+    font-size: 11px;
+}
+
+
+.mp-no-image i {
+    font-size: 32px;
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.mp-status {
+    position: absolute;
+
+    top: 12px;
+    left: 12px;
+
+    display: inline-flex;
+    align-items: center;
+
+    gap: 6px;
+
+    padding: 7px 10px;
+
+    background: rgba(255, 255, 255, 0.96);
+
+    border-radius: 7px;
+
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.10);
+
+    font-size: 9px;
+    font-weight: 800;
+}
+
+
+.mp-status i {
+    font-size: 7px;
+}
+
+
+.mp-status.active,
+.mp-status.approved,
+.mp-status.available {
+    color: #18864a;
+}
+
+
+.mp-status.pending {
+    color: #c47718;
+}
+
+
+.mp-status.rented {
+    color: #3176b3;
+}
+
+
+/* =========================================================
+   IMAGE COUNT
+========================================================= */
+
+.mp-image-count {
+    position: absolute;
+
+    right: 11px;
+    bottom: 11px;
+
+    display: inline-flex;
+    align-items: center;
+
+    gap: 5px;
+
+    padding: 6px 8px;
+
+    background: rgba(20, 18, 27, 0.75);
+
+    border-radius: 6px;
+
+    color: #ffffff;
+
+    font-size: 9px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   CARD BODY
+========================================================= */
+
+.mp-card-body {
+    padding: 18px;
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.mp-title-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.mp-title {
+    min-width: 0;
+}
+
+
+.mp-title h3 {
+    margin: 0;
+
+    overflow: hidden;
+
+    color: #292538;
+
+    font-size: 16px;
+    font-weight: 800;
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+
+.mp-title p {
+    display: flex;
+    align-items: center;
+
+    gap: 6px;
+
+    margin: 6px 0 0;
+
+    overflow: hidden;
+
+    color: #878390;
+
+    font-size: 10px;
+}
+
+
+.mp-title p i {
+    flex-shrink: 0;
+
+    color: #6d5dfc;
+}
+
+
+/* =========================================================
+   DETAILS
+========================================================= */
+
+.mp-details {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 8px;
+
+    margin-top: 16px;
+}
+
+
+.mp-detail {
+    min-width: 0;
+
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 9px;
+
+    background: #f8f7fa;
+
+    border-radius: 8px;
+}
+
+
+.mp-detail > i {
+    flex-shrink: 0;
+
+    color: #6d5dfc;
+
+    font-size: 11px;
+}
+
+
+.mp-detail div {
+    min-width: 0;
+}
+
+
+.mp-detail span {
+    display: block;
+
+    margin-bottom: 2px;
+
+    color: #9a96a2;
+
+    font-size: 8px;
+    font-weight: 700;
+}
+
+
+.mp-detail strong {
+    display: block;
+
+    overflow: hidden;
+
+    color: #504b5b;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+
+/* =========================================================
+   RENT
+========================================================= */
+
+.mp-rent {
+    margin-top: 17px;
+}
+
+
+.mp-rent span {
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: #9995a0;
+
+    font-size: 8px;
+    font-weight: 700;
+
+    text-transform: uppercase;
+}
+
+
+.mp-rent strong {
+    color: #29253a;
+
+    font-size: 20px;
+    font-weight: 800;
+}
+
+
+.mp-rent small {
+    color: #9995a0;
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   ACTION BUTTONS
+========================================================= */
+
+.mp-actions {
+    display: flex;
+    align-items: center;
+
+    gap: 7px;
+
+    margin-top: 15px;
+    padding-top: 14px;
+
+    border-top: 1px solid #eeecf2;
+}
+
+
+.mp-actions a,
+.mp-actions button {
+    height: 36px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 6px;
+
+    border-radius: 7px;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+
+.mp-view {
+    flex: 1;
+
+    background: #ffffff;
+
+    border: 1px solid #dfdce7;
+
+    color: #5d5868;
+
+    text-decoration: none;
+}
+
+
+.mp-view:hover {
+    background: #f6f4ff;
+
+    border-color: #d7d1f3;
+
+    color: #6253e8;
+}
+
+
+.mp-edit {
+    flex: 1;
+
+    background: #f2f0ff;
+
+    border: 1px solid #ddd8ff;
+
+    color: #6253e8;
+
+    text-decoration: none;
+}
+
+
+.mp-edit:hover {
+    background: #e8e4ff;
+
+    color: #5142d8;
+}
+
+
+.mp-actions form {
+    margin: 0;
+}
+
+
+.mp-delete {
+    width: 36px;
+
+    background: #fff8f8;
+
+    border: 1px solid #efdcdc;
+
+    color: #ca6262;
+}
+
+
+.mp-delete:hover {
+    background: #ffefef;
+
+    color: #b94949;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.mp-empty {
+    min-height: 380px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 35px;
+
+    background: #ffffff;
+
+    border: 1px dashed #d9d6e2;
+    border-radius: 16px;
+
+    text-align: center;
+}
+
+
+.mp-empty-icon {
+    width: 65px;
+    height: 65px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 15px;
+
+    background: #f0edff;
+
+    border-radius: 17px;
+
+    color: #6d5dfc;
+
+    font-size: 26px;
+}
+
+
+.mp-empty h2 {
+    margin: 0;
+
+    color: #302c3e;
+
+    font-size: 20px;
+    font-weight: 800;
+}
+
+
+.mp-empty p {
+    max-width: 450px;
+
+    margin: 8px 0 20px;
+
+    color: #898592;
+
+    font-size: 11px;
+
+    line-height: 1.7;
+}
+
+
+.mp-empty a {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 11px 17px;
+
+    background: #6d5dfc;
+
+    border-radius: 8px;
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+
+.mp-empty a:hover {
+    background: #5848e8;
+
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .my-properties-page {
+        padding: 25px 22px 60px;
+    }
+
+
+    .mp-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+
+    .mp-stats {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+
+    .mp-stat-card {
+        padding: 18px;
+
+        gap: 13px;
+    }
+
+
+    .mp-stat-icon {
+        width: 46px;
+        height: 46px;
+    }
+
+
+    .mp-stat-card strong {
+        font-size: 25px;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL TABLET
+========================================================= */
+
+@media (max-width: 800px) {
+
+    .mp-header {
+        padding: 22px;
+    }
+
+
+    .mp-header h1 {
+        font-size: 25px;
+    }
+
+
+    .mp-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+        gap: 15px;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+
+    .my-properties-page {
+        padding: 18px 12px 50px;
+    }
+
+
+    /* HEADER */
+
+    .mp-header {
+        flex-direction: column;
+        align-items: stretch;
+
+        gap: 18px;
+
+        padding: 18px;
+
+        border-radius: 14px;
+    }
+
+
+    .mp-header-content {
+        align-items: flex-start;
+
+        gap: 12px;
+    }
+
+
+    .mp-header-icon {
+        width: 48px;
+        height: 48px;
+
+        font-size: 18px;
+    }
+
+
+    .mp-header h1 {
+        font-size: 22px;
+    }
+
+
+    .mp-header p {
+        font-size: 10px;
+
+        line-height: 1.5;
+    }
+
+
+    .mp-add-btn {
+        width: 100%;
+    }
+
+
+    /* THREE STATS */
+
+    .mp-stats {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+
+        gap: 7px;
+
+        margin-bottom: 28px;
+    }
+
+
+    .mp-stat-card {
+        min-height: 95px;
+
+        flex-direction: column;
+        justify-content: center;
+
+        gap: 7px;
+
+        padding: 10px 5px;
+
+        text-align: center;
+
+        border-radius: 11px;
+    }
+
+
+    .mp-stat-icon {
+        width: 34px;
+        height: 34px;
+
+        font-size: 12px;
+
+        border-radius: 9px;
+    }
+
+
+    .mp-stat-card span {
+        margin: 0;
+
+        font-size: 7px;
+    }
+
+
+    .mp-stat-card strong {
+        font-size: 19px;
+    }
+
+
+    /* LIST HEADER */
+
+    .mp-list-header {
+        align-items: flex-start;
+
+        gap: 10px;
+    }
+
+
+    .mp-list-header h2 {
+        font-size: 18px;
+    }
+
+
+    .mp-list-header p {
+        font-size: 9px;
+    }
+
+
+    .mp-count {
+        padding: 6px 9px;
+
+        font-size: 8px;
+    }
+
+
+    /* PROPERTY GRID */
+
+    .mp-grid {
+        grid-template-columns: 1fr;
+
+        gap: 15px;
+    }
+
+
+    .mp-image {
+        height: 220px;
+    }
+
+
+    .mp-card-body {
+        padding: 15px;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 400px) {
+
+    .my-properties-page {
+        padding: 15px 9px 40px;
+    }
+
+
+    .mp-header {
+        padding: 15px;
+    }
+
+
+    .mp-header-icon {
+        width: 43px;
+        height: 43px;
+
+        font-size: 16px;
+    }
+
+
+    .mp-header h1 {
+        font-size: 20px;
+    }
+
+
+    .mp-header p {
+        font-size: 9px;
+    }
+
+
+    /* STATS */
+
+    .mp-stats {
+        gap: 5px;
+    }
+
+
+    .mp-stat-card {
+        min-height: 88px;
+
+        padding: 8px 3px;
+    }
+
+
+    .mp-stat-icon {
+        width: 31px;
+        height: 31px;
+
+        font-size: 11px;
+    }
+
+
+    .mp-stat-card span {
+        font-size: 6.5px;
+    }
+
+
+    .mp-stat-card strong {
+        font-size: 17px;
+    }
+
+
+    .mp-image {
+        height: 195px;
+    }
+
+
+    .mp-title h3 {
+        font-size: 15px;
+    }
+
+
+    .mp-rent strong {
+        font-size: 18px;
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 330px) {
+
+    .mp-stat-card {
+        min-height: 82px;
+    }
+
+
+    .mp-stat-card strong {
+        font-size: 16px;
+    }
+
+
+    .mp-stat-card span {
+        font-size: 6px;
+    }
+
+
+    .mp-image {
+        height: 180px;
+    }
+
+}
+
+
+/* =========================================================
+   TOUCH DEVICES
+========================================================= */
+
+@media (hover: none) {
+
+    .mp-stat-card:hover,
+    .mp-card:hover {
+        transform: none;
+    }
+
+
+    .mp-card:hover .mp-image img {
+        transform: none;
+    }
+
+}

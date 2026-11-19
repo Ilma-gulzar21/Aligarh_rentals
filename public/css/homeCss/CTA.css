@@ -1,0 +1,267 @@
+/* ===== Rent CTA Section ===== */
+
+.rent-cta {
+    padding: 72px 7%;
+    background: #f4effd;
+    font-family: "Instrument Sans", system-ui, sans-serif;
+}
+
+.rent-cta * {
+    box-sizing: border-box;
+}
+
+.rent-cta-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 24px;
+}
+
+
+/* ----- Left box (tenants) ----- */
+
+.tenant-box {
+    position: relative;
+    overflow: hidden;
+    padding: 52px;
+    border-radius: 28px;
+    color: #fff;
+    background: linear-gradient(135deg, #2e0f6b, #3b1488, #6d28d9);
+}
+
+.tenant-box::after {
+    content: "";
+    position: absolute;
+    right: -40px;
+    bottom: -60px;
+    width: 260px;
+    height: 260px;
+    border: 2px solid rgba(255, 255, 255, 0.14);
+    border-radius: 32px 32px 0 0;
+    transform: rotate(-8deg);
+    pointer-events: none;
+}
+
+.tenant-box h2,
+.tenant-box p,
+.type-list,
+.btn-light {
+    position: relative;
+    z-index: 1;
+}
+
+.tenant-box h2 {
+    margin: 0 0 14px;
+    max-width: 520px;
+    font-family: "Bricolage Grotesque", system-ui, sans-serif;
+    font-size: 42px;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+}
+
+.tenant-box p {
+    margin: 0 0 28px;
+    max-width: 460px;
+    font-size: 17px;
+    line-height: 1.65;
+    color: #e6dcfb;
+}
+
+
+/* Type chips */
+
+.type-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 34px;
+}
+
+.type-list a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 999px;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.type-list a i {
+    color: #fde68a;
+    font-size: 14px;
+}
+
+.type-list a:hover {
+    background: #fff;
+    color: #3b1488;
+    border-color: #fff;
+}
+
+.type-list a:hover i {
+    color: #6d28d9;
+}
+
+
+/* ----- Right box (owners) ----- */
+
+.owner-box {
+    display: flex;
+    flex-direction: column;
+    padding: 40px 34px;
+    border: 1px solid #e4d8fa;
+    border-radius: 28px;
+    background: #fff;
+    color: #1e1033;
+}
+
+.owner-icon {
+    width: 48px;
+    height: 48px;
+    display: grid;
+    place-items: center;
+    margin-bottom: 18px;
+    border-radius: 14px;
+    background: #f4effd;
+    color: #6d28d9;
+    font-size: 20px;
+}
+
+.owner-box h3 {
+    margin: 0 0 8px;
+    font-family: "Bricolage Grotesque", system-ui, sans-serif;
+    font-size: 26px;
+    line-height: 1.2;
+}
+
+.owner-box p {
+    margin: 0 0 20px;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #5b4a7a;
+}
+
+.owner-box ul {
+    list-style: none;
+    margin: 0 0 28px;
+    padding: 0;
+    display: grid;
+    gap: 12px;
+}
+
+.owner-box li {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.owner-box li i {
+    margin-top: 3px;
+    color: #6d28d9;
+}
+
+.owner-box .btn-purple {
+    margin-top: auto;
+    align-self: flex-start;
+}
+
+
+/* ----- Buttons ----- */
+
+.btn-light,
+.btn-purple {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.btn-light {
+    background: #fff;
+    color: #3b1488;
+}
+
+.btn-light:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+}
+
+.btn-purple {
+    background: #6d28d9;
+    color: #fff;
+}
+
+.btn-purple:hover {
+    background: #3b1488;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(109, 40, 217, 0.3);
+}
+
+
+/* ----- Tablet ----- */
+
+@media (max-width: 900px) {
+
+    .rent-cta {
+        padding: 56px 5%;
+    }
+
+    .rent-cta-inner {
+        grid-template-columns: 1fr;
+    }
+
+    .tenant-box {
+        padding: 40px 28px;
+    }
+
+    .tenant-box h2 {
+        font-size: 32px;
+    }
+}
+
+
+/* ----- Mobile ----- */
+
+@media (max-width: 500px) {
+
+    .tenant-box {
+        padding: 32px 22px;
+        border-radius: 22px;
+    }
+
+    .tenant-box h2 {
+        font-size: 26px;
+    }
+
+    .owner-box {
+        padding: 30px 22px;
+        border-radius: 22px;
+    }
+
+    .type-list a {
+        padding: 9px 14px;
+        font-size: 14px;
+    }
+
+    .btn-light,
+    .btn-purple {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .owner-box .btn-purple {
+        align-self: stretch;
+    }
+}

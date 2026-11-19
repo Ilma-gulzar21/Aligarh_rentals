@@ -1,0 +1,221 @@
+<% layout("fixLayout/boilerplate") %>
+<link rel="stylesheet" href="/css/UserAuthenticate/signup.css">
+
+<div class="ar-signup-page">
+
+    <div class="ar-signup-card">
+
+        <!-- LEFT SIDE BRAND -->
+
+        <div class="ar-signup-left">
+
+            <div class="ar-brand-logo">
+                ALIGARH RENTALS
+            </div>
+
+            <h1>
+                Find Your Perfect Home
+            </h1>
+
+            <p>
+                Create your account and explore verified rental properties,
+                rooms and roommates around Aligarh.
+            </p>
+
+            <div class="ar-benefits">
+
+                <div>
+                    ✓ Verified Properties
+                </div>
+
+                <div>
+                    ✓ Easy Owner Connection
+                </div>
+
+                <div>
+                    ✓ Safe Rental Experience
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- RIGHT SIDE FORM -->
+
+        <div class="ar-signup-right">
+
+            <div class="ar-signup-header">
+
+                <h2>
+                    Create Account
+                </h2>
+
+                <p>
+                    Already have an account?
+
+                    <a href="/login<%= redirectUrl ? '?redirect=' + encodeURIComponent(redirectUrl) : '' %>">
+                        Login
+                    </a>
+                </p>
+
+            </div>
+
+
+            <form
+                action="/signup"
+                method="POST"
+                class="ar-signup-form"
+            >
+
+                <!-- PRESERVE REDIRECT URL -->
+
+                <input
+                    type="hidden"
+                    name="redirect"
+                    value="<%= redirectUrl || '' %>"
+                >
+
+
+                <!-- NAME -->
+
+                <div class="ar-input-group">
+
+                    <label>
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        name="fullName"
+                        placeholder="Enter your full name"
+                        minlength="3"
+                        maxlength="50"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- EMAIL -->
+
+                <div class="ar-input-group">
+
+                    <label>
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        name="email"
+                        id="email"
+                        placeholder="Enter email address"
+                    >
+
+                </div>
+
+
+                <!-- PHONE -->
+
+                <div class="ar-input-group">
+
+                    <label>
+                        Mobile Number
+                    </label>
+
+                    <input
+                        type="tel"
+                        name="phone"
+                        id="phone"
+                        placeholder="10 digit mobile number"
+                        pattern="[6-9][0-9]{9}"
+                        maxlength="10"
+                    >
+
+                    <small>
+                        Enter email or mobile number (any one required)
+                    </small>
+
+                </div>
+
+
+                <!-- PASSWORD -->
+
+                <div class="ar-input-group">
+
+                    <label>
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        name="password"
+                        placeholder="Create password"
+                        minlength="6"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- ROLE -->
+
+                <div class="ar-input-group">
+
+                    <label>
+                        Register As
+                    </label>
+
+                    <div class="ar-role-select">
+
+                        <label>
+
+                            <input
+                                type="radio"
+                                name="role"
+                                value="Tenant"
+                                checked
+                            >
+
+                            <span>
+                                Tenant
+                            </span>
+
+                        </label>
+
+
+                        <label>
+
+                            <input
+                                type="radio"
+                                name="role"
+                                value="Owner"
+                            >
+
+                            <span>
+                                Owner
+                            </span>
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="ar-signup-btn"
+                >
+                    Create Account
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="/js/signup-login/signup.js"></script>

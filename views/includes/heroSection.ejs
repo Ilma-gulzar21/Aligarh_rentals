@@ -1,0 +1,229 @@
+<!-- ================= HERO SECTION START ================= -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <h1>ALIGARH RENTALS</h1>
+
+        <p id="subhead">
+            Find Your Perfect Rental Home, PG, Hostel, Roommates, Apartment etc. in Aligarh
+        </p>
+
+
+        <!-- ================= SEARCH CARD ================= -->
+
+        <div class="property-search-card">
+
+
+            <!-- TOP TABS -->
+
+            <div class="property-tabs">
+
+                <a href="/listings/new" class="tab-link">
+                    <button
+                        type="button"
+                        class="tab-btn"
+                        data-tab="rent">
+                        Rent a Property
+                    </button>
+                </a>
+
+
+                <a href="/listings" class="tab-link">
+                    <button
+                        type="button"
+                        class="tab-btn"
+                        data-tab="find-rental">
+                        Find Rental Property
+                    </button>
+                </a>
+
+
+                <a href="/listings/roommates" class="tab-link">
+                    <button
+                        type="button"
+                        class="tab-btn"
+                        data-tab="roommate">
+                        Find Roommate / Flatmate
+                    </button>
+                </a>
+
+            </div>
+
+
+            <!-- ================= SEARCH FORM ================= -->
+
+            <form
+                action="/listings"
+                method="GET"
+                class="main-search-box"
+                id="propertySearchForm">
+
+
+                <!-- LOCATION -->
+
+                <div class="search-location">
+
+                    <i class="fa-solid fa-location-dot"></i>
+
+                    <input
+                        type="text"
+                        id="location"
+                        name="location"
+                        placeholder="Enter a Location to Find Rental Property"
+                        autocomplete="off"
+                    >
+
+                </div>
+
+
+                <div class="search-divider"></div>
+
+
+                <!-- PROPERTY TYPE -->
+
+                <div class="search-select">
+
+                    <select
+                        id="propertyType"
+                        name="propertyType">
+
+                        <option value="">
+                            Property Type
+                        </option>
+
+                        <% propertyBudget.forEach(item => { %>
+
+                            <option value="<%= item._id %>">
+                                <%= item._id %>
+                            </option>
+
+                        <% }) %>
+
+                    </select>
+
+                </div>
+
+
+                <div class="search-divider"></div>
+
+
+                <!-- BUDGET -->
+
+                <div class="search-select">
+
+                    <select
+                        id="budget"
+                        name="budget">
+
+                        <option value="">
+                            Budget
+                        </option>
+
+                        <option value="below-5000">
+                            Below ₹5,000
+                        </option>
+
+                        <option value="5000-10000">
+                            ₹5,000 - ₹10,000
+                        </option>
+
+                        <option value="10000-15000">
+                            ₹10,000 - ₹15,000
+                        </option>
+
+                        <option value="15000-20000">
+                            ₹15,000 - ₹20,000
+                        </option>
+
+                        <option value="20000-30000">
+                            ₹20,000 - ₹30,000
+                        </option>
+
+                        <option value="above-30000">
+                            Above ₹30,000
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- SEARCH BUTTON -->
+
+                <button
+                    class="property-search-btn"
+                    id="searchBtn"
+                    type="submit">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    Search
+
+                </button>
+
+
+            </form>
+
+        </div>
+
+
+        <!-- ================= QUICK TAGS ================= -->
+
+        <div class="hero-features">
+
+            <span class="feature-badge">
+                <i class="fa-solid fa-couch"></i>
+                Furnished
+            </span>
+
+
+            <span class="feature-badge">
+                <i class="fa-solid fa-location-dot"></i>
+                Near Landmark
+            </span>
+
+
+            <span class="feature-badge">
+                <i class="fa-solid fa-user-group"></i>
+                Find Roommate
+            </span>
+
+
+            <span class="feature-badge">
+                <i class="fa-solid fa-circle-check"></i>
+                Verified
+            </span>
+
+
+            <span class="feature-badge">
+                <i class="fa-solid fa-ban"></i>
+                No Brokerage
+            </span>
+
+
+            <span class="feature-badge">
+                <i class="fa-solid fa-house"></i>
+                Family Friendly
+            </span>
+
+
+            <span class="feature-badge">
+                <i class="fa-solid fa-user-graduate"></i>
+                Student Friendly
+            </span>
+
+
+            <span class="feature-badge">
+                <i class="fa-solid fa-bed"></i>
+                PG & Flats
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= HERO SECTION END ================= -->

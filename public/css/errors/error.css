@@ -1,0 +1,234 @@
+/* =====================================
+   PROFESSIONAL ERROR PAGE
+===================================== */
+
+
+.ar-error-page{
+
+    min-height:80vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:40px 20px;
+
+    background:#f8fafc;
+
+}
+
+
+
+.ar-error-card{
+
+
+    width:100%;
+
+    max-width:520px;
+
+    background:white;
+
+    border-radius:25px;
+
+    padding:50px 40px;
+
+    text-align:center;
+
+    box-shadow:
+    0 15px 40px rgba(0,0,0,.10);
+
+    border:1px solid #eee;
+
+}
+
+
+
+
+.ar-error-icon{
+
+
+    height:90px;
+
+    width:90px;
+
+    margin:auto;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:#fee2e2;
+
+    color:#dc2626;
+
+    font-size:40px;
+
+
+}
+
+
+
+.ar-error-card h1{
+
+
+    margin:25px 0 5px;
+
+    font-size:70px;
+
+    font-weight:800;
+
+    color:#7c3aed;
+
+
+}
+
+
+
+.ar-error-card h2{
+
+
+    font-size:28px;
+
+    margin-bottom:15px;
+
+    color:#111827;
+
+
+}
+
+
+
+.ar-error-card p{
+
+
+    color:#6b7280;
+
+    font-size:16px;
+
+    line-height:1.7;
+
+    margin-bottom:35px;
+
+
+}
+
+
+
+
+.ar-error-actions{
+
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:15px;
+
+    flex-wrap:wrap;
+
+
+}
+
+
+
+.ar-error-actions a,
+.ar-error-actions button{
+
+
+    padding:14px 25px;
+
+    border-radius:12px;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    text-decoration:none;
+
+
+}
+
+
+
+
+.ar-error-home{
+
+
+    background:#7c3aed;
+
+    color:white;
+
+}
+
+
+
+.ar-error-home:hover{
+
+    background:#5b21b6;
+
+}
+
+
+
+
+.ar-error-back{
+
+
+    border:1px solid #ddd;
+
+    background:white;
+
+    color:#333;
+
+}
+
+
+
+.ar-error-back:hover{
+
+    background:#f3f4f6;
+
+}
+
+
+
+
+@media(max-width:600px){
+
+
+.ar-error-card{
+
+    padding:40px 20px;
+
+}
+
+
+.ar-error-card h1{
+
+    font-size:55px;
+
+}
+
+
+.ar-error-card h2{
+
+    font-size:22px;
+
+}
+
+
+}

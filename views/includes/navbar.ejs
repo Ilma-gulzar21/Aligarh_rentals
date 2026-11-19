@@ -1,0 +1,331 @@
+<!-- =========================================================
+     ALIGARH RENTALS - RESPONSIVE NAVBAR
+========================================================= -->
+
+<header class="site-header">
+
+    <nav class="navbar" aria-label="Main Navigation">
+
+        <!-- LOGO -->
+        <div class="logo">
+            <a href="/listings" aria-label="Aligarh Rentals Home">
+                <img
+                    src="/images/headerimage/web_icon.png"
+                    alt="Aligarh Rentals"
+                    class="navbar-logo">
+                <span class="logo-text">Aligarh Rentals</span>
+            </a>
+        </div>
+
+
+        <!-- MAIN NAVIGATION -->
+        <ul class="nav-links" id="navLinks">
+
+            <!-- ALL OVER ALIGARH -->
+            <li class="dropdown">
+                <a href="#" class="dropdown-trigger" aria-expanded="false">
+                    <span>All Over Aligarh</span>
+                    <i class="fa-solid fa-angle-down"></i>
+                </a>
+
+                <div class="mega-menu">
+                    <div class="mega-column">
+                        <h4>Select Area</h4>
+
+                        <div class="area-menu">
+                            <% if (areas && areas.length) { %>
+                                <% areas.forEach(area => { %>
+                                    <a href="/listings?area=<%= encodeURIComponent(area) %>">
+                                        <i class="fa-solid fa-location-dot"></i>
+                                        <span><%= area %></span>
+                                    </a>
+                                <% }) %>
+                            <% } else { %>
+                                <a href="/listings">
+                                    <i class="fa-solid fa-map-location-dot"></i>
+                                    <span>All Properties</span>
+                                </a>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+
+            <!-- FOR TENANTS -->
+            <li class="dropdown">
+                <a href="#" class="dropdown-trigger" aria-expanded="false">
+                    <span>For Tenants</span>
+                    <i class="fa-solid fa-angle-down"></i>
+                </a>
+
+                <div class="mega-menu">
+                    <div class="mega-column">
+                        <h4>
+                            <i class="fa-solid fa-house-circle-check"></i>
+                            Find Property
+                        </h4>
+
+                        <div class="budget-table">
+
+                            <div class="budget-header">
+                                <span>Property Type</span>
+                                <span>Minimum Budget</span>
+                                <span>Maximum Budget</span>
+                            </div>
+
+                            <% if (propertyBudget && propertyBudget.length) { %>
+                                <% propertyBudget.forEach(item => { %>
+                                    <div class="budget-row">
+                                        <a href="/listings?propertyType=<%= encodeURIComponent(item._id) %>&minPrice=<%= item.minPrice %>&maxPrice=<%= item.maxPrice %>">
+                                            <i class="fa-solid fa-building"></i>
+                                            <span><%= item._id %></span>
+                                        </a>
+                                        <span data-label="Min">₹<%= item.minPrice %></span>
+                                        <span data-label="Max">₹<%= item.maxPrice %></span>
+                                    </div>
+                                <% }) %>
+                            <% } else { %>
+                                <div class="budget-row">
+                                    <a href="/listings">
+                                        <i class="fa-solid fa-building"></i>
+                                        <span>View All Properties</span>
+                                    </a>
+                                    <span data-label="Min">—</span>
+                                    <span data-label="Max">—</span>
+                                </div>
+                            <% } %>
+
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+
+            <!-- PROPERTY FOR -->
+            <li class="dropdown">
+                <a href="#" class="dropdown-trigger" aria-expanded="false">
+                    <span>Property For</span>
+                    <i class="fa-solid fa-angle-down"></i>
+                </a>
+
+                <div class="mega-menu">
+
+                    <!-- PREFERRED TENANT -->
+                    <div class="mega-column">
+                        <h4>
+                            <i class="fa-solid fa-users"></i>
+                            Preferred Tenant
+                        </h4>
+
+                        <% if (preferredTenants && preferredTenants.length) { %>
+                            <% preferredTenants.forEach(tenant => { %>
+                                <a href="/listings?preferredTenant=<%= encodeURIComponent(tenant) %>">
+                                    <i class="fa-solid fa-user-check"></i>
+                                    <span><%= tenant %></span>
+                                </a>
+                            <% }) %>
+                        <% } else { %>
+                            <a href="/listings">
+                                <i class="fa-solid fa-users"></i>
+                                <span>All Tenants</span>
+                            </a>
+                        <% } %>
+                    </div>
+
+                    <!-- PROPERTY CONFIGURATION -->
+                    <div class="mega-column">
+                        <h4>
+                            <i class="fa-solid fa-layer-group"></i>
+                            Property Configuration
+                        </h4>
+
+                        <% if (bhkTypes && bhkTypes.length) { %>
+                            <% bhkTypes.forEach(config => { %>
+                                <a href="/listings?bhk=<%= encodeURIComponent(config) %>">
+                                    <i class="fa-solid fa-bed"></i>
+                                    <span><%= config %></span>
+                                </a>
+                            <% }) %>
+                        <% } else { %>
+                            <a href="/listings">
+                                <i class="fa-solid fa-bed"></i>
+                                <span>All Configurations</span>
+                            </a>
+                        <% } %>
+                    </div>
+
+                </div>
+            </li>
+
+
+            <!-- FOR PROPERTY OWNER -->
+            <li class="dropdown">
+                <a href="#" class="dropdown-trigger" aria-expanded="false">
+                    <span>For Property Owner</span>
+                    <i class="fa-solid fa-angle-down"></i>
+                </a>
+
+                <div class="mega-menu">
+                    <div class="mega-column">
+
+                        <h4>
+                            <i class="fa-solid fa-key"></i>
+                            Rent Out Your Property
+                        </h4>
+
+                        <a href="/listings/new">
+                            <i class="fa-solid fa-circle-plus"></i>
+                            <span>Post Your Property</span>
+                        </a>
+
+                       
+                        <a href="/listings/guide">
+                            <i class="fa-solid fa-book-open"></i>
+                            <span>Rental Guide</span>
+                        </a>
+
+                        <a href="/listings/OwnerBenifits">
+                            <i class="fa-solid fa-gift"></i>
+                            <span>Owner Benefits</span>
+                        </a>
+
+                    </div>
+                </div>
+            </li>
+
+
+            <!-- SERVICES -->
+            <li class="dropdown">
+                <a href="#" class="dropdown-trigger" aria-expanded="false">
+                    <span>Services</span>
+                    <i class="fa-solid fa-angle-down"></i>
+                </a>
+
+                <div class="mega-menu">
+                    <div class="mega-column">
+
+                        <h4>
+                            <i class="fa-solid fa-screwdriver-wrench"></i>
+                            Our Services
+                        </h4>
+
+                        <a href="/listings/Roommates">
+                            <i class="fa-solid fa-people-arrows"></i>
+                            <span>Roommate Matching</span>
+                        </a>
+
+
+                        <a href="/listings/guide">
+                            <i class="fa-solid fa-map-location-dot"></i>
+                            <span>Location Guide</span>
+                        </a>
+
+                       <a href="/listings/help-support">
+    <i class="fa-solid fa-headset"></i>
+    <span>Help &amp; Support</span>
+</a>
+
+                        <a href="/listings">
+                            <i class="fa-solid fa-house-chimney"></i>
+                            <span>All Properties in Aligarh</span>
+                        </a>
+
+                    </div>
+                </div>
+            </li>
+
+           
+        </ul>
+
+
+        <!-- RIGHT SIDE: PROFILE + BURGER -->
+        <div class="right-nav" id="rightNav">
+
+            <!-- PROFILE -->
+            <div class="profile" id="profileBtn">
+
+                <a href="#"
+                   class="profile-trigger"
+                   aria-expanded="false"
+                   aria-label="My Profile">
+
+                    <i class="fa-solid fa-circle-user"></i>
+                    <span class="profile-text">My Profile</span>
+                    <i class="fa-solid fa-angle-down"></i>
+
+                </a>
+
+                <div class="profile-menu" id="profileMenu">
+
+<% if (currentUser) { %>
+
+    <a href="/listings/dashboard">
+        <i class="fa-solid fa-chart-line"></i>
+        <span>Dashboard</span>
+    </a>
+
+    <% if (currentUser.role === "Owner") { %>
+
+        <a href="/listings/myProperties">
+            <i class="fa-solid fa-building"></i>
+            <span>My Properties</span>
+        </a>
+
+    <% } %>
+
+<% } %>
+
+                    <% if (!currentUser) { %>
+
+                        <div class="profile-menu-divider"></div>
+
+                        <a href="/signup">
+                            <i class="fa-solid fa-user-plus"></i>
+                            <span>Sign Up</span>
+                        </a>
+
+                        <a href="/login">
+                            <i class="fa-solid fa-right-to-bracket"></i>
+                            <span>Login</span>
+                        </a>
+
+                    <% } else { %>
+
+                        <div class="profile-menu-divider"></div>
+
+                        <a href="/logout">
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                            <span>Logout</span>
+                        </a>
+
+                    <% } %>
+
+                </div>
+            </div>
+
+            <!-- BURGER / CROSS BUTTON (mobile + tablet) -->
+            <button
+                type="button"
+                class="menu-toggle"
+                id="menuToggle"
+                aria-label="Open navigation menu"
+                aria-expanded="false"
+                aria-controls="navLinks">
+
+                <span></span>
+                <span></span>
+                <span></span>
+
+            </button>
+
+        </div>
+
+    </nav>
+
+</header>
+
+<!-- Fixed navbar content ko cover na kare -->
+<div class="navbar-spacer"></div>
+
+<script src="/js/homeJS/header.js" defer></script>

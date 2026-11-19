@@ -1,0 +1,199 @@
+    <link rel="stylesheet" href="/css/homeCss/homeCard.css">
+    
+<section class="listing-section">
+
+    <!-- HEADING + FILTER -->
+    <div class="ls-header">
+        <div class="ls-heading">
+            <h2>Popular Areas</h2>
+            <p>Student-friendly areas with PGs, hostels and rental rooms near universities.</p>
+        </div>
+
+        <form class="ls-filter" method="GET" action="/listings/">
+            <i class="fa-solid fa-sliders"></i>
+            <select id="availableFor" name="availableFor" onchange="this.form.submit()">
+                <option value="All"      <%= selected === "All" ? "selected" : "" %>>All Categories</option>
+                <option value="Student"  <%= selected === "Student" ? "selected" : "" %>>Student</option>
+                <option value="Family"   <%= selected === "Family" ? "selected" : "" %>>Family</option>
+                <option value="Roommate" <%= selected === "Roommate" ? "selected" : "" %>>Roommate</option>
+                <option value="Visitor"  <%= selected === "Visitor" ? "selected" : "" %>>Visitor</option>
+            </select>
+        </form>
+    </div>
+
+
+    <!-- SLIDER -->
+    <div class="ls-slider">
+
+        <button type="button" class="ls-arrow ls-prev" id="slidePrev" aria-label="Previous">
+            <i class="fa-solid fa-angle-left"></i>
+        </button>
+
+        <div class="ls-track" id="slider">
+
+            <% if (listings && listings.length > 0) { %>
+
+                <% listings.forEach(listing => { %>
+
+                    <%
+                        /* ---------- IMAGE ---------- */
+                        const img = (listing.images && listing.images.length > 0)
+                            ? listing.images[0].url
+                            : "https://images.unsplash.com/photo-1560518883-ce09059eeffa";
+
+                        /* ---------- OWNER ---------- */
+                        const ownerName = (listing.owner && listing.owner.fullName)
+                            ? listing.owner.fullName
+                            : "Owner";
+
+                        /* ---------- PRICE ---------- */
+                        const rent = Number(listing.rentPrice || 0).toLocaleString("en-IN");
+
+                        /* ---------- STATUS ---------- */
+                        const status      = listing.status || "Available";
+                        const isAvailable = status === "Available";
+
+                        /* ---------- RATING ---------- */
+                        let avgRating = 0;
+                        const reviewCount = listing.reviews ? listing.reviews.length : 0;
+                        if (reviewCount > 0) {
+                            const total = listing.reviews.reduce((sum, r) => sum + (r.rating || 0), 0);
+                            avgRating = (total / reviewCount).toFixed(1);
+                        }
+
+                        /* ---------- LANDMARK ---------- */
+                        const landmark = (listing.nearbyLandmarks && listing.nearbyLandmarks.length > 0)
+                            ? listing.nearbyLandmarks[0]
+                            : null;
+                    %>
+
+                    <article class="pc-card <%= isAvailable ? '' : 'pc-unavailable' %>">
+
+                        <!-- IMAGE -->
+                        <a href="/listings/<%= listing._id %>" class="pc-media">
+                            <img src="<%= img %>" alt="<%= listing.title %>" loading="lazy">
+
+                            <span class="pc-badge"><%= listing.propertyType %></span>
+
+                            <span class="pc-status pc-status-<%= status.toLowerCase() %>">
+                                <%= status %>
+                            </span>
+
+                            <span class="pc-price">
+                                ₹<%= rent %><small>/month</small>
+                            </span>
+                        </a>
+
+
+                        <!-- DETAILS -->
+                        <div class="pc-body">
+
+                            <!-- TITLE + RATING -->
+                            <div class="pc-top">
+                                <h3 class="pc-title" title="<%= listing.title %>">
+                                    <%= listing.title %>
+                                </h3>
+
+                                <% if (reviewCount > 0) { %>
+                                    <span class="pc-rating">
+                                        <i class="fa-solid fa-star"></i>
+                                        <%= avgRating %> <small>(<%= reviewCount %>)</small>
+                                    </span>
+                                <% } %>
+                            </div>
+
+
+                            <!-- AREA + ADDRESS -->
+                            <p class="pc-address">
+                                <i class="fa-solid fa-location-dot"></i>
+                                <%= listing.area %>, <%= listing.fullAddress %>
+                            </p>
+
+                        
+                            <!-- LANDMARK -->
+                            <% if (landmark) { %>
+                                <p class="pc-landmark">
+                                    <i class="fa-solid fa-map-pin"></i>
+                                    <%= landmark.distance %> <%= landmark.distanceUnit %> from <%= landmark.landmarkName %>
+                                </p>
+                            <% } %>
+
+                            <!-- CHIPS (sirf BHK + Floor + Electricity) -->
+                            <div class="pc-chips">
+                                <span class="pc-chip">
+                                    <i class="fa-solid fa-bed"></i> <%= listing.bhk %>
+                                </span>
+
+                                <span class="pc-chip">
+                                    <i class="fa-solid fa-building"></i>
+                                    Floor <%= listing.floor %>/<%= listing.totalFloors %>
+                                </span>
+
+                                <% if (listing.electricityIncluded) { %>
+                                    <span class="pc-chip pc-chip-green">
+                                        <i class="fa-solid fa-bolt"></i> Electricity incl.
+                                    </span>
+                                <% } %>
+                            </div>
+
+                            <!-- DESCRIPTION -->
+                            <% if (listing.description) { %>
+                                <p class="pc-desc"><%= listing.description %></p>
+                            <% } %>
+
+
+                            <!-- OWNER + CONTACT -->
+                            <div class="pc-footer">
+
+                                <div class="pc-owner">
+                                    <span class="pc-avatar">
+                                        <% if (listing.owner && listing.owner.profileImage && listing.owner.profileImage.url) { %>
+                                            <img src="<%= listing.owner.profileImage.url %>" alt="<%= ownerName %>">
+                                        <% } else { %>
+                                            <%= ownerName.charAt(0).toUpperCase() %>
+                                        <% } %>
+                                    </span>
+
+                                    <div class="pc-owner-text">
+                                        <small>Posted by</small>
+                                        <strong>
+                                            <%= ownerName %>
+                                            <% if (listing.ownerVerified) { %>
+                                                <i class="fa-solid fa-circle-check pc-verified" title="Verified owner"></i>
+                                            <% } %>
+                                        </strong>
+                                    </div>
+                                </div>
+
+                                <a href="/listings/<%= listing._id %>" class="pc-contact">
+                                    <i class="fa-solid fa-phone"></i>
+                                    Contact
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                <% }) %>
+
+            <% } else { %>
+
+                <div class="ls-empty">
+                    <i class="fa-solid fa-house-circle-xmark"></i>
+                    <p>No properties found.</p>
+                </div>
+
+            <% } %>
+
+        </div>
+
+        <button type="button" class="ls-arrow ls-next" id="slideNext" aria-label="Next">
+            <i class="fa-solid fa-angle-right"></i>
+        </button>
+
+    </div>
+
+</section>
+   <script src="/js/homejS/CardSlider.js"></script>

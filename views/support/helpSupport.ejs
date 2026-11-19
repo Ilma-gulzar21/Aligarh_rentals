@@ -1,0 +1,415 @@
+<% layout("fixLayout/boilerplate") %>
+
+<link rel="stylesheet" href="/css/homeCss/helpSupport.css"><% if (success && success.length) { %>
+    <div class="alert alert-success support-alert">
+        <%= success[0] %>
+    </div>
+<% } %>
+
+<% if (error && error.length) { %>
+    <div class="alert alert-danger support-alert">
+        <%= error[0] %>
+    </div>
+<% } %>
+<div class="support-page">
+
+    <!-- HERO SECTION -->
+    <section class="support-hero">
+
+        <div class="support-hero-content">
+
+            <span class="support-eyebrow">
+                <i class="fa-solid fa-headset"></i>
+                WE ARE HERE TO HELP
+            </span>
+
+            <h1>
+                How can we
+                <span>help you?</span>
+            </h1>
+
+            <p>
+                Have a question or facing an issue?
+                Our Help & Support Center is here to make
+                your Aligarh Rentals experience easier.
+            </p>
+
+            <a href="#contact" class="support-primary-btn">
+                Contact Support
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+        </div>
+
+        <div class="support-hero-visual">
+            <div class="support-visual-circle">
+                <i class="fa-solid fa-headset"></i>
+            </div>
+
+            <div class="support-floating-card card-one">
+                <i class="fa-solid fa-house"></i>
+                <span>Property Help</span>
+            </div>
+
+            <div class="support-floating-card card-two">
+                <i class="fa-solid fa-comments"></i>
+                <span>Quick Assistance</span>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- HELP CATEGORIES -->
+    <section class="support-categories">
+
+        <div class="support-section-heading">
+            <span>SUPPORT CATEGORIES</span>
+            <h2>What do you need help with?</h2>
+            <p>Select a category to find relevant information.</p>
+        </div>
+
+        <div class="support-category-grid">
+
+            <a href="#faq" class="support-category-card">
+                <div class="support-category-icon purple">
+                    <i class="fa-solid fa-user-shield"></i>
+                </div>
+
+                <h3>Account & Login</h3>
+                <p>Help with registration, login and account-related issues.</p>
+
+                <span class="category-link">
+                    Explore <i class="fa-solid fa-arrow-right"></i>
+                </span>
+            </a>
+
+
+            <a href="#faq" class="support-category-card">
+                <div class="support-category-icon blue">
+                    <i class="fa-solid fa-house"></i>
+                </div>
+
+                <h3>Property Listings</h3>
+                <p>Get help with adding, editing and managing properties.</p>
+
+                <span class="category-link">
+                    Explore <i class="fa-solid fa-arrow-right"></i>
+                </span>
+            </a>
+
+
+            <a href="#faq" class="support-category-card">
+                <div class="support-category-icon green">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+
+                <h3>Finding Properties</h3>
+                <p>Learn how to search and filter rental properties.</p>
+
+                <span class="category-link">
+                    Explore <i class="fa-solid fa-arrow-right"></i>
+                </span>
+            </a>
+
+
+            <a href="#faq" class="support-category-card">
+                <div class="support-category-icon orange">
+                    <i class="fa-solid fa-people-group"></i>
+                </div>
+
+                <h3>Roommates</h3>
+                <p>Get assistance with roommate and flatmate listings.</p>
+
+                <span class="category-link">
+                    Explore <i class="fa-solid fa-arrow-right"></i>
+                </span>
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- FAQ SECTION -->
+    <section class="support-faq" id="faq">
+
+        <div class="support-section-heading">
+            <span>FREQUENTLY ASKED QUESTIONS</span>
+            <h2>How can we assist you?</h2>
+            <p>Find answers to some commonly asked questions.</p>
+        </div>
+
+
+        <div class="faq-container">
+
+            <details class="faq-item">
+                <summary>
+                    How can I create an account on Aligarh Rentals?
+                    <i class="fa-solid fa-chevron-down"></i>
+                </summary>
+
+                <div class="faq-answer">
+                    Click on the Sign Up option and enter your
+                    required details to create your account.
+                    Once registered, you can explore the platform.
+                </div>
+            </details>
+
+
+            <details class="faq-item">
+                <summary>
+                    How can I find rental properties in Aligarh?
+                    <i class="fa-solid fa-chevron-down"></i>
+                </summary>
+
+                <div class="faq-answer">
+                    Visit the All Properties section. You can explore
+                    available properties and use filters such as
+                    location, rent, property type and BHK to find
+                    suitable accommodation.
+                </div>
+            </details>
+
+
+            <details class="faq-item">
+                <summary>
+                    How can I list my property?
+                    <i class="fa-solid fa-chevron-down"></i>
+                </summary>
+
+                <div class="faq-answer">
+                    Log in to your account and use the Add Property
+                    option. Fill in the property details, upload images
+                    and submit your listing.
+                </div>
+            </details>
+
+
+            <details class="faq-item">
+                <summary>
+                    Can students find roommates through this platform?
+                    <i class="fa-solid fa-chevron-down"></i>
+                </summary>
+
+                <div class="faq-answer">
+                    Yes. Aligarh Rentals provides roommate and
+                    flatmate discovery features to help students
+                    and other users find suitable sharing options.
+                </div>
+            </details>
+
+
+            <details class="faq-item">
+                <summary>
+                    How can I edit or delete my property listing?
+                    <i class="fa-solid fa-chevron-down"></i>
+                </summary>
+
+                <div class="faq-answer">
+                    Log in using the account associated with your
+                    property. You can manage your own listings from
+                    the relevant property management options.
+                </div>
+            </details>
+
+
+            <details class="faq-item">
+                <summary>
+                    What should I do if I face a technical issue?
+                    <i class="fa-solid fa-chevron-down"></i>
+                </summary>
+
+                <div class="faq-answer">
+                    Use the Contact Support form below. Describe
+                    the issue in detail and provide your email address
+                    so that your request can be reviewed.
+                </div>
+            </details>
+
+        </div>
+
+    </section>
+
+
+    <!-- CONTACT SUPPORT -->
+    <section class="support-contact" id="contact">
+
+        <div class="support-contact-info">
+
+            <span class="support-eyebrow">
+                CONTACT OUR TEAM
+            </span>
+
+            <h2>
+                Still need help?
+                <span>Let's talk.</span>
+            </h2>
+
+            <p>
+                We would love to hear from you. Submit your query
+                and provide the details so we can understand
+                how to assist you.
+            </p>
+
+            <div class="support-contact-point">
+                <div class="contact-point-icon">
+                    <i class="fa-solid fa-envelope"></i>
+                </div>
+
+                <div>
+                    <h4>Email Support</h4>
+                    <p>Submit your query through our support form.</p>
+                </div>
+            </div>
+
+
+            <div class="support-contact-point">
+                <div class="contact-point-icon">
+                    <i class="fa-solid fa-clock"></i>
+                </div>
+
+                <div>
+                    <h4>Support Requests</h4>
+                    <p>Your request will be recorded for review.</p>
+                </div>
+            </div>
+
+
+            <div class="support-contact-point">
+                <div class="contact-point-icon">
+                    <i class="fa-solid fa-location-dot"></i>
+                </div>
+
+                <div>
+                    <h4>Our Focus</h4>
+                    <p>Rental assistance across Aligarh.</p>
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- SUPPORT FORM -->
+        <div class="support-form-wrapper">
+
+            <div class="support-form-heading">
+                <h3>Send us a message</h3>
+                <p>Fill out the form below to submit your request.</p>
+            </div>
+
+
+            <form action="/listings/help-support" method="POST">
+
+                <div class="support-form-row">
+
+                    <div class="support-form-group">
+                        <label for="supportName">Your Name *</label>
+
+                        <input
+                            type="text"
+                            id="supportName"
+                            name="name"
+                            placeholder="Enter your name"
+value="<%= typeof currUser !== 'undefined' && currUser ? currUser.username : '' %>"                            maxlength="80"
+                            required
+                        >
+                    </div>
+
+
+                    <div class="support-form-group">
+                        <label for="supportEmail">Email Address *</label>
+
+                        <input
+                            type="email"
+                            id="supportEmail"
+                            name="email"
+                            placeholder="Enter your email"
+                            value="<%= currUser ? currUser.email : '' %>"
+                            required
+                        >
+                    </div>
+
+                </div>
+
+
+                <div class="support-form-group">
+                    <label for="supportCategory">Support Category *</label>
+
+                    <select
+                        name="category"
+                        id="supportCategory"
+                        required
+                    >
+                        <option value="">Select a category</option>
+                        <option value="Account & Login">Account & Login</option>
+                        <option value="Property Listing">Property Listing</option>
+                        <option value="Property Search">Property Search</option>
+                        <option value="Roommate & Flatmate">Roommate & Flatmate</option>
+                        <option value="Technical Issue">Technical Issue</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+
+                <div class="support-form-group">
+                    <label for="supportSubject">Subject *</label>
+
+                    <input
+                        type="text"
+                        name="subject"
+                        id="supportSubject"
+                        placeholder="Briefly describe your issue"
+                        maxlength="150"
+                        required
+                    >
+                </div>
+
+
+                <div class="support-form-group">
+                    <label for="supportMessage">Your Message *</label>
+
+                    <textarea
+                        name="message"
+                        id="supportMessage"
+                        rows="5"
+                        maxlength="2000"
+                        placeholder="Explain your query or problem in detail..."
+                        required
+                    ></textarea>
+                </div>
+
+
+                <button type="submit" class="support-submit-btn">
+                    Submit Request
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+
+                <p class="support-form-note">
+                    <i class="fa-solid fa-lock"></i>
+                    Your information will be used to review your support request.
+                </p>
+
+            </form>
+
+        </div>
+
+    </section>
+
+
+    <!-- BOTTOM CTA -->
+    <section class="support-bottom-cta">
+
+        <div>
+            <h2>We're here to make renting easier.</h2>
+            <p>Explore rental opportunities across Aligarh with Aligarh Rentals.</p>
+        </div>
+
+        <a href="/listings" class="support-bottom-btn">
+            Explore Properties
+            <i class="fa-solid fa-arrow-right"></i>
+        </a>
+
+    </section>
+
+</div>

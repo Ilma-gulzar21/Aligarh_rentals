@@ -1,0 +1,1844 @@
+/* =========================================================
+   ALIGARH RENTALS
+   OWNER BENEFITS PAGE
+========================================================= */
+
+.ar-owner-page {
+
+    --ar-primary: var(--nav-primary, #073b4c);
+    --ar-secondary: var(--nav-secondary, #087f6a);
+
+    --ar-navy: #0b3047;
+    --ar-dark: #082c43;
+    --ar-teal: #087f6a;
+
+    --ar-text: #102a43;
+    --ar-muted: #647789;
+
+    --ar-bg: #ffffff;
+    --ar-soft-bg: #f7faf9;
+
+    --ar-border: #e5ebee;
+
+    width: 100%;
+    overflow: hidden;
+    background: var(--ar-bg);
+    color: var(--ar-text);
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.ar-owner-hero {
+
+    min-height: 525px;
+
+    display: grid;
+    grid-template-columns: 46% 54%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff 0%,
+            #f9fbfa 100%
+        );
+}
+
+
+/* ---------------------------------------------------------
+   HERO CONTENT
+--------------------------------------------------------- */
+
+.ar-owner-hero-content {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    padding:
+        65px
+        45px
+        60px
+        max(6vw, 48px);
+
+    position: relative;
+    z-index: 2;
+}
+
+
+.ar-owner-tag {
+
+    width: fit-content;
+
+    padding: 6px 13px;
+
+    border-radius: 30px;
+
+    background: #eaf5f2;
+
+    border: 1px solid #d6eae4;
+
+    color: var(--ar-teal);
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: .7px;
+}
+
+
+.ar-owner-hero-content h1 {
+
+    margin: 22px 0 16px;
+
+    color: var(--ar-text);
+
+    font-size: clamp(36px, 4vw, 48px);
+
+    line-height: 1.12;
+
+    letter-spacing: -1.5px;
+
+    font-weight: 800;
+}
+
+
+.ar-owner-hero-content h1 span {
+
+    color: var(--ar-teal);
+}
+
+
+.ar-owner-hero-content > p {
+
+    max-width: 500px;
+
+    margin: 0;
+
+    color: #566b7b;
+
+    font-size: 14px;
+
+    line-height: 1.75;
+}
+
+
+/* ---------------------------------------------------------
+   HERO ACTIONS
+--------------------------------------------------------- */
+
+.ar-owner-hero-actions {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 22px;
+
+    margin-top: 23px;
+}
+
+
+.ar-owner-primary-btn {
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    padding: 12px 18px;
+
+    min-height: 42px;
+
+    border-radius: 6px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--ar-primary),
+            var(--ar-secondary)
+        );
+
+    color: #fff;
+
+    text-decoration: none;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    transition: .25s ease;
+
+    box-shadow:
+        0 8px 20px rgba(8, 127, 106, .18);
+}
+
+
+.ar-owner-primary-btn:hover {
+
+    color: #fff;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 12px 25px rgba(8, 127, 106, .25);
+}
+
+
+.ar-owner-watch-btn {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    text-decoration: none;
+
+    color: var(--ar-text);
+
+    font-size: 12px;
+
+    font-weight: 700;
+}
+
+
+.ar-play-icon {
+
+    width: 28px;
+    height: 28px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #9aa8af;
+
+    border-radius: 50%;
+
+    font-size: 9px;
+
+    color: var(--ar-primary);
+
+    transition: .25s;
+}
+
+
+.ar-owner-watch-btn:hover .ar-play-icon {
+
+    background: var(--ar-primary);
+
+    border-color: var(--ar-primary);
+
+    color: #fff;
+}
+
+
+/* ---------------------------------------------------------
+   TRUST
+--------------------------------------------------------- */
+
+.ar-owner-trust {
+
+    display: flex;
+
+    gap: 25px;
+
+    margin-top: 35px;
+}
+
+
+.ar-owner-trust-item {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    min-width: 115px;
+}
+
+
+.ar-trust-icon {
+
+    width: 36px;
+    height: 36px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    font-size: 14px;
+}
+
+
+.ar-trust-icon.green {
+
+    background: #e2f4ed;
+
+    color: var(--ar-teal);
+}
+
+
+.ar-trust-icon.blue {
+
+    background: #e7f0fb;
+
+    color: #2473b6;
+}
+
+
+.ar-owner-trust-item strong {
+
+    display: block;
+
+    color: #21394b;
+
+    font-size: 10px;
+}
+
+
+.ar-owner-trust-item span {
+
+    display: block;
+
+    margin-top: 3px;
+
+    color: #718190;
+
+    font-size: 8px;
+
+    line-height: 1.4;
+}
+
+
+/* =========================================================
+   HERO VISUAL
+========================================================= */
+
+.ar-owner-hero-visual {
+
+    position: relative;
+
+    min-height: 525px;
+
+    padding: 40px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+.ar-owner-main-image {
+
+    width: 100%;
+    height: 390px;
+
+    overflow: hidden;
+
+    border-radius: 12px;
+
+    position: relative;
+}
+
+
+.ar-owner-main-image::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(8, 59, 76, .04),
+            transparent
+        );
+
+    pointer-events: none;
+}
+
+
+.ar-owner-main-image img {
+
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    transition: transform .5s ease;
+}
+
+
+.ar-owner-main-image:hover img {
+
+    transform: scale(1.025);
+}
+
+
+/* ---------------------------------------------------------
+   RESULT CARD
+--------------------------------------------------------- */
+
+.ar-owner-result-card {
+
+    position: absolute;
+
+    width: 245px;
+
+    right: 7%;
+
+    bottom: 150px;
+
+    padding: 21px;
+
+    background: #fff;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 18px 45px rgba(9, 37, 52, .18);
+
+    z-index: 3;
+}
+
+
+.ar-result-header strong {
+
+    display: block;
+
+    color: var(--ar-text);
+
+    font-size: 12px;
+}
+
+
+.ar-result-header span {
+
+    display: block;
+
+    margin-top: 5px;
+
+    color: #687b89;
+
+    font-size: 9px;
+}
+
+
+.ar-result-stat {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    margin-top: 17px;
+}
+
+
+.ar-result-stat strong {
+
+    padding: 8px 9px;
+
+    border-radius: 5px;
+
+    background: #dff2eb;
+
+    color: var(--ar-teal);
+
+    font-size: 17px;
+}
+
+
+.ar-result-stat span {
+
+    color: #536775;
+
+    font-size: 9px;
+
+    line-height: 1.45;
+}
+
+
+/* ---------------------------------------------------------
+   MINI CHART
+--------------------------------------------------------- */
+
+.ar-mini-chart {
+
+    height: 90px;
+
+    margin-top: 10px;
+}
+
+
+.ar-mini-chart svg {
+
+    width: 100%;
+    height: 100%;
+
+    overflow: visible;
+}
+
+
+.ar-mini-chart .chart-area {
+
+    fill: url(#chartGradient);
+}
+
+
+.ar-mini-chart .chart-line {
+
+    fill: none;
+
+    stroke: var(--ar-teal);
+
+    stroke-width: 2.2;
+
+    stroke-linecap: round;
+
+    stroke-linejoin: round;
+}
+
+
+.ar-mini-chart circle {
+
+    fill: var(--ar-teal);
+
+    stroke: #fff;
+
+    stroke-width: 1.5;
+}
+
+
+.ar-chart-label {
+
+    display: block;
+
+    text-align: right;
+
+    margin-top: -4px;
+
+    color: #87949c;
+
+    font-size: 8px;
+}
+
+
+/* =========================================================
+   WHY SECTION
+========================================================= */
+
+.ar-owner-why {
+
+    padding: 30px max(3vw, 25px) 28px;
+
+    background: #fff;
+}
+
+
+.ar-owner-section-heading {
+
+    text-align: center;
+
+    margin-bottom: 27px;
+}
+
+
+.ar-owner-section-heading h2 {
+
+    margin: 0;
+
+    color: var(--ar-text);
+
+    font-size: 24px;
+
+    line-height: 1.3;
+}
+
+
+.ar-owner-section-heading h2 span {
+
+    color: var(--ar-teal);
+}
+
+
+.ar-heading-line {
+
+    width: 30px;
+    height: 2px;
+
+    margin: 10px auto 0;
+
+    border-radius: 5px;
+
+    background: var(--ar-teal);
+}
+
+
+/* =========================================================
+   BENEFIT CARDS
+========================================================= */
+
+.ar-owner-benefit-row {
+
+    max-width: 1150px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, 1fr);
+
+    gap: 10px;
+}
+
+
+.ar-owner-benefit-card {
+
+    min-height: 190px;
+
+    padding: 20px 17px;
+
+    border: 1px solid #e8edef;
+
+    border-radius: 10px;
+
+    text-align: center;
+
+    background: #fff;
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        border-color .25s ease;
+}
+
+
+.ar-owner-benefit-card:hover {
+
+    transform: translateY(-5px);
+
+    border-color: #d4e8e2;
+
+    box-shadow:
+        0 12px 28px rgba(12, 45, 61, .08);
+}
+
+
+.ar-benefit-icon {
+
+    width: 55px;
+    height: 55px;
+
+    margin: 0 auto 13px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    font-size: 21px;
+}
+
+
+.ar-benefit-icon.green {
+
+    background: #e2f4ed;
+    color: var(--ar-teal);
+}
+
+
+.ar-benefit-icon.blue {
+
+    background: #e7f0fb;
+    color: #236fb0;
+}
+
+
+.ar-benefit-icon.yellow {
+
+    background: #fff2d9;
+    color: #cf900c;
+}
+
+
+.ar-benefit-icon.purple {
+
+    background: #eee9fa;
+    color: #7052b7;
+}
+
+
+.ar-benefit-icon.red {
+
+    background: #fae8e8;
+    color: #c74c55;
+}
+
+
+.ar-owner-benefit-card h3 {
+
+    margin: 0 0 10px;
+
+    color: #142c3e;
+
+    font-size: 12px;
+}
+
+
+.ar-owner-benefit-card p {
+
+    margin: 0;
+
+    color: #667887;
+
+    font-size: 10px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   FAST CTA
+========================================================= */
+
+.ar-owner-fast-cta {
+
+    max-width: 1150px;
+
+    min-height: 105px;
+
+    margin: 0 auto 15px;
+
+    padding: 10px 30px;
+
+    display: grid;
+
+    grid-template-columns: 230px 1fr auto;
+
+    align-items: center;
+
+    gap: 20px;
+
+    background: #f3f7f5;
+
+    border: 1px solid #e5ebe8;
+
+    border-radius: 11px;
+
+    overflow: hidden;
+}
+
+
+/* ---------------------------------------------------------
+   SIMPLE HOUSE ART
+--------------------------------------------------------- */
+
+.ar-owner-house-art {
+
+    height: 100%;
+
+    min-height: 95px;
+
+    position: relative;
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: center;
+
+    padding-bottom: 5px;
+}
+
+
+.ar-house {
+
+    width: 120px;
+    height: 70px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+
+    color: var(--ar-teal);
+
+    background: #e1f2eb;
+
+    border-radius: 10px 10px 3px 3px;
+
+    font-size: 38px;
+}
+
+
+.ar-house::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: -25px;
+
+    left: 16px;
+
+    width: 88px;
+    height: 52px;
+
+    background: #d5e9e2;
+
+    transform: rotate(45deg);
+
+    border-radius: 7px 0 7px 0;
+
+    z-index: -1;
+}
+
+
+.ar-house-tree {
+
+    position: absolute;
+
+    bottom: 12px;
+
+    width: 20px;
+    height: 38px;
+
+    border-radius: 50% 50% 35% 35%;
+
+    background: #a8d3c1;
+}
+
+
+.tree-one {
+
+    left: 25px;
+}
+
+
+.tree-two {
+
+    right: 25px;
+
+    width: 25px;
+    height: 46px;
+}
+
+
+.ar-fast-cta-content h2 {
+
+    margin: 0 0 5px;
+
+    color: var(--ar-text);
+
+    font-size: 17px;
+}
+
+
+.ar-fast-cta-content p {
+
+    margin: 0;
+
+    color: #617482;
+
+    font-size: 10px;
+
+    line-height: 1.6;
+}
+
+
+.ar-fast-cta-btn {
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
+
+    white-space: nowrap;
+
+    padding: 11px 18px;
+
+    border-radius: 6px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--ar-primary),
+            var(--ar-secondary)
+        );
+
+    color: #fff;
+
+    text-decoration: none;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    transition: .25s;
+}
+
+
+.ar-fast-cta-btn:hover {
+
+    color: #fff;
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   STATS
+========================================================= */
+
+.ar-owner-stats {
+
+    max-width: 1150px;
+
+    min-height: 102px;
+
+    margin: 0 auto 28px;
+
+    padding: 15px 25px;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1px 1fr 1px 1fr 1px 1fr;
+
+    align-items: center;
+
+    gap: 15px;
+
+    border-radius: 10px;
+
+    color: #fff;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--ar-primary),
+            var(--ar-secondary)
+        );
+
+    box-shadow:
+        0 10px 25px rgba(8, 59, 76, .12);
+}
+
+
+.ar-owner-stat {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 12px;
+}
+
+
+.ar-stat-circle {
+
+    width: 42px;
+    height: 42px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,.13);
+
+    color: #fff;
+
+    font-size: 17px;
+}
+
+
+.ar-stat-circle.house {
+
+    background: rgba(82, 190, 163, .2);
+}
+
+
+.ar-stat-circle.handshake {
+
+    background: rgba(255,255,255,.14);
+}
+
+
+.ar-stat-circle.support {
+
+    color: #ffe08a;
+
+    background: rgba(255,255,255,.12);
+}
+
+
+.ar-owner-stat strong {
+
+    display: block;
+
+    color: #fff;
+
+    font-size: 24px;
+
+    line-height: 1;
+}
+
+
+.ar-owner-stat span {
+
+    display: block;
+
+    margin-top: 5px;
+
+    color: rgba(255,255,255,.85);
+
+    font-size: 9px;
+}
+
+
+.ar-stat-separator {
+
+    width: 1px;
+
+    height: 52px;
+
+    background: rgba(255,255,255,.35);
+}
+
+
+/* =========================================================
+   DETAIL SECTION
+========================================================= */
+
+.ar-owner-detail {
+
+    max-width: 1150px;
+
+    margin: 0 auto;
+
+    padding: 0 0 28px;
+}
+
+
+.ar-owner-detail-heading {
+
+    text-align: center;
+
+    margin-bottom: 22px;
+}
+
+
+.ar-owner-detail-heading h2 {
+
+    margin: 0;
+
+    color: var(--ar-text);
+
+    font-size: 24px;
+}
+
+
+.ar-owner-detail-heading h2 span {
+
+    color: var(--ar-teal);
+}
+
+
+.ar-owner-detail-grid {
+
+    display: grid;
+
+    grid-template-columns: 45% 55%;
+
+    gap: 30px;
+
+    align-items: center;
+}
+
+
+/* ---------------------------------------------------------
+   DETAIL IMAGE
+--------------------------------------------------------- */
+
+.ar-owner-detail-image {
+
+    height: 280px;
+
+    overflow: hidden;
+
+    border-radius: 11px;
+}
+
+
+.ar-owner-detail-image img {
+
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    transition: transform .4s ease;
+}
+
+
+.ar-owner-detail-image:hover img {
+
+    transform: scale(1.03);
+}
+
+
+/* ---------------------------------------------------------
+   DETAIL BENEFITS
+--------------------------------------------------------- */
+
+.ar-owner-detail-benefits {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 22px 25px;
+}
+
+
+.ar-detail-item {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 12px;
+}
+
+
+.ar-detail-icon {
+
+    width: 42px;
+    height: 42px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    font-size: 17px;
+}
+
+
+.ar-detail-icon.green {
+
+    background: #e2f4ed;
+    color: var(--ar-teal);
+}
+
+
+.ar-detail-icon.blue {
+
+    background: #e7f0fb;
+    color: #2473b6;
+}
+
+
+.ar-detail-icon.yellow {
+
+    background: #fff2d9;
+    color: #cf900c;
+}
+
+
+.ar-detail-icon.purple {
+
+    background: #eee9fa;
+    color: #7052b7;
+}
+
+
+.ar-detail-icon.red {
+
+    background: #fae8e8;
+    color: #c74c55;
+}
+
+
+.ar-detail-item h3 {
+
+    margin: 1px 0 5px;
+
+    color: #183246;
+
+    font-size: 12px;
+}
+
+
+.ar-detail-item p {
+
+    margin: 0;
+
+    color: #687b89;
+
+    font-size: 9px;
+
+    line-height: 1.65;
+}
+
+
+/* =========================================================
+   FINAL CTA
+========================================================= */
+
+.ar-owner-final-cta {
+
+    max-width: 1150px;
+
+    min-height: 88px;
+
+    margin: 0 auto 35px;
+
+    padding: 17px 30px;
+
+    display: grid;
+
+    grid-template-columns: 55px 1fr auto;
+
+    align-items: center;
+
+    gap: 15px;
+
+    border-radius: 11px;
+
+    color: #fff;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--ar-primary),
+            var(--ar-secondary)
+        );
+}
+
+
+.ar-final-icon {
+
+    width: 45px;
+    height: 45px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: rgba(91, 211, 177, .25);
+
+    color: #fff;
+
+    font-size: 19px;
+}
+
+
+.ar-final-content h2 {
+
+    margin: 0 0 4px;
+
+    color: #fff;
+
+    font-size: 17px;
+}
+
+
+.ar-final-content p {
+
+    margin: 0;
+
+    color: rgba(255,255,255,.82);
+
+    font-size: 10px;
+}
+
+
+.ar-final-btn {
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
+
+    padding: 11px 18px;
+
+    border-radius: 6px;
+
+    background: #fff;
+
+    color: var(--ar-primary);
+
+    text-decoration: none;
+
+    white-space: nowrap;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    transition: .25s;
+}
+
+
+.ar-final-btn:hover {
+
+    color: var(--ar-primary);
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,.15);
+}
+
+
+/* =========================================================
+   LARGE TABLET
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .ar-owner-hero {
+
+        grid-template-columns: 1fr 1fr;
+    }
+
+
+    .ar-owner-hero-content {
+
+        padding-left: 35px;
+        padding-right: 25px;
+    }
+
+
+    .ar-owner-hero-content h1 {
+
+        font-size: 38px;
+    }
+
+
+    .ar-owner-trust {
+
+        gap: 12px;
+    }
+
+
+    .ar-owner-trust-item {
+
+        min-width: auto;
+    }
+
+
+    .ar-owner-trust-item span {
+
+        display: none;
+    }
+
+
+    .ar-owner-benefit-row {
+
+        grid-template-columns:
+            repeat(3, 1fr);
+
+        max-width: 850px;
+    }
+
+
+    .ar-owner-fast-cta,
+    .ar-owner-stats,
+    .ar-owner-detail,
+    .ar-owner-final-cta {
+
+        margin-left: 25px;
+        margin-right: 25px;
+    }
+
+
+    .ar-owner-detail-grid {
+
+        grid-template-columns: 1fr 1fr;
+    }
+
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 850px) {
+
+    .ar-owner-hero {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .ar-owner-hero-content {
+
+        padding:
+            55px
+            30px
+            45px;
+    }
+
+
+    .ar-owner-hero-visual {
+
+        min-height: 440px;
+
+        padding:
+            0
+            30px
+            45px;
+    }
+
+
+    .ar-owner-main-image {
+
+        height: 360px;
+    }
+
+
+    .ar-owner-result-card {
+
+        right: 8%;
+        bottom: 70px;
+    }
+
+
+    .ar-owner-benefit-row {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+
+    .ar-owner-fast-cta {
+
+        grid-template-columns: 160px 1fr;
+
+        padding: 15px 20px;
+    }
+
+
+    .ar-fast-cta-btn {
+
+        grid-column: 2;
+
+        width: fit-content;
+    }
+
+
+    .ar-owner-stats {
+
+        grid-template-columns:
+            1fr 1px 1fr;
+
+        row-gap: 20px;
+
+        padding: 20px;
+    }
+
+
+    .ar-stat-separator:nth-of-type(4) {
+
+        display: none;
+    }
+
+
+    .ar-owner-detail-grid {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .ar-owner-detail-image {
+
+        height: 330px;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .ar-owner-hero-content {
+
+        padding:
+            42px
+            20px
+            38px;
+    }
+
+
+    .ar-owner-hero-content h1 {
+
+        font-size: 34px;
+
+        letter-spacing: -.8px;
+    }
+
+
+    .ar-owner-hero-content > p {
+
+        font-size: 13px;
+    }
+
+
+    .ar-owner-hero-actions {
+
+        flex-wrap: wrap;
+
+        gap: 14px;
+    }
+
+
+    .ar-owner-primary-btn {
+
+        padding: 12px 16px;
+    }
+
+
+    .ar-owner-trust {
+
+        flex-direction: column;
+
+        gap: 13px;
+
+        margin-top: 28px;
+    }
+
+
+    .ar-owner-trust-item span {
+
+        display: block;
+    }
+
+
+    .ar-owner-hero-visual {
+
+        min-height: 360px;
+
+        padding:
+            0
+            20px
+            35px;
+    }
+
+
+    .ar-owner-main-image {
+
+        height: 300px;
+
+        border-radius: 10px;
+    }
+
+
+    .ar-owner-result-card {
+
+        width: 205px;
+
+        right: 28px;
+
+        bottom: 48px;
+
+        padding: 16px;
+    }
+
+
+    .ar-result-header strong {
+
+        font-size: 10px;
+    }
+
+
+    .ar-result-stat strong {
+
+        font-size: 14px;
+    }
+
+
+    .ar-owner-why {
+
+        padding:
+            45px
+            20px
+            25px;
+    }
+
+
+    .ar-owner-section-heading h2 {
+
+        font-size: 23px;
+    }
+
+
+    .ar-owner-benefit-row {
+
+        grid-template-columns: 1fr;
+
+        gap: 12px;
+    }
+
+
+    .ar-owner-benefit-card {
+
+        min-height: auto;
+
+        padding: 22px 20px;
+    }
+
+
+    .ar-owner-fast-cta {
+
+        margin:
+            15px
+            15px
+            15px;
+
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 12px;
+
+        padding: 22px;
+
+        text-align: left;
+    }
+
+
+    .ar-owner-house-art {
+
+        display: none;
+    }
+
+
+    .ar-fast-cta-content h2 {
+
+        font-size: 18px;
+    }
+
+
+    .ar-fast-cta-btn {
+
+        width: 100%;
+    }
+
+
+    .ar-owner-stats {
+
+        margin:
+            15px
+            15px
+            35px;
+
+        display: grid;
+
+        grid-template-columns: 1fr 1fr;
+
+        gap: 18px 10px;
+
+        padding: 22px 15px;
+    }
+
+
+    .ar-stat-separator {
+
+        display: none;
+    }
+
+
+    .ar-owner-stat {
+
+        justify-content: flex-start;
+
+        gap: 9px;
+    }
+
+
+    .ar-stat-circle {
+
+        width: 38px;
+        height: 38px;
+
+        font-size: 14px;
+    }
+
+
+    .ar-owner-stat strong {
+
+        font-size: 19px;
+    }
+
+
+    .ar-owner-stat span {
+
+        font-size: 8px;
+    }
+
+
+    .ar-owner-detail {
+
+        margin:
+            0
+            20px;
+    }
+
+
+    .ar-owner-detail-heading h2 {
+
+        font-size: 23px;
+    }
+
+
+    .ar-owner-detail-grid {
+
+        gap: 25px;
+    }
+
+
+    .ar-owner-detail-image {
+
+        height: 270px;
+    }
+
+
+    .ar-owner-detail-benefits {
+
+        grid-template-columns: 1fr;
+
+        gap: 18px;
+    }
+
+
+    .ar-detail-item {
+
+        gap: 10px;
+    }
+
+
+    .ar-owner-final-cta {
+
+        margin:
+            35px
+            15px
+            25px;
+
+        padding: 22px;
+
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 13px;
+    }
+
+
+    .ar-final-content h2 {
+
+        font-size: 17px;
+    }
+
+
+    .ar-final-btn {
+
+        width: 100%;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 380px) {
+
+    .ar-owner-hero-content h1 {
+
+        font-size: 30px;
+    }
+
+
+    .ar-owner-result-card {
+
+        width: 190px;
+
+        right: 18px;
+
+        bottom: 40px;
+    }
+
+
+    .ar-owner-main-image {
+
+        height: 270px;
+    }
+
+
+    .ar-owner-stats {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .ar-owner-stat {
+
+        justify-content: flex-start;
+    }
+
+}

@@ -1,0 +1,366 @@
+<% layout("fixLayout/boilerplate") %>
+
+
+<section class="tenant-result-page">
+
+
+<!-- ==========================
+     TOP INTRO SECTION
+=========================== -->
+
+
+<div class="result-header">
+
+
+    <div class="header-content">
+
+
+        <span class="result-tag">
+            Aligarh Rental Search
+        </span>
+
+
+
+        <h1>
+
+        <% if(preferredTenant){ %>
+
+            <%= preferredTenant %> Friendly Rental Properties
+
+        <% } else if(bhk){ %>
+
+            <%= bhk %> Homes Available In Aligarh
+
+        <% } else if(propertyType){ %>
+
+            <%= propertyType %> For Rent In Aligarh
+
+        <% } else { %>
+
+            Find Your Perfect Rental Home
+
+        <% } %>
+
+        </h1>
+
+
+
+        <p>
+
+            Explore verified rental homes in Aligarh with
+            complete details, pricing, amenities and
+            owner information. Find a property that matches
+            your lifestyle and budget.
+
+        </p>
+
+
+
+        <div class="active-filters">
+
+
+            <% if(preferredTenant){ %>
+
+            <span>
+                <i class="fa-solid fa-user-group"></i>
+                <%= preferredTenant %>
+            </span>
+
+            <% } %>
+
+
+
+            <% if(bhk){ %>
+
+            <span>
+                <i class="fa-solid fa-building"></i>
+                <%= bhk %>
+            </span>
+
+            <% } %>
+
+
+
+            <% if(propertyType){ %>
+
+            <span>
+                <i class="fa-solid fa-house"></i>
+                <%= propertyType %>
+            </span>
+
+            <% } %>
+
+
+
+            <% if(minPrice && maxPrice){ %>
+
+            <span>
+                <i class="fa-solid fa-indian-rupee-sign"></i>
+
+                ₹<%= minPrice %> -
+                ₹<%= maxPrice %>
+
+            </span>
+
+            <% } %>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <div class="property-count">
+
+
+        <i class="fa-solid fa-house-circle-check"></i>
+
+
+        <h2>
+            <%= totalProperties %>+
+        </h2>
+
+
+        <p>
+            Properties Found
+        </p>
+
+
+    </div>
+
+
+
+</div>
+
+
+
+
+
+<!-- ==========================
+      PROPERTY LIST SECTION
+=========================== -->
+
+
+<div class="property-section-title">
+
+
+    <h2>
+        Available Rental Homes
+    </h2>
+
+
+    <p>
+        Browse properties matching your selected preferences.
+    </p>
+
+
+</div>
+
+
+
+
+
+
+<% if(listings.length > 0){ %>
+
+
+
+<div class="tenant-property-grid">
+
+
+
+<% listings.forEach(listing=>{ %>
+
+
+
+<div class="tenant-property-card">
+
+
+
+    <!-- IMAGE -->
+
+    <div class="property-image">
+
+
+        <img 
+        src="<%= listing.images[0]?.url %>"
+        alt="property image">
+
+
+
+        <% if(listing.ownerVerified){ %>
+
+        <div class="verified-badge">
+
+            <i class="fa-solid fa-circle-check"></i>
+            Verified Owner
+
+        </div>
+
+        <% } %>
+
+
+
+    </div>
+
+
+
+
+
+
+    <!-- BODY -->
+
+
+    <div class="property-body">
+
+
+        <h3>
+            <%= listing.title %>
+        </h3>
+
+
+
+        <p class="location">
+
+            <i class="fa-solid fa-location-dot"></i>
+
+            <%= listing.area %>, 
+            <%= listing.city %>
+
+        </p>
+
+
+
+
+        <div class="property-info">
+
+
+            <span>
+                <i class="fa-solid fa-building"></i>
+                <%= listing.propertyType %>
+            </span>
+
+
+            <span>
+                <i class="fa-solid fa-bed"></i>
+                <%= listing.bhk %>
+            </span>
+
+
+            <span>
+                <i class="fa-solid fa-couch"></i>
+                <%= listing.furnishing %>
+            </span>
+
+
+
+        </div>
+
+
+
+
+
+        <p class="description">
+
+            <%= listing.description.substring(0,120) %>...
+
+        </p>
+
+
+
+
+
+
+        <div class="extra-details">
+
+
+            <div>
+
+                <small>Rent</small>
+
+                <h4>
+                    ₹<%= listing.rentPrice %>
+                    /month
+                </h4>
+
+            </div>
+
+
+
+            <div>
+
+                <small>Tenant</small>
+
+                <h4>
+                    <%= listing.preferredTenant %>
+                </h4>
+
+            </div>
+
+
+        </div>
+
+
+
+
+
+
+        <a href="/listings/<%= listing._id %>"
+           class="view-property-btn">
+
+            View Details
+
+            <i class="fa-solid fa-arrow-right"></i>
+
+        </a>
+
+
+
+
+    </div>
+
+
+
+</div>
+
+
+
+
+<% }) %>
+
+
+</div>
+
+
+
+<% } else { %>
+
+
+
+<div class="no-result">
+
+
+    <i class="fa-solid fa-house-circle-exclamation"></i>
+
+
+    <h2>
+        No Property Found
+    </h2>
+
+
+    <p>
+        Try changing your filters to find more rental homes.
+    </p>
+
+
+</div>
+
+
+
+<% } %>
+
+
+
+</section>
