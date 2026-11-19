@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const express = require("express");
 const mongoose = require("mongoose");
 const session = require("express-session");
@@ -5,37 +7,15 @@ const flash = require("connect-flash");
 const path = require("path");
 const ejsMate = require("ejs-mate");
 const methodOverride = require("method-override");
-const supportRoutes = require("./routes/helpSupport");
-const User = require("./models/userListing/users.js");
-const ExpressError = require("./utils/ExpressError.js");
 
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
-const app = express();
 
-const port = 8080;
-const url = "mongodb://127.0.0.1:27017/Nestlust";
+const User = require("./models/userListing/users.js");
+const ExpressError = require("./utils/ExpressError.js");
 
-
-// DATABASE CONNECTION
-
-main()
-.then(()=>{
-    console.log("Connection successfull");
-})
-.catch((err)=>{
-    console.log(err);
-});
-
-
-async function main(){
-    await mongoose.connect(url);
-}
-
-
-
-// ROUTES REQUIRE
-
+// ROUTES
+const supportRoutes = require("./routes/helpSupport");
 const listingRoutes = require("./routes/listingsRoutes");
 const reviewRoutes = require("./routes/reviewRoutes");
 const roommateRoutes = require("./routes/roommateRoutes");
@@ -45,150 +25,194 @@ const ownerRoutes = require("./routes/ownerRoutes");
 const signInRoutes = require("./routes/signIn-Login.js");
 const myPropertyRoutes = require("./routes/navOptions/MyPropertyRoutes");
 
+const app = express();
 
-// BASIC CONFIG
+// SERVER CONFIGURATION
+const PORT = process.env.PORT || 8080;
+const MONGO_URL = process.env.MONGO_URL;
+
+
+// =====================================
+// DATABASE CONNECTION
+// =====================================
+
+async function main() {
+
+    if (!MONGO_URL) {
+        throw new Error("MONGO_URL is missing in environment variables");
+    }
+
+    await mongoose.connect(MONGO_URL);
+
+    console.log("MongoDB Atlas connected successfully");
+}
+
+
+// =====================================
+// BASIC CONFIGURATION
+// =====================================
 
 app.use(express.json());
-app.use(express.urlencoded({extended:true}));
 
+app.use(express.urlencoded({
+    extended: true
+}));
 
-app.engine("ejs",ejsMate);
-app.set("view engine","ejs");
+app.engine("ejs", ejsMate);
+
+app.set("view engine", "ejs");
+
 app.set(
     "views",
-    path.join(__dirname,"views")
+    path.join(__dirname, "views")
 );
 
+
+// =====================================
+// STATIC FILES
+// =====================================
 
 app.use(
     express.static(
-        path.join(__dirname,"public")
+        path.join(__dirname, "public")
     )
 );
-
 
 app.use(
     "/uploads",
     express.static(
-        path.join(__dirname,"uploads")
+        path.join(__dirname, "uploads")
     )
 );
-
 
 app.use(methodOverride("_method"));
 
 
-
-
-// SESSION
+// =====================================
+// SESSION CONFIGURATION
+// =====================================
 
 const sessionOptions = {
 
-    secret:"aligarhRentalsSecret",
+    secret: process.env.SESSION_SECRET,
 
-    resave:false,
+    resave: false,
 
-    saveUninitialized:false,
-
+    saveUninitialized: false,
 
 };
-
 
 app.use(session(sessionOptions));
 
 app.use(flash());
 
 
-
-
-// PASSPORT CONFIG
-
+// =====================================
+// PASSPORT CONFIGURATION
+// =====================================
 
 app.use(passport.initialize());
 
 app.use(passport.session());
 
-
-
 passport.use(
-
     new LocalStrategy(
-
         {
-            usernameField:"email",
-            passwordField:"password"
+            usernameField: "email",
+            passwordField: "password"
         },
-
         User.authenticate()
-
     )
-
 );
-
-
 
 passport.serializeUser(
     User.serializeUser()
 );
-
 
 passport.deserializeUser(
     User.deserializeUser()
 );
 
 
+// =====================================
+// DEFAULT EJS LOCALS
+// =====================================
 
+app.use((req, res, next) => {
 
-// GLOBAL MIDDLEWARE
+    res.locals.areas = [];
 
-const globals = require("./middleware/global.js");
+    res.locals.propertyBudget = [];
 
+    res.locals.preferredTenants = [];
 
-app.use(globals);
+    res.locals.bhkTypes = [];
 
-
-
-// FLASH MESSAGE LOCALS
-
-app.use((req,res,next)=>{
+    res.locals.currentUser = req.user || null;
 
     res.locals.success = req.flash("success");
 
     res.locals.error = req.flash("error");
 
-
-    res.locals.currentUser = req.user;
-
-
     next();
 
 });
 
 
+// =====================================
+// GLOBAL MIDDLEWARE
+// =====================================
 
+const globals = require("./middleware/global.js");
+
+app.use(globals);
+
+
+// =====================================
+// REQUEST LOGGER
+// =====================================
 
 app.use((req, res, next) => {
-    console.log("REQUEST URL:", req.method, req.originalUrl);
+
+    console.log(
+        "REQUEST URL:",
+        req.method,
+        req.originalUrl
+    );
+
     next();
+
 });
+
+
+// =====================================
 // ROUTES
+// =====================================
 
 app.use("/listings", myPropertyRoutes);
+
 app.use("/listings", supportRoutes);
 
-// GUIDE ROUTE
 app.use("/listings", guideRoutes);
+
 app.use("/listings", propertyTypeRoutes);
+
 app.use("/listings", roommateRoutes);
+
 app.use("/listings", reviewRoutes);
+
 app.use("/listings", ownerRoutes);
-app.use("/listings", listingRoutes)
+
+app.use("/listings", listingRoutes);
+
 app.use("/", signInRoutes);
 
 
+// =====================================
 // 404 ERROR
+// =====================================
 
-app.use((req,res,next)=>{
+app.use((req, res, next) => {
 
     next(
         new ExpressError(
@@ -200,33 +224,55 @@ app.use((req,res,next)=>{
 });
 
 
-
+// =====================================
 // ERROR HANDLER
+// =====================================
 
-app.use((err,req,res,next)=>{
+app.use((err, req, res, next) => {
 
-    let {
-        statusCode=500,
-        message="Something went wrong"
-
+    const {
+        statusCode = 500,
+        message = "Something went wrong"
     } = err;
 
+    console.error(err);
 
-    console.log(err);
-
-
-    res.status(statusCode)
-    .render(
+    res.status(statusCode).render(
         "routeListings/error.ejs",
-        {err}
+        {
+            err: {
+                statusCode,
+                message
+            }
+        }
     );
 
 });
 
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, "0.0.0.0", () => {
-    console.log(`Server running on port ${PORT}`);
-});
 
+// =====================================
+// START SERVER AFTER DB CONNECTION
+// =====================================
 
+main()
+    .then(() => {
 
+        app.listen(PORT, "0.0.0.0", () => {
+
+            console.log(
+                `Server running on port ${PORT}`
+            );
+
+        });
+
+    })
+    .catch((err) => {
+
+        console.error(
+            "Database connection failed:",
+            err
+        );
+
+        process.exit(1);
+
+    });
