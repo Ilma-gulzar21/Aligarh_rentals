@@ -14,7 +14,10 @@ const LocalStrategy = require("passport-local");
 const User = require("./models/userListing/users.js");
 const ExpressError = require("./utils/ExpressError.js");
 
+// =====================================
 // ROUTES
+// =====================================
+
 const supportRoutes = require("./routes/helpSupport");
 const listingRoutes = require("./routes/listingsRoutes");
 const reviewRoutes = require("./routes/reviewRoutes");
@@ -27,10 +30,12 @@ const myPropertyRoutes = require("./routes/navOptions/MyPropertyRoutes");
 
 const app = express();
 
+// =====================================
 // SERVER CONFIGURATION
+// =====================================
+
 const PORT = process.env.PORT || 8080;
 const MONGO_URL = process.env.MONGO_URL;
-
 
 // =====================================
 // DATABASE CONNECTION
@@ -39,7 +44,9 @@ const MONGO_URL = process.env.MONGO_URL;
 async function main() {
 
     if (!MONGO_URL) {
-        throw new Error("MONGO_URL is missing in environment variables");
+        throw new Error(
+            "MONGO_URL is missing in environment variables"
+        );
     }
 
     await mongoose.connect(MONGO_URL);
@@ -47,16 +54,17 @@ async function main() {
     console.log("MongoDB Atlas connected successfully");
 }
 
-
 // =====================================
 // BASIC CONFIGURATION
 // =====================================
 
 app.use(express.json());
 
-app.use(express.urlencoded({
-    extended: true
-}));
+app.use(
+    express.urlencoded({
+        extended: true
+    })
+);
 
 app.engine("ejs", ejsMate);
 
@@ -66,7 +74,6 @@ app.set(
     "views",
     path.join(__dirname, "views")
 );
-
 
 // =====================================
 // STATIC FILES
@@ -87,7 +94,6 @@ app.use(
 
 app.use(methodOverride("_method"));
 
-
 // =====================================
 // SESSION CONFIGURATION
 // =====================================
@@ -100,12 +106,16 @@ const sessionOptions = {
 
     saveUninitialized: false,
 
+    cookie: {
+        httpOnly: true,
+        maxAge: 7 * 24 * 60 * 60 * 1000
+    }
+
 };
 
 app.use(session(sessionOptions));
 
 app.use(flash());
-
 
 // =====================================
 // PASSPORT CONFIGURATION
@@ -133,7 +143,6 @@ passport.deserializeUser(
     User.deserializeUser()
 );
 
-
 // =====================================
 // DEFAULT EJS LOCALS
 // =====================================
@@ -158,7 +167,6 @@ app.use((req, res, next) => {
 
 });
 
-
 // =====================================
 // GLOBAL MIDDLEWARE
 // =====================================
@@ -166,7 +174,6 @@ app.use((req, res, next) => {
 const globals = require("./middleware/global.js");
 
 app.use(globals);
-
 
 // =====================================
 // REQUEST LOGGER
@@ -184,9 +191,18 @@ app.use((req, res, next) => {
 
 });
 
+// =====================================
+// HOMEPAGE ROUTE
+// =====================================
+
+app.get("/", (req, res) => {
+
+    res.redirect("/listings");
+
+});
 
 // =====================================
-// ROUTES
+// APPLICATION ROUTES
 // =====================================
 
 app.use("/listings", myPropertyRoutes);
@@ -207,9 +223,8 @@ app.use("/listings", listingRoutes);
 
 app.use("/", signInRoutes);
 
-
 // =====================================
-// 404 ERROR
+// 404 ERROR HANDLER
 // =====================================
 
 app.use((req, res, next) => {
@@ -223,9 +238,8 @@ app.use((req, res, next) => {
 
 });
 
-
 // =====================================
-// ERROR HANDLER
+// GLOBAL ERROR HANDLER
 // =====================================
 
 app.use((err, req, res, next) => {
@@ -236,6 +250,10 @@ app.use((err, req, res, next) => {
     } = err;
 
     console.error(err);
+
+    if (res.headersSent) {
+        return next(err);
+    }
 
     res.status(statusCode).render(
         "routeListings/error.ejs",
@@ -249,12 +267,12 @@ app.use((err, req, res, next) => {
 
 });
 
-
 // =====================================
 // START SERVER AFTER DB CONNECTION
 // =====================================
 
 main()
+
     .then(() => {
 
         app.listen(PORT, "0.0.0.0", () => {
@@ -266,6 +284,7 @@ main()
         });
 
     })
+
     .catch((err) => {
 
         console.error(
