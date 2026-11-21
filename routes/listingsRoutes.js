@@ -1,4 +1,3 @@
-
 const express = require("express");
 const router = express.Router();
 
@@ -20,6 +19,8 @@ const {
     isLoggedInForRoommateDetails,
     isOwnerRole
 } = require("../middleware/Auth");
+
+
 // =====================================
 // HELPER: ESCAPE REGEX
 // =====================================
@@ -35,11 +36,7 @@ const escapeRegex = (text) => {
 
 const parseBudget = (budget) => {
 
-    if (!budget) {
-        return null;
-    }
-
-    // BELOW BUDGET
+    if (!budget) return null;
 
     if (budget.startsWith("below-")) {
 
@@ -47,17 +44,10 @@ const parseBudget = (budget) => {
             budget.replace("below-", "")
         );
 
-        if (!Number.isFinite(maxPrice)) {
-            return null;
-        }
+        if (!Number.isFinite(maxPrice)) return null;
 
-        return {
-            maxPrice
-        };
+        return { maxPrice };
     }
-
-
-    // ABOVE BUDGET
 
     if (budget.startsWith("above-")) {
 
@@ -65,17 +55,10 @@ const parseBudget = (budget) => {
             budget.replace("above-", "")
         );
 
-        if (!Number.isFinite(minPrice)) {
-            return null;
-        }
+        if (!Number.isFinite(minPrice)) return null;
 
-        return {
-            minPrice
-        };
+        return { minPrice };
     }
-
-
-    // RANGE BUDGET
 
     const parts = budget.split("-");
 
@@ -104,12 +87,102 @@ const parseBudget = (budget) => {
 
 
 // =====================================
+// HELPER: NORMALIZE ROOMMATES
+// =====================================
+
+const normalizeRoommates = (roommates) => {
+
+    if (!Array.isArray(roommates)) {
+        return [];
+    }
+
+    return roommates
+
+        .filter((roommate) => {
+
+            if (!roommate) return false;
+
+            const name = String(roommate.name || "").trim();
+            const gender = String(roommate.gender || "").trim();
+            const age = roommate.age;
+
+            // Remove completely empty rows
+            return Boolean(
+                name ||
+                gender ||
+                (age !== undefined && age !== "")
+            );
+
+        })
+
+        .map((roommate) => {
+
+            const name = String(
+                roommate.name || ""
+            ).trim();
+
+            let gender = String(
+                roommate.gender || ""
+            ).trim();
+
+            // Normalize gender values
+            if (gender.toLowerCase() === "male") {
+                gender = "Male";
+            } else if (gender.toLowerCase() === "female") {
+                gender = "Female";
+            } else {
+                gender = undefined;
+            }
+
+            const age = (
+                roommate.age !== undefined &&
+                roommate.age !== ""
+            )
+                ? Number(roommate.age)
+                : undefined;
+
+            return {
+                name,
+                gender,
+                age: Number.isFinite(age) ? age : undefined
+            };
+
+        });
+};
+
+
+// =====================================
+// HELPER: NORMALIZE LANDMARKS
+// =====================================
+
+const normalizeLandmarks = (landmarks) => {
+
+    if (!Array.isArray(landmarks)) {
+        return [];
+    }
+
+    return landmarks.filter((landmark) => {
+
+        return (
+            landmark &&
+            landmark.landmarkName &&
+            landmark.landmarkName.trim() !== "" &&
+            landmark.distance !== undefined &&
+            landmark.distance !== ""
+        );
+
+    });
+};
+
+
+// =====================================
 // INDEX ROUTE
 // GET /listings
 // =====================================
 
 router.get(
     "/",
+
     asyncWrap(async (req, res) => {
 
         const {
@@ -125,8 +198,6 @@ router.get(
             budget
         } = req.query;
 
-
-        // NORMALIZE SEARCH INPUTS
 
         const searchLocation =
             typeof location === "string"
@@ -151,28 +222,28 @@ router.get(
         };
 
 
-        // AVAILABLE FOR FILTER
+        // AVAILABLE FOR
 
         if (availableFor && availableFor !== "All") {
             filter.availableFor = availableFor;
         }
 
 
-        // AREA FILTER
+        // AREA
 
         if (area) {
             filter.area = area;
         }
 
 
-        // PROPERTY TYPE FILTER
+        // PROPERTY TYPE
 
         if (selectedPropertyType) {
             filter.propertyType = selectedPropertyType;
         }
 
 
-        // BHK FILTER
+        // BHK
 
         if (bhk) {
 
@@ -180,10 +251,11 @@ router.get(
                 $regex: `^${escapeRegex(bhk)}$`,
                 $options: "i"
             };
+
         }
 
 
-        // EXACT RENT PRICE FILTER
+        // EXACT RENT PRICE
 
         if (rentPrice) {
 
@@ -192,10 +264,11 @@ router.get(
             if (Number.isFinite(price)) {
                 filter.rentPrice = price;
             }
+
         }
 
 
-        // MIN / MAX PRICE FILTER
+        // MIN / MAX PRICE
 
         if (minPrice || maxPrice) {
 
@@ -208,6 +281,7 @@ router.get(
             if (maxPrice) {
                 filter.rentPrice.$lte = Number(maxPrice);
             }
+
         }
 
 
@@ -227,16 +301,15 @@ router.get(
                 { fullAddress: locationRegex },
 
                 {
-                    "nearbyLandmarks.landmarkName":
-                        locationRegex
+                    "nearbyLandmarks.landmarkName": locationRegex
                 },
 
                 {
-                    "nearbyLandmarks.mainlocation":
-                        locationRegex
+                    "nearbyLandmarks.mainlocation": locationRegex
                 }
 
             ];
+
         }
 
 
@@ -260,6 +333,7 @@ router.get(
             if (budgetRange.maxPrice !== undefined) {
                 filter.rentPrice.$lt = budgetRange.maxPrice;
             }
+
         }
 
 
@@ -289,16 +363,12 @@ router.get(
             const nearbyAreas = await Listing.distinct("area");
 
             return res.render("routeListings/areawise", {
-
                 listings,
-
                 selectedArea: area,
-
                 nearbyAreas,
-
                 totalProperties: listings.length
-
             });
+
         }
 
 
@@ -328,6 +398,7 @@ router.get(
                     budgetRange.maxPrice !== undefined
                         ? budgetRange.maxPrice
                         : "";
+
             }
 
             return res.render("routeListings/tenantswise", {
@@ -353,6 +424,7 @@ router.get(
                 totalProperties: listings.length
 
             });
+
         }
 
 
@@ -446,11 +518,8 @@ router.get(
 
 
         const ratingData = reviewStats[0] || {
-
             averageRating: 0,
-
             totalReviews: 0
-
         };
 
 
@@ -521,8 +590,6 @@ router.get(
 
     asyncWrap(async (req, res) => {
 
-        // FETCH LATEST USER DATA
-
         const user = await User.findById(req.user._id);
 
         if (!user || !user.isActive) {
@@ -536,23 +603,20 @@ router.get(
                 return res.redirect("/login");
 
             });
+
         }
 
 
-        // =====================================
         // OWNER DASHBOARD
-        // =====================================
 
         if (user.role === "Owner") {
 
             const ownerId = user._id;
 
-
             const totalProperties =
                 await Listing.countDocuments({
                     owner: ownerId
                 });
-
 
             const availableProperties =
                 await Listing.countDocuments({
@@ -561,13 +625,11 @@ router.get(
                     status: "Available"
                 });
 
-
             const pendingProperties =
                 await Listing.countDocuments({
                     owner: ownerId,
                     status: "Pending"
                 });
-
 
             const rentedProperties =
                 await Listing.countDocuments({
@@ -575,13 +637,11 @@ router.get(
                     status: "Rented"
                 });
 
-
             const bookedProperties =
                 await Listing.countDocuments({
                     owner: ownerId,
                     status: "Booked"
                 });
-
 
             const recentProperties =
                 await Listing.find({
@@ -600,76 +660,52 @@ router.get(
             return res.render(
                 "routeListings/dashboard",
                 {
-
                     user,
-
                     totalProperties,
-
                     availableProperties,
-
                     pendingProperties,
-
                     rentedProperties,
-
                     bookedProperties,
-
                     recentProperties
-
                 }
             );
+
         }
 
 
-        // =====================================
         // TENANT DASHBOARD
-        // =====================================
 
         if (user.role === "Tenant") {
 
             const totalAvailableProperties =
                 await Listing.countDocuments({
-
                     isActive: true,
-
                     status: "Available"
-
                 });
-
 
             const totalRoommates =
                 await Roommate.countDocuments({
-
                     status: "Open"
-
                 });
-
 
             const totalReviews =
                 await Review.countDocuments({
-
                     user: user._id
-
                 });
 
 
             return res.render(
                 "routeListings/tenantDashboard",
                 {
-
                     user,
-
                     totalAvailableProperties,
-
                     totalRoommates,
-
                     totalReviews
-
                 }
             );
+
         }
 
-
-        // INVALID ROLE
 
         req.flash("error", "Invalid account role.");
 
@@ -693,18 +729,14 @@ router.post(
 
         const newRole = req.body.role;
 
-
-        // VALIDATE ROLE
-
         if (!["Owner", "Tenant"].includes(newRole)) {
 
             req.flash("error", "Invalid role selected.");
 
             return res.redirect("/listings/dashboard");
+
         }
 
-
-        // FETCH USER
 
         const updatedUser = await User.findByIdAndUpdate(
 
@@ -727,10 +759,9 @@ router.post(
             req.flash("error", "User account not found.");
 
             return res.redirect("/listings");
+
         }
 
-
-        // REFRESH PASSPORT SESSION
 
         req.login(updatedUser, (err) => {
 
@@ -754,7 +785,6 @@ router.post(
 // =====================================
 // NEW LISTING PAGE
 // GET /listings/new
-// OWNER ONLY
 // =====================================
 
 router.get(
@@ -868,37 +898,111 @@ router.put(
         }
 
 
-        // UPDATE LISTING DATA
+        // =====================================
+        // UPDATE NORMAL FIELDS
+        // =====================================
 
-        Object.assign(listing, req.body);
+        const updateData = { ...req.body };
+
+        delete updateData.roommates;
+        delete updateData.nearbyLandmarks;
+        delete updateData.images;
+        delete updateData.deleteImages;
+        delete updateData._method;
+
+        Object.assign(listing, updateData);
 
 
-        // ADD NEW IMAGES
+        // =====================================
+        // UPDATE ROOMMATE DETAILS
+        // =====================================
+
+        if (req.body.roommateAvailable === "false") {
+
+            listing.roommateAvailable = false;
+            listing.roommates = [];
+
+        } else {
+
+            listing.roommateAvailable =
+                req.body.roommateAvailable === "true";
+
+            if (req.body.roommates !== undefined) {
+
+                const rawRoommates = Array.isArray(req.body.roommates)
+                    ? req.body.roommates
+                    : Object.values(req.body.roommates || {});
+
+                listing.roommates = normalizeRoommates(rawRoommates);
+
+            } else {
+
+                // Clean existing database values
+                listing.roommates = normalizeRoommates(
+                    (listing.roommates || []).map(roommate => ({
+                        name: roommate.name,
+                        gender: roommate.gender,
+                        age: roommate.age
+                    }))
+                );
+
+            }
+
+        }
+
+
+        // =====================================
+        // UPDATE LANDMARKS
+        // =====================================
+
+        if (req.body.nearbyLandmarks !== undefined) {
+
+            const rawLandmarks = Array.isArray(req.body.nearbyLandmarks)
+                ? req.body.nearbyLandmarks
+                : Object.values(req.body.nearbyLandmarks || {});
+
+            listing.nearbyLandmarks = normalizeLandmarks(rawLandmarks);
+
+        }
+
+
+        // =====================================
+        // UPDATE IMAGES
+        // =====================================
 
         if (req.files && req.files.length > 0) {
 
             const newImages = req.files.map(file => ({
-
                 filename: file.filename,
-
                 url: "/uploads/" + file.filename
-
             }));
 
             listing.images = [
                 ...listing.images,
                 ...newImages
             ];
+
         }
 
 
-        // KEEP OWNER EMAIL
+        // =====================================
+        // OWNER DETAILS
+        // =====================================
 
         listing.ownerEmail = req.user.email;
 
+
+        // =====================================
+        // SAVE LISTING
+        // =====================================
+
         await listing.save();
 
-        req.flash("success", "Property updated successfully.");
+
+        req.flash(
+            "success",
+            "Property updated successfully."
+        );
 
         return res.redirect(`/listings/${listing._id}`);
 
@@ -909,7 +1013,6 @@ router.put(
 // =====================================
 // POST NEW LISTING
 // POST /listings
-// OWNER ONLY
 // =====================================
 
 router.post(
@@ -925,7 +1028,6 @@ router.post(
 
     asyncWrap(async (req, res) => {
 
-
         // CHECK USER EMAIL
 
         if (!req.user || !req.user.email) {
@@ -934,6 +1036,7 @@ router.post(
                 400,
                 "Owner email not found. Please login again."
             );
+
         }
 
 
@@ -945,47 +1048,34 @@ router.post(
                 400,
                 "Please upload minimum 3 property images"
             );
+
         }
 
 
         // IMAGE HANDLING
 
         const imageUrls = req.files.map(file => ({
-
             filename: file.filename,
-
             url: "/uploads/" + file.filename
-
         }));
 
 
         // LANDMARK FILTER
 
-        const filteredLandmarks =
-
+        const filteredLandmarks = normalizeLandmarks(
             Array.isArray(req.body.nearbyLandmarks)
-
-                ? req.body.nearbyLandmarks.filter(
-                    landmark =>
-                        landmark.landmarkName &&
-                        landmark.distance !== undefined &&
-                        landmark.distance !== ""
-                )
-
-                : [];
+                ? req.body.nearbyLandmarks
+                : []
+        );
 
 
         // ROOMMATE FILTER
 
-        const filteredRoommates =
-
+        const filteredRoommates = normalizeRoommates(
             Array.isArray(req.body.roommates)
-
-                ? req.body.roommates.filter(
-                    roommate => roommate.name
-                )
-
-                : [];
+                ? req.body.roommates
+                : []
+        );
 
 
         // LISTING DATA
@@ -1142,24 +1232,20 @@ router.get(
         if (!listing) {
 
             return res.status(404).json({
-
                 success: false,
-
                 message: "Property not found."
-
             });
+
         }
 
 
         if (!listing.owner) {
 
             return res.status(404).json({
-
                 success: false,
-
                 message: "Owner details not found."
-
             });
+
         }
 
 
@@ -1170,22 +1256,15 @@ router.get(
         if (!owner) {
 
             return res.status(404).json({
-
                 success: false,
-
                 message: "Owner not found."
-
             });
+
         }
 
 
-        // PROPERTY-SPECIFIC OWNER PHONE
-
         const ownerPhone =
             listing.ownerPhone || owner.phone || "";
-
-
-        // PROPERTY-SPECIFIC OWNER EMAIL
 
         const ownerEmail =
             listing.ownerEmail || owner.email || "";
@@ -1216,35 +1295,39 @@ router.get(
     })
 );
 
+
 // =====================================
 // PROTECTED ROOMMATE DETAILS
 // GET /listings/:id/roommates
 // =====================================
-// =====================================
-// VIEW ROOMMATE DETAILS
-// =====================================
 
 router.get(
     "/:id/roommates",
+
     isLoggedInForRoommateDetails,
+
     asyncWrap(async (req, res) => {
 
         const listing = await Listing.findById(req.params.id)
             .select("roommates");
 
         if (!listing) {
+
             return res.status(404).json({
                 success: false,
                 message: "Property not found."
             });
+
         }
 
 
         const availableRoommates = (listing.roommates || [])
+
             .filter(roommate =>
                 roommate.name &&
                 roommate.name.trim() !== ""
             )
+
             .map(roommate => ({
                 name: roommate.name,
                 gender: roommate.gender,
@@ -1253,10 +1336,12 @@ router.get(
 
 
         if (availableRoommates.length === 0) {
+
             return res.status(404).json({
                 success: false,
                 message: "No roommate details are available."
             });
+
         }
 
 
@@ -1267,6 +1352,8 @@ router.get(
 
     })
 );
+
+
 // =====================================
 // SHOW PROPERTY DETAILS
 // GET /listings/:id
@@ -1291,6 +1378,7 @@ router.get(
                 404,
                 "Listing not found"
             );
+
         }
 
 
@@ -1360,45 +1448,42 @@ router.get(
 
         );
 
-// =====================================
-// ROOMMATE DETAILS VISIBILITY
-// =====================================
 
-const availableRoommates = (listing.roommates || []).filter(
-    roommate =>
-        roommate.name &&
-        roommate.name.trim() !== ""
-);
+        // ROOMMATE DETAILS VISIBILITY
 
-console.log("Roommate data from database:", listing.roommates);
-console.log("Available roommates:", availableRoommates);
-console.log("Logged in user:", Boolean(req.user));
-console.log("Show roommates query:", req.query.showRoommates);
-const hasRoommateDetails = availableRoommates.length > 0;
+        const availableRoommates = (listing.roommates || []).filter(
+            roommate =>
+                roommate.name &&
+                roommate.name.trim() !== ""
+        );
 
-const showRoommates =
-    Boolean(req.user) &&
-    req.query.showRoommates === "1" &&
-    hasRoommateDetails;
+
+        const hasRoommateDetails = availableRoommates.length > 0;
+
+        const showRoommates =
+            Boolean(req.user) &&
+            req.query.showRoommates === "1" &&
+            hasRoommateDetails;
+
+
         // RENDER PROPERTY PAGE
 
         res.render(
             "routeListings/show.ejs",
+            {
+                listing,
+                reviews,
+                totalReviews,
+                averageRating,
+                isListingOwner,
 
-           {
-    listing,
-    reviews,
-    totalReviews,
-    averageRating,
-    isListingOwner,
+                hasRoommateDetails,
+                showRoommates,
 
-    hasRoommateDetails,
-    showRoommates,
-
-    availableRoommates: showRoommates
-        ? availableRoommates
-        : []
-}
+                availableRoommates: showRoommates
+                    ? availableRoommates
+                    : []
+            }
         );
 
     })
