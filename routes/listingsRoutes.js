@@ -972,10 +972,10 @@ router.put(
 
         if (req.files && req.files.length > 0) {
 
-            const newImages = req.files.map(file => ({
-                filename: file.filename,
-                url: "/uploads/" + file.filename
-            }));
+      const newImages = req.files.map(file => ({
+    filename: file.filename,
+    url: file.path
+}));
 
             listing.images = [
                 ...listing.images,
@@ -1054,11 +1054,10 @@ router.post(
 
         // IMAGE HANDLING
 
-        const imageUrls = req.files.map(file => ({
-            filename: file.filename,
-            url: "/uploads/" + file.filename
-        }));
-
+   const imageUrls = req.files.map(file => ({
+    filename: file.filename,
+    url: file.path
+}));
 
         // LANDMARK FILTER
 
