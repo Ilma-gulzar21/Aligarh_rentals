@@ -1199,31 +1199,42 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!form) return;
 
+/* =====================================
+   ROOMMATE SECTION VISIBILITY
+===================================== */
 
-    /* =====================================
-       ROOMMATE SECTION VISIBILITY
-    ===================================== */
+const roommateAvailable =
+    document.getElementById("apnListRoommateAvailable");
 
-    const roommateAvailable =
-        document.getElementById("apnListRoommateAvailable");
+const roommateSection =
+    document.getElementById("apnListRoommateSection");
 
-    const roommateSection =
-        document.getElementById("apnListRoommateSection");
+function toggleRoommateSection() {
 
-    function toggleRoommateSection() {
+    if (!roommateAvailable || !roommateSection) return;
 
-        if (!roommateAvailable || !roommateSection) return;
+    const isAvailable = roommateAvailable.value === "true";
 
-        roommateSection.style.display =
-            roommateAvailable.value === "true" ? "block" : "none";
+    // Show / hide roommate section
+    roommateSection.style.display = isAvailable ? "block" : "none";
 
-    }
+    // Disable fields when section is hidden
+    const roommateInputs = roommateSection.querySelectorAll(
+        "input, select, textarea"
+    );
 
-    toggleRoommateSection();
+    roommateInputs.forEach((input) => {
+        input.disabled = !isAvailable;
+    });
+}
 
-    if (roommateAvailable) {
-        roommateAvailable.addEventListener("change", toggleRoommateSection);
-    }
+// Run when page loads
+toggleRoommateSection();
+
+// Run whenever dropdown value changes
+if (roommateAvailable) {
+    roommateAvailable.addEventListener("change", toggleRoommateSection);
+}
 
 
     /* =====================================
