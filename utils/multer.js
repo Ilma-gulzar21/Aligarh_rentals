@@ -2,24 +2,38 @@ const multer = require("multer");
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const cloudinary = require("../config/cloudinary");
 
-// Cloudinary Storage Configuration
+// =====================================
+// CLOUDINARY STORAGE
+// =====================================
+
 const storage = new CloudinaryStorage({
-    cloudinary: cloudinary,
-    params: {
-        folder: "aligarh-rentals",
-        allowed_formats: ["jpg", "jpeg", "png", "webp"],
-        transformation: [
-            {
-                width: 1200,
-                height: 1200,
-                crop: "limit"
-            }
-        ]
+    cloudinary,
+
+    params: async (req, file) => {
+        return {
+            folder: "aligarh-rentals/properties",
+
+            allowed_formats: [
+                "jpg",
+                "jpeg",
+                "png",
+                "webp"
+            ],
+
+            public_id:
+                Date.now() +
+                "-" +
+                Math.round(Math.random() * 1E9)
+        };
     }
 });
 
-// File Filter
+// =====================================
+// FILE FILTER
+// =====================================
+
 const fileFilter = (req, file, cb) => {
+
     const allowedTypes = [
         "image/jpeg",
         "image/jpg",
@@ -31,18 +45,24 @@ const fileFilter = (req, file, cb) => {
         cb(null, true);
     } else {
         cb(
-            new Error("Only image files (jpg, jpeg, png, webp) are allowed"),
+            new Error(
+                "Only image files (jpg, jpeg, png, webp) are allowed"
+            ),
             false
         );
     }
 };
 
-// Multer Configuration
+// =====================================
+// MULTER CONFIGURATION
+// =====================================
+
 const upload = multer({
-    storage: storage,
-    fileFilter: fileFilter,
+    storage,
+    fileFilter,
+
     limits: {
-        fileSize: 5 * 1024 * 1024, // 5MB max
+        fileSize: 5 * 1024 * 1024,
         files: 10
     }
 });
