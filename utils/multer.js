@@ -1,51 +1,25 @@
 const multer = require("multer");
-const path = require("path");
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
+const cloudinary = require("../config/cloudinary");
 
-
-// ================================
-// STORAGE CONFIGURATION
-// ================================
-
-const storage = multer.diskStorage({
-
-    destination: (req, file, cb) => {
-
-        cb(null, "uploads/");
-
-    },
-
-
-    filename: (req, file, cb) => {
-
-
-        const uniqueName =
-            Date.now() +
-            "-" +
-            Math.round(Math.random() * 1E9);
-
-
-        cb(
-            null,
-            uniqueName + path.extname(file.originalname)
-        );
-
-
+// Cloudinary Storage Configuration
+const storage = new CloudinaryStorage({
+    cloudinary: cloudinary,
+    params: {
+        folder: "aligarh-rentals",
+        allowed_formats: ["jpg", "jpeg", "png", "webp"],
+        transformation: [
+            {
+                width: 1200,
+                height: 1200,
+                crop: "limit"
+            }
+        ]
     }
-
 });
 
-
-
-
-// ================================
-// FILE FILTER
-// ONLY IMAGE FILES ALLOWED
-// ================================
-
-
+// File Filter
 const fileFilter = (req, file, cb) => {
-
-
     const allowedTypes = [
         "image/jpeg",
         "image/jpg",
@@ -53,61 +27,24 @@ const fileFilter = (req, file, cb) => {
         "image/webp"
     ];
 
-
-
-    if(
-        allowedTypes.includes(file.mimetype)
-    ){
-
-        cb(null,true);
-
-    }
-
-    else{
-
+    if (allowedTypes.includes(file.mimetype)) {
+        cb(null, true);
+    } else {
         cb(
-            new Error(
-                "Only image files (jpg, jpeg, png, webp) are allowed"
-            ),
+            new Error("Only image files (jpg, jpeg, png, webp) are allowed"),
             false
         );
-
     }
-
-
 };
 
-
-
-
-// ================================
-// MULTER CONFIGURATION
-// ================================
-
-
+// Multer Configuration
 const upload = multer({
-
     storage: storage,
-
-
     fileFilter: fileFilter,
-
-
     limits: {
-
-        // maximum image size 5MB
-
         fileSize: 5 * 1024 * 1024,
-
-
-        // maximum files
-
         files: 10
-
     }
-
 });
-
-
 
 module.exports = upload;
